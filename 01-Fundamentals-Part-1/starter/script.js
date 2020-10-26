@@ -181,31 +181,108 @@ HINT: Use an if/else statement 😉
 GOOD LUCK 😀
 */
 
-const markMass = 95;
-const markHeight = 1.95
+// const markMass = 95;
+// const markHeight = 1.95
 
-const johnMass = 78;
-const johnHeight = 1.69;
+// const johnMass = 78;
+// const johnHeight = 1.69;
 
-const markBMI = markMass / (markHeight * markHeight);
-const johnBMI = johnMass / (johnHeight * johnHeight);
+// const markBMI = markMass / (markHeight * markHeight);
+// const johnBMI = johnMass / (johnHeight * johnHeight);
 
-if(markBMI > johnBMI){
-    console.log(`mark BMI ${markBMI} is higher then johns BMI ${johnBMI}`);
+// if(markBMI > johnBMI){
+//     console.log(`mark BMI ${markBMI} is higher then johns BMI ${johnBMI}`);
 
+// } else {
+//     console.log(`johns BMI ${johnBMI} is higher then marks BMI ${markBMI}`);
+// }
+
+
+// Type conversion 
+// when you want to convert from one type to another
+
+// const inputYear = '1991';
+
+// console.log(Number(inputYear) + 18);
+// console.log(inputYear + 18);
+
+// // NaN = Not a number, actually means invalid number
+// console.log(Number('Akram'));
+// console.log(typeof NaN);
+// console.log(String(23), 23);
+
+// // Type coercion
+// // the plus operator will convert number to strings - all the numbers are converted to string
+// // JS jas automatic type coercion
+// console.log('I am ' + 23 + ' years old');
+// // the negative operator convert String to number
+// console .log('23' - '10' - 3);
+
+// console.log('23' * '2');
+
+// console.log('23' > '18');
+
+// let n = '1' + 1; // String 11
+// n = n-1; // 11 - 1
+// console.log(n); // 10
+
+// Truthy and Falsy values
+// Falsy values: 0, '', undefined, null, NaN
+
+// console.log(Boolean(0));
+// console.log(Boolean(undefined));
+// console.log(Boolean('Akram'));
+// console.log(Boolean({}));
+// console.log(Boolean(''));
+
+
+// const money = 0;
+
+// if(money){ // True
+//     console.log('has money')
+// } else { // False
+//     console.log('no money')
+// }
+
+
+// let height = 0; 
+// if(height){
+//     console.log('height is defined')
+// } else {
+//     console.log('height is undefined')
+// }
+
+// Equality operators
+
+const age = 18;
+
+// strict equality operator - if both values are exactly the same 
+// === does not perform type coercion
+if(age === 18) console.log('Yes person is 18 (strict)');
+// == double equal does type coercion
+// does perform type coercion
+if(age == 18) console.log('Yes person is 18(loose)');
+
+// Number converts string into number
+const favourite = Number (prompt ("whats your favourite number?"));
+console.log(favourite);
+console.log(typeof favourite);
+
+// always use strict === 
+if(favourite === 23){
+    console.log('23 is an amazing number');
+} else if(favourite === 7){
+    console.log('7 is also a cool number');
+} else if(favourite === 9){
+    console.log('9 is also a cool number');
 } else {
-    console.log(`johns BMI ${johnBMI} is higher then marks BMI ${markBMI}`);
+    console.log('number is not 23 or 7 or 9');
 }
 
-
-
-
-
-
-
-
-
-
+// !== does not equal - != loose, !== strict
+if( favourite !== 23){
+    console.log('why not 23');
+}
 
 
 
