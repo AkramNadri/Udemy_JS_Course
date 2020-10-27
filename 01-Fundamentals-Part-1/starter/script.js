@@ -254,46 +254,125 @@ GOOD LUCK 😀
 
 // Equality operators
 
-const age = 18;
+// const age = 18;
 
-// strict equality operator - if both values are exactly the same 
-// === does not perform type coercion
-if(age === 18) console.log('Yes person is 18 (strict)');
-// == double equal does type coercion
-// does perform type coercion
-if(age == 18) console.log('Yes person is 18(loose)');
+// // strict equality operator - if both values are exactly the same 
+// // === does not perform type coercion
+// if(age === 18) console.log('Yes person is 18 (strict)');
+// // == double equal does type coercion
+// // does perform type coercion
+// if(age == 18) console.log('Yes person is 18(loose)');
 
-// Number converts string into number
-const favourite = Number (prompt ("whats your favourite number?"));
-console.log(favourite);
-console.log(typeof favourite);
+// // Number converts string into number
+// const favourite = Number (prompt ("whats your favourite number?"));
+// console.log(favourite);
+// console.log(typeof favourite);
 
-// always use strict === 
-if(favourite === 23){
-    console.log('23 is an amazing number');
-} else if(favourite === 7){
-    console.log('7 is also a cool number');
-} else if(favourite === 9){
-    console.log('9 is also a cool number');
+// // always use strict === 
+// if(favourite === 23){
+//     console.log('23 is an amazing number');
+// } else if(favourite === 7){
+//     console.log('7 is also a cool number');
+// } else if(favourite === 9){
+//     console.log('9 is also a cool number');
+// } else {
+//     console.log('number is not 23 or 7 or 9');
+// }
+
+// // !== does not equal - != loose, !== strict
+// if( favourite !== 23){
+//     console.log('why not 23');
+// }
+
+// basic boolean log: And, Or, Not operators
+
+const hasDriversLicense = true; // A
+const hasGoodVision = true; // B
+
+// both conditions must be true
+console.log(hasDriversLicense && hasGoodVision);
+// only one condition needs to be true 
+console.log(hasDriversLicense || hasGoodVision);
+// ! is not true
+console.log(!hasDriversLicense);
+
+const shouldDrive = hasDriversLicense && hasGoodVision;
+
+// if(shouldDrive) {
+//     console.log('Able to drive')
+// } else {
+//     console.log('Someone else should drive')
+// }
+
+
+
+const isTired = false;
+
+console.log(hasDriversLicense && hasGoodVision && isTired);
+
+
+if(hasDriversLicense && hasGoodVision && !isTired) {
+    console.log('Able to drive')
 } else {
-    console.log('number is not 23 or 7 or 9');
-}
-
-// !== does not equal - != loose, !== strict
-if( favourite !== 23){
-    console.log('why not 23');
+    console.log('Someone else should drive')
 }
 
 
+////////////////////////////////////
+// Coding Challenge #3
+
+/*
+There are two gymnastics teams, Dolphins and Koalas. They compete against each other 3 times. The winner with the highest average score wins the a trophy!
+
+1. Calculate the average score for each team, using the test data below
+
+2. Compare the team's average scores to determine the winner of the competition, and print it to the console. Don't forget that there can be a draw, so test for that as well (draw means they have the same average score).
+
+3. BONUS 1: Include a requirement for a minimum score of 100. With this rule, a team only wins if it has a higher score than the other team, and the same time a score of at least 100 points. HINT: Use a logical operator to test for minimum score, as well as multiple else-if blocks 😉
+
+4. BONUS 2: Minimum score also applies to a draw! So a draw only happens when both teams have the same score and both have a score greater or equal 100 points. Otherwise, no team wins the trophy.
 
 
+TEST DATA: Dolphins score 96, 108 and 89. Koalas score 88, 91 and 110
 
 
+TEST DATA BONUS 1: Dolphins score 97, 112 and 101. Koalas score 109, 95 and 123
+TEST DATA BONUS 2: Dolphins score 97, 112 and 101. Koalas score 109, 95 and 106
+GOOD LUCK 😀
+*/
 
 
+// let dolphins = (96 + 108 + 89) / 3;
+// let koalas = (88 + 91 + 110) / 3;
 
+// console.log(`Dolphins score is ${dolphins} and koalas score is ${koalas}` );
 
+// if(dolphins > koalas) {
+//     console.log('dolphins score is greater');
 
+// } else if(dolphins < koalas) {
+//     console.log('koalas score is greater')
 
+// } else {
+//     dolphins === koalas;
+//     console.log('DRAW ! scores are the same')
+// }
 
+// Bonus
+let dolphins = (97 + 112 + 101) / 3;
+let koalas = (109 + 95 + 106) / 3;
 
+console.log(`Dolphins score is ${dolphins} and koalas score is ${koalas}` );
+
+if(dolphins > koalas && dolphins >= 100) {
+    console.log('dolphins score is greater');
+
+} else if(dolphins < koalas && koalas >= 100) {
+    console.log('koalas score is greater')
+
+} else if(dolphins === koalas && dolphins >= 100 && koalas >= 100) {
+    console.log('DRAW ! scores are the same')
+
+} else {
+    console.log('No winners!')
+}
