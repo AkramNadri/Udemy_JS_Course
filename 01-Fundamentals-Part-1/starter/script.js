@@ -286,17 +286,17 @@ GOOD LUCK 😀
 
 // basic boolean log: And, Or, Not operators
 
-const hasDriversLicense = true; // A
-const hasGoodVision = true; // B
+// const hasDriversLicense = true; // A
+// const hasGoodVision = true; // B
 
-// both conditions must be true
-console.log(hasDriversLicense && hasGoodVision);
-// only one condition needs to be true 
-console.log(hasDriversLicense || hasGoodVision);
-// ! is not true
-console.log(!hasDriversLicense);
+// // both conditions must be true
+// console.log(hasDriversLicense && hasGoodVision);
+// // only one condition needs to be true 
+// console.log(hasDriversLicense || hasGoodVision);
+// // ! is not true
+// console.log(!hasDriversLicense);
 
-const shouldDrive = hasDriversLicense && hasGoodVision;
+// const shouldDrive = hasDriversLicense && hasGoodVision;
 
 // if(shouldDrive) {
 //     console.log('Able to drive')
@@ -306,16 +306,16 @@ const shouldDrive = hasDriversLicense && hasGoodVision;
 
 
 
-const isTired = false;
+// const isTired = false;
 
-console.log(hasDriversLicense && hasGoodVision && isTired);
+// console.log(hasDriversLicense && hasGoodVision && isTired);
 
 
-if(hasDriversLicense && hasGoodVision && !isTired) {
-    console.log('Able to drive')
-} else {
-    console.log('Someone else should drive')
-}
+// if(hasDriversLicense && hasGoodVision && !isTired) {
+//     console.log('Able to drive')
+// } else {
+//     console.log('Someone else should drive')
+// }
 
 
 ////////////////////////////////////
@@ -359,20 +359,109 @@ GOOD LUCK 😀
 // }
 
 // Bonus
-let dolphins = (97 + 112 + 101) / 3;
-let koalas = (109 + 95 + 106) / 3;
+// let dolphins = (97 + 112 + 101) / 3;
+// let koalas = (109 + 95 + 106) / 3;
 
-console.log(`Dolphins score is ${dolphins} and koalas score is ${koalas}` );
+// console.log(`Dolphins score is ${dolphins} and koalas score is ${koalas}` );
 
-if(dolphins > koalas && dolphins >= 100) {
-    console.log('dolphins score is greater');
+// if(dolphins > koalas && dolphins >= 100) {
+//     console.log('dolphins score is greater');
 
-} else if(dolphins < koalas && koalas >= 100) {
-    console.log('koalas score is greater')
+// } else if(dolphins < koalas && koalas >= 100) {
+//     console.log('koalas score is greater')
 
-} else if(dolphins === koalas && dolphins >= 100 && koalas >= 100) {
-    console.log('DRAW ! scores are the same')
+// } else if(dolphins === koalas && dolphins >= 100 && koalas >= 100) {
+//     console.log('DRAW ! scores are the same')
 
-} else {
-    console.log('No winners!')
-}
+// } else {
+//     console.log('No winners!')
+// }
+
+
+
+// The Switch Statement
+
+// const day = 'monday';
+
+// switch(day){
+//     case 'monday': // day === monday, and if true execute code
+//         console.log('Plan course structure');
+//         console.log('Go to coding meetup');
+//             break; // without the break the code continues executing
+
+//         case 'tuesday': // === tuesday
+//         console.log('Prepare theory videos');
+//             break;
+
+//         case 'wednesday':
+//         case 'thursday':
+//         console.log('Write code examples');
+//             break;
+
+//         case 'friday': // === friday
+//         console.log('record videos');
+//             break;
+
+//         case 'saturday':
+//         case 'sunday':
+//         console.log('enjoy the weekend!')
+//             break;
+
+//         default: // === no valid input
+//             console.log('Not a valid day');
+// }
+
+// if(day === 'monday'){
+//     console.log('Plan course structure');
+//     console.log('Go to coding');
+
+// } else if(day === 'tuesday'){
+//     console.log('Prepare theory videos');
+
+// } else if (day === 'wednesday' || 'thursday'){
+//     console.log('Write code examples');
+
+// }else if(day === 'friday'){
+//     console.log('record videos');
+
+// } else if(day === 'saturday' || 'sunday') {
+//     console.log('enjoy the weekend!')
+
+// } else {
+//     console.log('not a valid day')
+// }
+
+
+// Expression is a piece of code that produces a value
+// 3 + 4;
+// 1991
+
+// // Statement, bigger piece of code which is executed but does not produce a value
+// // full sentences that perform some action
+// if (123 > 111){
+//     const str = '123 is bigger';
+// } 
+
+// Conditional (Ternary) operator
+
+// const age = 23;
+// // age >= 18 ? console.log('person is full age'):
+// // console.log('person not full age');
+
+// const drink = age >= 18 ? 'is of age' : 'not of age';
+// console.log(drink);
+
+// let drink2;
+
+// if(age >= 18) {
+//     drink2 = 'is of age'
+// } else {
+//     drink2 = 'not of age'
+// }
+
+// console.log(drink2);
+
+
+// // here we can use the age condition in template literal
+// // ternary operator used for quick decision
+// console.log(`I like  ${age >= 18 ? 'water' : 'juice'}`)
