@@ -145,9 +145,31 @@
 
 // console.log(fruitProcessor(2,3));
 
+
+const calcAge = function(birthyear) {
+    // birthyear is not related to the other birthyear
+    return 2037 - birthyear;
+
+}
+
 const yearsUntilRetirement = function (birthyear, firstName) {
-        const age = 2037 - birthyear;
-        const retirement = 65 - age;
-        return `${firstName} retires in ${retirement} years.`;
-    }
+    const age = 2037 - birthyear;
+    const retirement = 65 - age;
+
+if(retirement > 0){
+    console.log(`${firstName} retires in ${retirement} years.`);
+    return retirement;
+
+} else {
+    console.log(`${firstName} has already retired`);
+    return -1;
+
+}
+} 
+
+console.log(yearsUntilRetirement (1991, 'Akram'));
+console.log(yearsUntilRetirement (1950, 'Pardis'));
+
+
+// CODING CHALLENGE #1 - FUNCTIONS
 
