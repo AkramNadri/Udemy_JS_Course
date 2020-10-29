@@ -205,31 +205,96 @@ GOOD LUCK 😀
 // } 
 
 
-const calcAverage =  (score1, score2, score3) => {
-    const scores = (score1 + score2 + score3) / 3;
-    return scores;
-}   
+// const calcAverage =  (score1, score2, score3) => {
+//     const scores = (score1 + score2 + score3) / 3;
+//     return scores;
+// }   
 
 // Test data 1
-let dolphinScore = (calcAverage(44, 23, 71));
-console.log(`Dolphins score is ${dolphinScore}`);
+// let dolphinScore = (calcAverage(44, 23, 71));
+// console.log(`Dolphins score is ${dolphinScore}`);
 
-let koalaScore = (calcAverage(65, 54, 49));
-console.log(`Koala score is ${koalaScore}`);
+// let koalaScore = (calcAverage(65, 54, 49));
+// console.log(`Koala score is ${koalaScore}`);
 
-function checkWinner(avgDolphins, avgKoalas ){
+// function checkWinner(avgDolphins, avgKoalas ){
     
-    if(avgDolphins >= 2 * avgKoalas) {
-        console.log(` Dolphins win (${dolphinScore} VS ${koalaScore})`)
-    } else if(avgKoalas >= 2 * avgDolphins){
-        console.log(` Koalas win (${koalaScore} VS ${dolphinScore})`)
-    } else {
-        console.log('No winner');
-    }
+//     if(avgDolphins >= 2 * avgKoalas) {
+//         console.log(` Dolphins win (${dolphinScore} VS ${koalaScore})`)
+//     } else if(avgKoalas >= 2 * avgDolphins){
+//         console.log(` Koalas win (${koalaScore} VS ${dolphinScore})`)
+//     } else {
+//         console.log('No winner');
+//     }
     
+// }
+// // Test data 2
+// dolphinScore = calcAverage(85, 54, 41);
+// koalaScore = calcAverage(23,34,27);
+
+// checkWinner(dolphinScore, koalaScore);
+
+
+// Data structures
+// Arrays
+
+const friend1 = 'Micheal';
+const friend2 = 'Steven';
+const friend3 = 'Peter';
+
+// placing elements into an Array
+const friends = ['micheal', 'steven', 'peter'];
+console.log(friends);
+
+
+// creating an array with new Array
+// const years = new Array(1991, 1984, 2008, 2020);
+
+
+console.log(friends[0]);
+console.log(friends[2]);
+
+
+// length is called property
+// gives us the number of elements in the array
+console.log(friends.length);
+
+
+// find the last element in the array 
+console.log(friends[friends.length -1]);
+
+// mutate the array
+// an Array is not a primitive value and so it can be changed
+friends[2] = 'Jay';
+console.log(friends);
+
+
+// cannot replace the entire array
+// friends = ['bob', 'frank', 'Alice']
+
+
+// can store different types of data
+const firstName = 'Akram';
+const akram = [firstName, 'Nadri', 2037 - 1984 , 'Teacher'
+, friends];
+
+console.log(akram);
+console.log(akram.length);
+
+
+const calcAge = function (birthyear){
+    return 2037 - birthyear;
 }
-// Test data 2
-dolphinScore = calcAverage(85, 54, 41);
-koalaScore = calcAverage(23,34,27);
 
-checkWinner(dolphinScore, koalaScore);
+const years = [1991, 1984, 2008, 2020, 2022];
+
+const age1 = calcAge(years[0]);
+const age2 = calcAge(years[1]);
+const age3 = calcAge(years[years.length - 1]);
+
+console.log(age1, age2, age3);
+
+const ages = [calcAge(years[0]), calcAge(years[1]), 
+    calcAge(years[years.length - 1])];
+    
+console.log(ages);
