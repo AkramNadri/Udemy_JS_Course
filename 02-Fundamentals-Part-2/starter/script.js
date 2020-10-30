@@ -361,16 +361,130 @@ HINT: Remember that an array needs a value in each position, and that value can 
 GOOD LUCK 😀
 */
 
-const bills = [125, 555, 44];
+// const bills = [125, 555, 44];
 
-const calcTip = billValue => billValue >= 50 && billValue <= 300 ? 
-    billValue * .15 : billValue * .20;
+// const calcTip = billValue => billValue >= 50 && billValue <= 300 ? 
+//     billValue * .15 : billValue * .20;
     
-const tips = new Array (calcTip(bills[0]), (calcTip(bills[1])), 
-(calcTip(bills[2])));
+// const tips = new Array (calcTip(bills[0]), (calcTip(bills[1])), 
+// (calcTip(bills[2])));
 
-const totals = new Array ((tips[0] + bills[0]), (tips[1] + bills[1]), (tips[2] + bills[2]));
+// const totals = new Array ((tips[0] + bills[0]), (tips[1] + bills[1]), (tips[2] + bills[2]));
 
-console.log(bills, tips);
-console.log(totals);
+// console.log(bills, tips);
+// console.log(totals);
+
+
+///////////////////////// OBJECTS
+
+// const akramArray = [
+//     'Akram',
+//     'Nadri',
+//     2037 - 1984,
+//     'Programmer',
+//     ['Ak', 'Peter', 'Pardis']
+// ];
+
+// Obejects define key/value names
+// Use Arrays for more ordered data
+// Use objects for unstructured data
+
+// we name data and retrieve its value
+// const akram = {
+//     firstName: 'Akram',
+//     lastName: 'Nadri',
+//     age: 2037 - 1991,
+//     job: 'Teacher',
+//     friends:['Ak', 'Peter', 'Pardis']
+// };
+
+// console.log(akram);
+
+// // the . is an operator
+// console.log(akram.lastName);
+
+// // Here we can put any expression 
+// console.log(akram['lastName']);
+
+// // Use the [ ] to do expressions
+// const nameKey = 'Name';
+// console.log(akram['first' + nameKey]);
+// console.log(akram['last' + nameKey]);
+
+
+// const interestedIn = prompt('What do you want to know about Akram? Choose between firstname, lastname, age, job and friends');
+    // console.log(akram[interestedIn]);
+
+
+// if(akram[interestedIn]){
+//     console.log(akram[interestedIn]);
+// } else {
+//     console.log('Wrong request! Choose between firstname, lastname, age, job and friends');
+// }
+
+// akram.location = 'Canada';
+// akram['twitter'] = 'aktwitter';
+// console.log(akram);
+
+// hint need to use multiple dots
+// Challenge
+// 'Akram has 3 friends, and his best friend is called micheal'
+
+
+
+// console.log(`${akram.firstName} has ${akram.friends.length} friends, and his best friend is called ${akram.friends[0]}`);
+
+// Object methods
+
+const akram = {
+    firstName: 'Akram',
+    lastName: 'Nadri',
+    birthyear: 1991,
+    job: 'Teacher',
+    friends:['Ak', 'Peter', 'Pardis'],
+    hasDriversLicense: true,
+
+    // function that is attached to an object is called a method
+    // calcAge: function(birthyear) {
+    //     return 2037 - birthyear;
+    // } 
+
+    // calcAge: function() {
+        // console.log(this);
+    //     return 2037 - this.birthyear;
+    // } 
+
+    calcAge: function() {
+        this.age = 2037 - this.birthyear;
+        return this.age;
+    } , // need comma
+
+    hasLicense: function(){
+            return `${this.firstName} is a ${this.calcAge()} years old ${akram.job}, and he has ${this.hasDriversLicense ? 'a' : 'no'} drivers license`;
+        }
+    }
+
+
+console.log(akram.calcAge());
+console.log(akram.age);
+
+console.log(akram.hasLicense());
+// Challenge
+// "Akram is a 46 year old teacher, and he has a drivers license || has no drivers license"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
