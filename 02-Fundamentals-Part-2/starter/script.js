@@ -591,3 +591,34 @@ GOOD LUCK 😀
 
 //     console.log(akram[i], typeof akram[i]);
 // }
+
+
+// Loop backwards and loop within loop
+// loop over this array backwards
+const akram = [
+    'Akram',
+    'Nadri',
+    2037 - 1984,
+    'Programmer',
+    ['Ak', 'Peter', 'Pardis'],
+    true
+];
+
+// 0, 1, ....., 4
+// 4, 3, ...., 0
+
+// loops backward through array
+for(let i = akram.length - 1; i  >= 0; i--){
+    console.log(i, akram[i]);
+
+}
+
+
+// Loop within loop
+for(let exercise = 1; exercise < 4; exercise++){
+    console.log(`----- STARTING EXERCISE ${exercise}`);
+
+    for(let rep = 1; rep < 6; rep++){
+        console.log(`Exercise ${exercise}: lifting weights rep ${rep}`);
+    }
+}
