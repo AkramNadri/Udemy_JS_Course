@@ -487,42 +487,61 @@ GOOD LUCK 😀
 */
 
 // create mark object with properties
-const mark = {
-    fullName: 'Mark Miller',
-    mass: 78,
-    height: 1.69,
+// const mark = {
+//     fullName: 'Mark Miller',
+//     mass: 78,
+//     height: 1.69,
 
-    // created method to calculate BMI for mark
-    markCalcBMI: function(){
-        this.markBMI = this.mass / (this.height * this.height);
-        return this.markBMI;
-    }
+//     // created method to calculate BMI for mark
+//     calcBMI: function(){
+//         this.bmi = this.mass / (this.height * this.height);
+//         return this.bmi;
+//     }
+// };
+
+// // create john object with properties
+// const john = {
+//     fullName: 'John Smith',
+//     mass: 92,
+//     height: 1.95,
+
+//     // created method to calculate BMI for john
+//     calcBMI: function(){
+//         this.bmi = this.mass / (this.height * this.height);
+//         return this.bmi;
+//     }
+// };
+
+// mark.calcBMI();
+// john.calcBMI();
+
+// if(mark.bmi > john.bmi){
+//     console.log(`${mark.fullName} BMI (${mark.bmi}) is higher than ${john.fullName} (${john.bmi})`)
+
+// } else if (john.bmi > mark.bmi) {
+//     console.log(`${mark.fullName} BMI (${mark.bmi}) is less than ${john.fullName} (${john.bmi})`)
+// };
+
+
+// For Loop
+
+// console.log('Lifting weights repitition 1');
+// console.log('Lifting weights repitition 2');
+// console.log('Lifting weights repitition 3');
+// console.log('Lifting weights repitition 4');
+// console.log('Lifting weights repitition 5');
+// console.log('Lifting weights repitition 6');
+// console.log('Lifting weights repitition 7');
+// console.log('Lifting weights repitition 8');
+// console.log('Lifting weights repitition 9');
+// console.log('Lifting weights repitition 10 💪🏼');
+
+
+// for loop keeps running while condition is true 
+for(let rep = 1; rep <= 30; rep++){
+console.log(`Lifting weights repitition ${rep}`);
+
 }
-
-// create john object with properties
-const john = {
-    fullName: 'John Smith',
-    mass: 92,
-    height: 1.95,
-
-    // created method to calculate BMI for john
-    johnCalcBMI: function(){
-        this.johnBMI = this.mass / (this.height * this.height);
-        return this.johnBMI;
-    }
-}
-
-if(mark.markCalcBMI() > john.johnCalcBMI()){
-    console.log(`${mark.fullName} BMI (${mark.markBMI}) is higher than ${john.fullName} (${john.johnBMI})`)
-
-} else {
-    console.log(`${mark.fullName} BMI (${mark.markCalcBMI()}) is less than ${john.fullName} (${john.johnCalcBMI()})`)
-}
-
-
-
-
-
 
 
 
