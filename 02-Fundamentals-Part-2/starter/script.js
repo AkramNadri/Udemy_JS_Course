@@ -538,13 +538,56 @@ GOOD LUCK 😀
 
 
 // for loop keeps running while condition is true 
-for(let rep = 1; rep <= 30; rep++){
-console.log(`Lifting weights repitition ${rep}`);
+// for(let rep = 1; rep <= 30; rep++){
+// console.log(`Lifting weights repitition ${rep}`);
 
-}
+// }
+
+// const akram = [
+//     'Akram',
+//     'Nadri',
+//     2037 - 1984,
+//     'Programmer',
+//     ['Ak', 'Peter', 'Pardis'],
+//     true
+// ];
+
+// const types = [];
+
+// for(let i = 0; i < akram.length ;i++) {
+//     // Reading from akram array
+//     console.log(akram[i], typeof akram[i]);
+
+//     // Filling types of array
+//     // types[i] = typeof akram[i];
+//     types.push(typeof akram[i]);
+// }
+
+// console.log(types);
+
+// const years = [1991, 2007, 1969, 2020]; 
+// const ages = []; 
+
+// for(let i = 0; i < years.length; i++){
+//     ages.push(2037 - years[i]);
+
+// }
+
+// console.log(ages);
 
 
+// // continue and break
+// console.log('--- ONLY STRINGS ---')
+// for(let i = 0; i < akram.length ;i++) {
+//     if (typeof akram[i] !== 'string') continue;
+
+//     console.log(akram[i], typeof akram[i]);
+// }
 
 
+// console.log('--- BREAK WITH NUMBER ---')
+// for(let i = 0; i < akram.length ;i++) {
+//     if (typeof akram[i] === 'number') break;
 
-
+//     console.log(akram[i], typeof akram[i]);
+// }
