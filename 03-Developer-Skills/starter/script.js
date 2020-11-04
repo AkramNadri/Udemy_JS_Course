@@ -105,58 +105,58 @@ function reverse(value)
 // -- find minimum value in temp array
 // -- subtract min from max(amplitude) and return it
 
-const temperatures = [3, -2, -6, -1, 'error', 9, 13, 17, 15, 14, 9, 5];
+// const temperatures = [3, -2, -6, -1, 'error', 9, 13, 17, 15, 14, 9, 5];
 
-const calcTempAmplitude = function (temps) {
-  let max = temps[0];
-  let min = temps[0];
+// const calcTempAmplitude = function (temps) {
+//   let max = temps[0];
+//   let min = temps[0];
 
-  for (let i = 0; i < temps.length; i++) {
-    const currentTemp = temps[i];
+//   for (let i = 0; i < temps.length; i++) {
+//     const currentTemp = temps[i];
 
-    // loops through array and ignores value that is not number
-    if (typeof currentTemp !== 'number') continue;
+//     // loops through array and ignores value that is not number
+//     if (typeof currentTemp !== 'number') continue;
 
-    // loops through array comparing numbers and sets max
-    if (currentTemp > max) max = currentTemp;
+//     // loops through array comparing numbers and sets max
+//     if (currentTemp > max) max = currentTemp;
 
-    // loops through array comparing numbers and sets min
-    if (currentTemp < min) min = currentTemp;
-  }
-  console.log(max, min);
-  return max - min;
-};
+//     // loops through array comparing numbers and sets min
+//     if (currentTemp < min) min = currentTemp;
+//   }
+//   console.log(max, min);
+//   return max - min;
+// };
 
-const calcTempAmplitudeNew = function (t1, t2) {
-  const temps = t1.concat(t2);
-  console.log(temps);
+// const calcTempAmplitudeNew = function (t1, t2) {
+//   const temps = t1.concat(t2);
+//   console.log(temps);
 
-  let max = temps[0];
-  let min = temps[0];
+//   let max = temps[0];
+//   let min = temps[0];
 
-  for (let i = 0; i < temps.length; i++) {
-    const currentTemp = temps[i];
+//   for (let i = 0; i < temps.length; i++) {
+//     const currentTemp = temps[i];
 
-    // loops through array and ignores value that is not number
-    if (typeof currentTemp !== 'number') continue;
+//     // loops through array and ignores value that is not number
+//     if (typeof currentTemp !== 'number') continue;
 
-    // loops through array comparing numbers and sets max
-    if (currentTemp > max) max = currentTemp;
+//     // loops through array comparing numbers and sets max
+//     if (currentTemp > max) max = currentTemp;
 
-    // loops through array comparing numbers and sets min
-    if (currentTemp < min) min = currentTemp;
-  }
-  console.log(max, min);
-  return max - min;
-};
+//     // loops through array comparing numbers and sets min
+//     if (currentTemp < min) min = currentTemp;
+//   }
+//   console.log(max, min);
+//   return max - min;
+// };
 
-calcTempAmplitude([3, 7, 4, 1, 8]);
-// max = 3
-// max = 7
+// calcTempAmplitude([3, 7, 4, 1, 8]);
+// // max = 3
+// // max = 7
 
-const amplitudeNew = calcTempAmplitudeNew([3, 5, 1], [9, 0, 5]);
+// const amplitudeNew = calcTempAmplitudeNew([3, 5, 1], [9, 0, 5]);
 
-console.log(amplitudeNew);
+// console.log(amplitudeNew);
 
 // PROBLEM 2:
 // Function should now receive two arrays of temperatures.
@@ -170,3 +170,59 @@ console.log(amplitudeNew);
 // const array1 = ['a', 'b', 'c'];
 // const array2 = ['d', 'e', 'f'];
 // const array3 = array1.concat(array2);
+
+// DEBUGGING IN CONSOLE
+
+// const measureKelvin = function () {
+//   const measurement = {
+//     type: 'temp',
+//     unit: 'celcius',
+
+//     // C) FIX
+//     value: Number(prompt('Degrees Celcius:')),
+//   };
+
+//   console.log(measurement);
+
+//   // B) Find the bug
+//   console.table(measurement);
+
+//   //   console.log(measurement.value);
+//   //   console.warn(measurement.value);
+//   //   console.error(measurement.value);
+
+//   const kelvin = measurement.value + 273;
+//   return kelvin;
+// };
+
+// // A) Identify the bug
+// console.log(measureKelvin());
+
+// const calcTempAmplitudeBug = function (t1, t2) {
+//   const temps = t1.concat(t2);
+//   console.log(temps);
+
+//   let max = 0;
+//   let min = 0;
+
+//   for (let i = 0; i < temps.length; i++) {
+//     const currentTemp = temps[i];
+
+//     // loops through array and ignores value that is not number
+//     if (typeof currentTemp !== 'number') continue;
+
+//     debugger;
+//     // loops through array comparing numbers and sets max
+//     if (currentTemp > max) max = currentTemp;
+
+//     // loops through array comparing numbers and sets min
+//     if (currentTemp < min) min = currentTemp;
+//   }
+//   console.log(max, min);
+//   return max - min;
+// };
+
+// const amplitudeBug = calcTempAmplitudeBug([3, 5, 1], [9, 4, 5]);
+
+// // A) Identify bug
+// console.log(amplitudeBug);
