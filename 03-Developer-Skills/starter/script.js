@@ -16,9 +16,9 @@ PROJECT MANAGER. "WE NEED A FUNCTION THAT REVERSES WHATEVER
 WE PASS INTO IT"
 */
 
-/*
+/*********************************** 
 1. MAKE SURE YOU %100 UNDERSTAND THE PROBLEM. ASK THE RIGHT QUESTIONS TO GET A CLEAR PICTURE OF THE PROBLEM.
-*/
+***********************************/
 
 /*
 --  WHAT DOES 'WHATEVER' MEAN ? ONLY STRINGS, NUMBERS AND 
@@ -226,3 +226,43 @@ function reverse(value)
 
 // // A) Identify bug
 // console.log(amplitudeBug);
+
+///////////////////////////////////////
+// Coding Challenge #1
+
+/*
+Given an array of forecasted maximum temperatures, the thermometer displays a string with these temperatures.
+
+Example: [17, 21, 23] will print "... 17ºC in 1 days ... 21ºC in 2 days ... 23ºC in 3 days ..."
+
+Create a function 'printForecast' which takes in an array 'arr' and logs a string like the above to the console.
+
+Use the problem-solving framework: Understand the problem and break it up into sub-problems!
+
+TEST DATA 1: [17, 21, 23]
+TEST DATA 2: [12, 5, -5, 0, 4]
+*/
+let testData1 = [17, 21, 23];
+let testData2 = [12, 5, -5, 0, 4];
+
+// console.log(
+//   `... ${testData1[0]} in 1 days ... ${testData1[1]} in 2 days ... ${testData1[2]} in 3 days ... `
+// );
+
+const printForecast = function (arr) {
+  let str = '';
+  for (let i = 0; i < arr.length; i++) {
+    str += `...${arr[i]}ºC in ${i + 1} days`;
+  }
+  console.log(str);
+};
+
+printForecast(testData1);
+
+// -- Array transformed to string, seperated by ...
+// -- what is the X days ? current index + 1
+
+// -- transform array into string
+// -- transform each element to string with ºC
+// -- string needs to contain day (index + 1)
+// -- add ... between elements
