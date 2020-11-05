@@ -242,22 +242,36 @@ Use the problem-solving framework: Understand the problem and break it up into s
 TEST DATA 1: [17, 21, 23]
 TEST DATA 2: [12, 5, -5, 0, 4]
 */
-let testData1 = [17, 21, 23];
-let testData2 = [12, 5, -5, 0, 4];
+// let testData1 = [17, 21, 23];
+// let testData2 = [12, 5, -5, 0, 4];
 
-// console.log(
-//   `... ${testData1[0]} in 1 days ... ${testData1[1]} in 2 days ... ${testData1[2]} in 3 days ... `
-// );
+// // console.log(
+// //   `... ${testData1[0]} in 1 days ... ${testData1[1]} in 2 days ... ${testData1[2]} in 3 days ... `
+// // );
 
-const printForecast = function (arr) {
-  let str = '';
-  for (let i = 0; i < arr.length; i++) {
-    str += `...${arr[i]}ºC in ${i + 1} days`;
-  }
-  console.log(str);
-};
+// const printForecast = function (arr) {
+//   let str = '';
+//   for (let i = 0; i < arr.length; i++) {
+//     str += `...${arr[i]}ºC in ${i + 1} days`;
+//   }
+//   console.log(str);
+// };
 
-printForecast(testData1);
+// printForecast(testData2);
+
+// converting Array into String
+// let age = [12, 13, 14, 15, 16];
+
+// const ageCalc = ages => {
+//   let newAge = '';
+
+//   for (let i = 0; i < ages.length; i++) {
+//     newAge += `I will be ${ages[i]} in ${i + 1} year \n `;
+//   }
+//   console.log(newAge);
+// };
+
+// ageCalc(age);
 
 // -- Array transformed to string, seperated by ...
 // -- what is the X days ? current index + 1
