@@ -19,9 +19,13 @@
 // # is id
 //
 
+// generate a random number between 1 & 20 using Math.random function
 const secretNumber = Math.trunc(Math.random() * 20) + 1;
+
+// player start with a score of 20
 let score = 20;
 
+// random generated secret number is then placed into the .number class
 document.querySelector('.number').textContent = secretNumber;
 
 // Event listener when "Check!" button is clicked.
@@ -32,25 +36,36 @@ document.querySelector('.check').addEventListener('click', function () {
 
   // if no guess is input
   if (!guess) {
-    document.querySelector('.message').textContent = 'No number!';
+    // No number message is placed in the .message class with .textContent
+    document.querySelector('.message').textContent = 'No number! 🤔';
     // if guess equals secret number - user wins
   } else if (guess === secretNumber) {
+    // when players guess is correct, set current score to highscore
+    document.querySelector('.highscore').textContent = score;
+
     document.querySelector('.message').textContent = 'Correct Number!👌';
     // If guess is greater then the secret number
   } else if (guess > secretNumber) {
     if (score > 0) {
+      // when guess is greater then secret number
       document.querySelector('.message').textContent = 'Too High! 👆🏻 ';
+      // decrement score each time player guesses incorrectly
       score--;
+      // .score class is then updated with new score
       document.querySelector('.score').textContent = score;
       // If player score reaches zero, player loses
     } else {
+      // if player score reaches zero, player loses
       document.querySelector('.message').textContent = 'You Lose! ❌';
     }
     // If guess is less then the secret number
   } else if (guess < secretNumber) {
     if (score > 0) {
+      // when guess number is lower then secret number
       document.querySelector('.message').textContent = 'Too Low! 👇🏻';
+      // decrement score each time player guesses incorrectly
       score--;
+      // .score class is then updated with the new score
       document.querySelector('.score').textContent = score;
       // If player score reaches zero, player loses
     } else {
