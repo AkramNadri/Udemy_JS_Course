@@ -43,10 +43,11 @@ document.querySelector('.check').addEventListener('click', function () {
     // when players guess is correct, set current score to highscore
     document.querySelector('.highscore').textContent = score;
 
+    // when player guess is correct
     document.querySelector('.message').textContent = 'Correct Number!👌';
     // If guess is greater then the secret number
   } else if (guess > secretNumber) {
-    if (score > 0) {
+    if (score > 1) {
       // when guess is greater then secret number
       document.querySelector('.message').textContent = 'Too High! 👆🏻 ';
       // decrement score each time player guesses incorrectly
@@ -57,10 +58,11 @@ document.querySelector('.check').addEventListener('click', function () {
     } else {
       // if player score reaches zero, player loses
       document.querySelector('.message').textContent = 'You Lose! ❌';
+      document.querySelector('.score').textContent = 0;
     }
     // If guess is less then the secret number
   } else if (guess < secretNumber) {
-    if (score > 0) {
+    if (score > 1) {
       // when guess number is lower then secret number
       document.querySelector('.message').textContent = 'Too Low! 👇🏻';
       // decrement score each time player guesses incorrectly
@@ -70,6 +72,7 @@ document.querySelector('.check').addEventListener('click', function () {
       // If player score reaches zero, player loses
     } else {
       document.querySelector('.message').textContent = 'You Lose! ❌';
+      document.querySelector('.score').textContent = 0;
     }
   }
 });
