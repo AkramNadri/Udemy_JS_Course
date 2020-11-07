@@ -25,8 +25,17 @@ const secretNumber = Math.trunc(Math.random() * 20) + 1;
 // player start with a score of 20
 let score = 20;
 
-// random generated secret number is then placed into the .number class
-document.querySelector('.number').textContent = secretNumber;
+document.querySelector('.again').addEventListener('click', function () {
+  location.reload();
+  document.querySelector('.message').textContent = 'Start guessing...';
+
+  document.querySelector('.score').textContent = '20';
+
+  resizeTo();
+  document.querySelector('.guess');
+
+  document.querySelector('.number').style.backgroundColor = '##eee';
+});
 
 // Event listener when "Check!" button is clicked.
 // function const guess can be used as a value
@@ -45,6 +54,16 @@ document.querySelector('.check').addEventListener('click', function () {
 
     // when player guess is correct
     document.querySelector('.message').textContent = 'Correct Number!👌';
+
+    // background of .number class change to green when guess is correct
+    document.querySelector('.number').style.backgroundColor = '#60b347';
+
+    // .number class increase width when guess is correct
+    document.querySelector('.number').style.width = '30rem';
+
+    // random generated secret number is then placed into the .number class
+    document.querySelector('.number').textContent = secretNumber;
+
     // If guess is greater then the secret number
   } else if (guess > secretNumber) {
     if (score > 1) {
@@ -54,7 +73,6 @@ document.querySelector('.check').addEventListener('click', function () {
       score--;
       // .score class is then updated with new score
       document.querySelector('.score').textContent = score;
-      // If player score reaches zero, player loses
     } else {
       // if player score reaches zero, player loses
       document.querySelector('.message').textContent = 'You Lose! ❌';
