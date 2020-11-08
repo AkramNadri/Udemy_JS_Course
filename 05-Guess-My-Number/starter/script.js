@@ -25,16 +25,25 @@ const secretNumber = Math.trunc(Math.random() * 20) + 1;
 // player start with a score of 20
 let score = 20;
 
+// Event listener for "Again!" button. Resets score, secret number, message and input value.
 document.querySelector('.again').addEventListener('click', function () {
-  location.reload();
+  // message class is set back to default
   document.querySelector('.message').textContent = 'Start guessing...';
 
+  // score value is reset to 20
   document.querySelector('.score').textContent = '20';
 
-  resizeTo();
-  document.querySelector('.guess');
+  // input guess value is reset to empty string
+  document.querySelector('.guess').value = '';
 
-  document.querySelector('.number').style.backgroundColor = '##eee';
+  // guess number box is reset to ?
+  document.querySelector('.number').textContent = '?';
+
+  // number class box width reset to 15
+  document.querySelector('.number').style.width = '15rem';
+
+  // number class background color is reset to white #eee
+  document.querySelector('.number').style.backgroundColor = '#eee';
 });
 
 // Event listener when "Check!" button is clicked.
@@ -61,7 +70,7 @@ document.querySelector('.check').addEventListener('click', function () {
     // .number class increase width when guess is correct
     document.querySelector('.number').style.width = '30rem';
 
-    // random generated secret number is then placed into the .number class
+    // random generated secret number is then placed into the .number class when guess is correct
     document.querySelector('.number').textContent = secretNumber;
 
     // If guess is greater then the secret number
