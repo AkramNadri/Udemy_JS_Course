@@ -27,3 +27,10 @@ btnCloseModal.addEventListener('click', closeModal);
 
 // eventListener to close modal & overlap when clicked off modal
 overlay.addEventListener('click', closeModal);
+
+document.addEventListener('keydown', function (e) {
+  console.log(e.key);
+
+  if (e.key === 'Escape' && !modal.classList.contains('hidden'));
+  closeModal();
+});
