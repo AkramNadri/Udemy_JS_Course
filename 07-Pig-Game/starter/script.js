@@ -21,6 +21,7 @@ const btnRoll = document.querySelector('.btn--roll');
 // Hold button
 const btnHold = document.querySelector('.btn--hold');
 
+// declaring variables as global variables so they can be used inside functions
 let scores, currentScore, activePlayer, playing;
 
 // Starting condition ///////////////////////////////////
@@ -35,7 +36,7 @@ const init = function () {
   current0Element.textContent = 0;
   current1Element.textContent = 0;
 
-  diceElement.classList.add('.hidden');
+  diceElement.classList.add('hidden');
   player0Element.classList.add('player--active');
   player1Element.classList.remove('player--active');
   player0Element.classList.remove('player--winner');
@@ -113,4 +114,4 @@ btnHold.addEventListener('click', function () {
 });
 
 // New Game button to reset game //////////////////////////
-btnNew.addEventListener('click', init());
+btnNew.addEventListener('click', init);
