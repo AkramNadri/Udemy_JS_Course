@@ -61,6 +61,7 @@ diceElement.classList.add('hidden');
 
 // Rolling dice functionality ///////////////////////////////
 btnRoll.addEventListener('click', function () {
+  // if playing = true, then execute code below.
   if (playing) {
     // generate random dice roll
     const dice = Math.trunc(Math.random() * 6) + 1;
@@ -87,6 +88,7 @@ btnRoll.addEventListener('click', function () {
 
 // Hold score functionality /////////////////////////////////
 btnHold.addEventListener('click', function () {
+  // if playing = true, execute code below
   if (playing) {
     // 1. Add current score to active player score
     scores[activePlayer] += currentScore;
@@ -95,14 +97,19 @@ btnHold.addEventListener('click', function () {
       scores[activePlayer];
 
     // 2. Check if players score is >= 100
-    if (scores[activePlayer] >= 10) {
+    if (scores[activePlayer] >= 50) {
+      // if playing = false, game ends
       playing = false;
+
+      // hide dice element
       diceElement.classList.add('hidden');
 
+      // adding player--winner class to active player
       document
         .querySelector(`.player--${activePlayer}`)
         .classList.add('player--winner');
 
+      // removing active player from non active player
       document
         .querySelector(`.player--${activePlayer}`)
         .classList.remove('player--active');
@@ -114,4 +121,5 @@ btnHold.addEventListener('click', function () {
 });
 
 // New Game button to reset game //////////////////////////
+// calls init function
 btnNew.addEventListener('click', init);
