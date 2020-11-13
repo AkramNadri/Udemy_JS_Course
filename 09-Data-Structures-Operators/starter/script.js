@@ -29,50 +29,69 @@ const restaurant = {
   },
 };
 
+//****************************************/
+// object destructuring we use curly braces {}
+// fundementals of destructuring an object
+// place properties inside curly braces, select then object pertaining to the properties.
+const { name, openingHours, categories } = restaurant;
+
+console.log(name, openingHours, categories);
+
+// what if we want the variable names different then property names
+// changing the default names in restaurant property to new variable names.
+const {
+  name: restaurantName,
+  openingHours: hours,
+  categories: tags,
+} = restaurant;
+
+console.log(restaurantName, hours, tags);
+
+//*******************************************/
 // older method of assigning array values to variables
-const arr = [2, 3, 4];
-const a = arr[0];
-const b = arr[1];
-const c = arr[2];
+// const arr = [2, 3, 4];
+// const a = arr[0];
+// const b = arr[1];
+// const c = arr[2];
 
-// destructuring an array, when you place an = in before an array JS will know to destructure the array
-const [x, y, z] = arr;
-console.log(x, y, z);
+// // destructuring an array, when you place an = in before an array JS will know to destructure the array
+// const [x, y, z] = arr;
+// console.log(x, y, z);
 
-// destructuring does not destroy the array, we are simply unpacking it.
-console.log(arr);
+// // destructuring does not destroy the array, we are simply unpacking it.
+// console.log(arr);
 
-// destructuring property values from restaurant object
-let [main, , secondary] = restaurant.categories;
-console.log(main, secondary);
-
-// Switching variables
-// required a temp variable in the middle
-// we are switching the values in the variables
-// const temp = main;
-// main = secondary;
-// secondary = temp;
+// // destructuring property values from restaurant object
+// let [main, , secondary] = restaurant.categories;
 // console.log(main, secondary);
 
-// Switching variables 2
-[main, secondary] = [secondary, main];
-// console.log(main, secondary);
+// // Switching variables
+// // required a temp variable in the middle
+// // we are switching the values in the variables
+// // const temp = main;
+// // main = secondary;
+// // secondary = temp;
+// // console.log(main, secondary);
 
-// receive 2 return values from a function
-const [starter, mainCourse] = restaurant.order(2, 0);
-console.log(starter, mainCourse);
+// // Switching variables 2
+// [main, secondary] = [secondary, main];
+// // console.log(main, secondary);
 
-// **nested array** is an array within an array
-const nested = [2, 4, [5, 6]];
-// const [i, , j] = nested;
-// console.log(i, j);
+// // receive 2 return values from a function
+// const [starter, mainCourse] = restaurant.order(2, 0);
+// console.log(starter, mainCourse);
 
-// destructuring an array within array
-const [i, , [, k]] = nested;
-console.log(i, k);
+// // **nested array** is an array within an array
+// const nested = [2, 4, [5, 6]];
+// // const [i, , j] = nested;
+// // console.log(i, j);
 
-// default values
-const [p = 1, q = 1, r = 1] = [8, 9];
+// // destructuring an array within array
+// const [i, , [, k]] = nested;
+// console.log(i, k);
 
-// r is set to undefined here
-console.log(p, q, r);
+// // default values
+// const [p = 1, q = 1, r = 1] = [8, 9];
+
+// // r is set to undefined here
+// console.log(p, q, r);
