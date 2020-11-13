@@ -95,6 +95,7 @@
 // console.log(lastName, oldLastName);
 
 // jessica object is store on the heap, assigning a new variable to this object does not create a new object with the properties, instead the variable will point to the objects address on the stack.
+// reference type
 const jessica = {
   firstName: 'Jessice',
   lastName: 'Williams',
@@ -106,9 +107,38 @@ const jessica = {
 // if we change a property on marriedJessica, it will change the property on jessice as well because they both point to the same object on the heap.
 // The stack only holds the reference which we are not changing
 // The only thing we are changing is the underlying object which is stored on the heap.
-const marriedJessica = jessica;
+// const marriedJessica = jessica;
 
 // changing the lastName property in the jessica object.
-marriedJessica.lastName = 'Davis';
-console.log('Before marriage', jessica);
-console.log('After marriage', marriedJessica);
+// marriedJessica.lastName = 'Davis';
+// console.log('Before marriage', jessica);
+// console.log('After marriage', marriedJessica);
+
+// We cannot assign a new object to marriedJessica because it is a const on the stack, const on the stack cannot be changed.
+// If it was a 'let' we could assign a new object to it.
+// marriedJessica = {};
+
+// jessica2 is an object
+const jessica2 = {
+  // these are properties of the object
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+
+  // array within the object
+  family: ['akram', 'pardis'],
+};
+
+// Object.assign will do a shallow copy of the object
+// jessicaCopy now has a shallow copy of the jessica2 object
+const jessicaCopy = Object.assign({}, jessica2);
+
+// jessicaCopy will only contain a shallow copy of the jessica2 object, other objects, arrays or functions inside jessica2 object will be copied into the new object
+jessicaCopy.lastName = 'Davis';
+
+// Here we try to push new strings into the family array inside jessica2 object
+jessicaCopy.family.push('Bob');
+jessicaCopy.family.push('John');
+
+console.log('Before marriage', jessica2);
+console.log('After marriage', jessicaCopy);
