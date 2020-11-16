@@ -30,6 +30,12 @@ const restaurant = {
     );
   },
 
+  orderPasta: function (ingredient1, ingredient2, ingredient3) {
+    console.log(
+      `Here is your pasta with ${ingredient1}, ${ingredient2}, ${ingredient3}`
+    );
+  },
+
   openingHours: {
     thu: {
       open: 12,
@@ -105,9 +111,68 @@ const arr = [7, 8, 9];
 const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
 console.log(badNewArr);
 
+// SPREAD OPERATOR ************************//
 // spread operator ... takes all the values inside the arr array and writes them out individually
-const newArr = [1, 2, ...arr];
-console.log(newArr);
+// use spread operator whenever write multiple values
+const newGoodArr = [1, 2, ...arr];
+console.log(newGoodArr);
+
+console.log(...newGoodArr);
+// same as above
+console.log(1, 2, 7, 8, 9);
+
+// creating a new array, use spread operator on mainMenu property and adding a value 'Gnocci' to the end of the new array
+
+// spread operator takes all the elements in the array and doesnt create new variables. We can only use it in place where we'd otherwise write values seperated by commas.
+const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+console.log(newMenu);
+
+// copy array
+const mainMenuCopy = [...restaurant.mainMenu];
+console.log(mainMenuCopy);
+
+// join two or more array together
+const menuNew = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(menuNew);
+
+// Iterables are arrays, strings, maps, sets.
+// NOT objects.
+
+// Spread operator on String
+// Each letter of the original string is now an original element.
+// we can only use the spread operator when building an array or passing to a function
+const str = 'Akram';
+const letters = [...str, '', 's.'];
+console.log(letters);
+// this will not work in template literal because it does not expect it here ***
+// console.log(`${...str} Nadri`);
+
+// const ingredients = [
+//   prompt('Lets make pasta! Ingredient 1? '),
+//   prompt('Ingredient 2?'),
+//   prompt('Ingerdient 3?'),
+// ];
+// console.log(ingredients);
+
+// passing values to orderPasta function arguments
+// restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2]);
+// same as above, better way of doing it
+// restaurant.orderPasta(...ingredients);
+
+// Objects with ... spread operator
+const newRestaurant = { founderIn: 1998, ...restaurant, founder: 'Akram' };
+
+console.log(newRestaurant);
+
+// copy restaurant into restaurantCopy
+const restaurantCopy = { ...restaurant };
+restaurantCopy.name = 'Ristorante';
+
+// the new copy has name changed to Ristorante
+console.log(restaurantCopy.name);
+
+// the original has not changed
+console.log(restaurant.name);
 
 //*******************************************/
 // older method of assigning array values to variables
