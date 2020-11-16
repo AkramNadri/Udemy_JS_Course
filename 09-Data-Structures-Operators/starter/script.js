@@ -100,6 +100,15 @@ const {
 } = openingHours;
 console.log(o, c);
 
+// old method of combining or adding to array
+const arr = [7, 8, 9];
+const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
+console.log(badNewArr);
+
+// spread operator ... takes all the values inside the arr array and writes them out individually
+const newArr = [1, 2, ...arr];
+console.log(newArr);
+
 //*******************************************/
 // older method of assigning array values to variables
 // const arr = [2, 3, 4];
