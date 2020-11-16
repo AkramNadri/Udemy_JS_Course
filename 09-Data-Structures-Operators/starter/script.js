@@ -13,6 +13,23 @@ const restaurant = {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
 
+  // added default values to orderDelivery function, if no value is passed to a argument the default value will be used instead.
+  orderDelivery: function ({
+    // starterIndex will always have a default value of 1.
+    starterIndex = 1,
+    // mainIndex default value always 0
+    mainIndex = 0,
+    // time default always 20:00
+    time = '20:00',
+    // address has no default value
+    address,
+  }) {
+    // using keyword this for scoping
+    console.log(
+      ` Order received: ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
+  },
+
   openingHours: {
     thu: {
       open: 12,
@@ -28,6 +45,20 @@ const restaurant = {
     },
   },
 };
+
+// calling orderDelivery function and passing values into the arguments. Property names here must match argument names in the function that the values are being passed to.
+restaurant.orderDelivery({
+  time: '22:30',
+  address: 'Via del Sole, 21',
+  mainIndex: 2,
+  starterIndex: 2,
+});
+
+// passing only 2 properties to orderDelivery function, default values in orderDelivery function will be used for missing arguments.
+restaurant.orderDelivery({
+  address: 'Via del Sole, 21',
+  starterIndex: 1,
+});
 
 //****************************************/
 // object destructuring we use curly braces {}
@@ -45,7 +76,29 @@ const {
   categories: tags,
 } = restaurant;
 
+// console logging by using new variable names
+// Very helpful when dealing with 3rd party data
 console.log(restaurantName, hours, tags);
+
+// setting default values
+const { menu = [], starterMenu: starters = [] } = restaurant;
+console.log(menu, starters);
+
+// mutating values
+let a = 111;
+let b = 999;
+const obj = { a: 23, b: 7, c: 14 };
+
+// to destructure an object we must wrap destructuring assignment in paranthesis
+({ a, b } = obj);
+console.log(a, b);
+
+// nested objects
+// selecting properties within an object properties
+const {
+  fri: { open: o, close: c },
+} = openingHours;
+console.log(o, c);
 
 //*******************************************/
 // older method of assigning array values to variables
