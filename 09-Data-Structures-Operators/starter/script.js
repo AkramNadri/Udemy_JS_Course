@@ -57,55 +57,93 @@ const restaurant = {
   },
 };
 
+console.log(' ------------- OR -----------');
+// use ANY data type
+// return any data type
+// short-circuiting
+console.log(3 || 'Akram');
+console.log('' || 'Akram');
+console.log(true || 0);
+console.log(undefined || null);
+
+// short-circuit through all the falsey values until a truthy element/value found, then return value
+console.log(undefined || 0 || '' || 'hello' || 23 || null);
+
+// restaurant.numGuests = 23;
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+
+console.log(guests1);
+
+// OR short-circuit will run through values until first truthy element
+const guest2 = restaurant.numGuests || 10;
+console.log(guest2);
+
+console.log(' ------------- AND -----------');
+
+// all values must be true
+// * the end operator is only true if all operands are true.
+console.log(0 && 'Akram');
+console.log(0 && 'Akram');
+console.log(7 && 'Akram');
+
+console.log('hello' && 23 && null && 'string');
+
+// practical example
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('mushrrom', 'spinach');
+}
+
+restaurant.orderPizza && restaurant.orderPizza('mushrrom', 'spinach');
+
 // SPREAD, because on the RIGHT side of =
-const arr = [1, 2, ...[3, 4]];
+// const arr = [1, 2, ...[3, 4]];
 
-// REST, because on LEFT side of =
-// Its called REST because it will take the rest of the elements, or remaining elements of the array and put them into a new array.
-// REST collects the unused elements in the destructuring assignment.
-const [a, b, ...others] = [1, 2, 3, 4, 5];
-console.log(a, b, others);
+// // REST, because on LEFT side of =
+// // Its called REST because it will take the rest of the elements, or remaining elements of the array and put them into a new array.
+// // REST collects the unused elements in the destructuring assignment.
+// const [a, b, ...others] = [1, 2, 3, 4, 5];
+// console.log(a, b, others);
 
-// this will select the first and third value in mainMenu, and REST of the starterMenu
-// does not include any skipped elements
-// REST should always be placed at the end.
-const [pizza, , risoto, ...otherFood] = [
-  ...restaurant.mainMenu,
-  ...restaurant.starterMenu,
-];
+// // this will select the first and third value in mainMenu, and REST of the starterMenu
+// // does not include any skipped elements
+// // REST should always be placed at the end.
+// const [pizza, , risoto, ...otherFood] = [
+//   ...restaurant.mainMenu,
+//   ...restaurant.starterMenu,
+// ];
 
-console.log(pizza, risoto, otherFood);
+// console.log(pizza, risoto, otherFood);
 
-// Objects
-// we placed thurs and fri properties into
-// ...weekdays array
-const { sat, ...weekdays } = restaurant.openingHours;
-console.log(weekdays);
+// // Objects
+// // we placed thurs and fri properties into
+// // ...weekdays array
+// const { sat, ...weekdays } = restaurant.openingHours;
+// console.log(weekdays);
 
-// 2) Functions
-// REST arguments
-// here we pack them into an array
-// ...numbers can now take arrays and single numbers
-const add = function (...numbers) {
-  let sum = 0;
-  for (let i = 0; i < numbers.length; i++) sum += numbers[i];
-  console.log(sum);
-};
+// // 2) Functions
+// // REST arguments
+// // here we pack them into an array
+// // ...numbers can now take arrays and single numbers
+// const add = function (...numbers) {
+//   let sum = 0;
+//   for (let i = 0; i < numbers.length; i++) sum += numbers[i];
+//   console.log(sum);
+// };
 
-add(2, 3);
-add(5, 3, 7, 2);
-add(8, 5, 2, 7, 1, 6);
+// add(2, 3);
+// add(5, 3, 7, 2);
+// add(8, 5, 2, 7, 1, 6);
 
-const x = [23, 5, 7];
-// taking all the numbers of the array and spreading them.
-// they will then enter the add function
-// they will be collected by the ...numbers argument in the add function
-// here we unpack the values
-add(...x);
+// const x = [23, 5, 7];
+// // taking all the numbers of the array and spreading them.
+// // they will then enter the add function
+// // they will be collected by the ...numbers argument in the add function
+// // here we unpack the values
+// add(...x);
 
-restaurant.orderPizza('mushroom', 'onion', 'olives', 'spinach');
+// restaurant.orderPizza('mushroom', 'onion', 'olives', 'spinach');
 
-restaurant.orderPizza('mushrooms');
+// restaurant.orderPizza('mushrooms');
 
 // calling orderDelivery function and passing values into the arguments. Property names here must match argument names in the function that the values are being passed to.
 // restaurant.orderDelivery({
