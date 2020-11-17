@@ -57,43 +57,54 @@ const restaurant = {
   },
 };
 
-console.log(' ------------- OR -----------');
-// use ANY data type
-// return any data type
-// short-circuiting
-console.log(3 || 'Akram');
-console.log('' || 'Akram');
-console.log(true || 0);
-console.log(undefined || null);
+restaurant.numGuests = 0;
+const guests = restaurant.numGuests ? restaurant.numGuests : 10;
 
-// short-circuit through all the falsey values until a truthy element/value found, then return value
-console.log(undefined || 0 || '' || 'hello' || 23 || null);
+console.log(guests);
 
-// restaurant.numGuests = 23;
-const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+// ??
+// this operator only works with nullish values
+// Nullish: null and undefined (NOT 0 or '')
+const guestCorret = restaurant.numGuests ?? 10;
+console.log(guestCorret);
 
-console.log(guests1);
+// console.log(' ------------- OR -----------');
+// // use ANY data type
+// // return any data type
+// // short-circuiting
+// console.log(3 || 'Akram');
+// console.log('' || 'Akram');
+// console.log(true || 0);
+// console.log(undefined || null);
 
-// OR short-circuit will run through values until first truthy element
-const guest2 = restaurant.numGuests || 10;
-console.log(guest2);
+// // short-circuit through all the falsey values until a truthy element/value found, then return value
+// console.log(undefined || 0 || '' || 'hello' || 23 || null);
 
-console.log(' ------------- AND -----------');
+// // restaurant.numGuests = 23;
+// const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
 
-// all values must be true
-// * the end operator is only true if all operands are true.
-console.log(0 && 'Akram');
-console.log(0 && 'Akram');
-console.log(7 && 'Akram');
+// console.log(guests1);
 
-console.log('hello' && 23 && null && 'string');
+// // OR short-circuit will run through values until first truthy element
+// const guest2 = restaurant.numGuests || 10;
+// console.log(guest2);
 
-// practical example
-if (restaurant.orderPizza) {
-  restaurant.orderPizza('mushrrom', 'spinach');
-}
+// console.log(' ------------- AND -----------');
 
-restaurant.orderPizza && restaurant.orderPizza('mushrrom', 'spinach');
+// // all values must be true
+// // * the end operator is only true if all operands are true.
+// console.log(0 && 'Akram');
+// console.log(0 && 'Akram');
+// console.log(7 && 'Akram');
+
+// console.log('hello' && 23 && null && 'string');
+
+// // practical example
+// if (restaurant.orderPizza) {
+//   restaurant.orderPizza('mushrrom', 'spinach');
+// }
+
+// restaurant.orderPizza && restaurant.orderPizza('mushrrom', 'spinach');
 
 // SPREAD, because on the RIGHT side of =
 // const arr = [1, 2, ...[3, 4]];
