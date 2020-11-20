@@ -123,46 +123,74 @@ const game = {
   },
 };
 
+const [players1, players2] = game.players;
+console.log(players1, players2);
+
+const [gk, ...fieldPlayers] = players1;
+console.log(gk, fieldPlayers);
+
+const allPlayers = [...players1, ...players2];
+console.log(allPlayers);
+
+const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
+
+console.log(players1Final);
+
+const {
+  odds: { team1: team1, x: draw, team2: team2 },
+} = game;
+console.log(draw);
+
+const printGoals = function (...playerNames) {
+  console.log(playerNames);
+  console.log(` ${playerNames.length} goals were scored`);
+};
+
+printGoals(...game.scored);
+
+team1 < team2 && console.log(`team 1 likely to win`);
+team1 > team2 && console.log(`team 2 likely to win`);
+
 // 1. create array of all players in team1
 // const player1 = [...game.players[0]];
 // 1. create array of all players in team2
 // const player2 = [...game.players[1]];
 
-const [player1, player2] = game.players;
-console.log(player1, player2);
+// const [player1, player2] = game.players;
+// console.log(player1, player2);
 
 // 2. first player set to gk, and all remaining players set to fieldPlayers
-const [gk, ...fieldPlayers] = player1;
-console.log(gk, fieldPlayers);
+// const [gk, ...fieldPlayers] = player1;
+// console.log(gk, fieldPlayers);
 
 // 3. all players on team1 and team2 on allPlayers
-const allPlayers = [...player1, ...player2];
-console.log(allPlayers);
+// const allPlayers = [...player1, ...player2];
+// console.log(allPlayers);
 
 // 4. all players on team1 into players1Final plus add 'Thiago', 'Coutinho' and 'Perisic'.
-const players1Final = [...player1, 'Thiago', 'Coutinho', 'Perisic'];
-console.log(players1Final);
+// const players1Final = [...player1, 'Thiago', 'Coutinho', 'Perisic'];
+// console.log(players1Final);
 
-// 5.
-const {
-  odds: { team1: team1, x: draw, team2: team2 },
-} = game;
+// 5. renaming property name inside the game object
+// const {
+//   odds: { team1: team1, x: draw, team2: team2 },
+// } = game;
 
-console.log(` team1=${team1}, draw=${draw}, team2=${team2}`);
+// console.log(` team1=${team1}, draw=${draw}, team2=${team2}`);
 
 // 6. printGoals function takes arbitrary number of names
-const printGoals = function (...playerNames) {
-  console.log(playerNames);
-  console.log(`${playerNames.length} goals were scored`);
-};
+// const printGoals = function (...playerNames) {
+//   console.log(playerNames);
+//   console.log(`${playerNames.length} goals were scored`);
+// };
 
-printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
+// printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
 
-printGoals(...game.scored);
+// printGoals(...game.scored);
 
 // 7. we use the AND operator here because if the first condition is true it will continue through to the last condition and print
-team1 < team2 && console.log('Team 1 likely to win');
-team1 > team2 && console.log('Team 2 likely to win');
+// team1 < team2 && console.log('Team 1 likely to win');
+// team1 > team2 && console.log('Team 2 likely to win');
 
 // restaurant.numGuests = 0;
 // const guests = restaurant.numGuests ? restaurant.numGuests : 10;
