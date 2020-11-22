@@ -57,7 +57,24 @@ const restaurant = {
   },
 };
 
-///////////////////////////////////////
+///////////////////////////////////////////////////////////
+// For Of Loop
+
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+for (const item of menu) console.log(item);
+
+// old way of destructuring an item
+// for (const item of menu.entries()) {
+//   console.log(`${item[0] + 1}: ${item}[1]`);
+// }
+
+// new way of destructuring an item
+for (const [i, el] of menu.entries()) {
+  console.log(`${i + 1}: ${el}`);
+}
+console.log(menu.entries());
+///////////////////////////////////////////////////////////
 // Coding Challenge #1
 
 /* 
@@ -82,74 +99,74 @@ TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Th
 GOOD LUCK 😀
 */
 
-const game = {
-  team1: 'Bayern Munich',
-  team2: 'Borrussia Dortmund',
-  players: [
-    [
-      'Neuer',
-      'Pavard',
-      'Martinez',
-      'Alaba',
-      'Davies',
-      'Kimmich',
-      'Goretzka',
-      'Coman',
-      'Muller',
-      'Gnarby',
-      'Lewandowski',
-    ],
-    [
-      'Burki',
-      'Schulz',
-      'Hummels',
-      'Akanji',
-      'Hakimi',
-      'Weigl',
-      'Witsel',
-      'Hazard',
-      'Brandt',
-      'Sancho',
-      'Gotze',
-    ],
-  ],
-  score: '4:0',
-  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
-  date: 'Nov 9th, 2037',
-  odds: {
-    team1: 1.33,
-    x: 3.25,
-    team2: 6.5,
-  },
-};
+// const game = {
+//   team1: 'Bayern Munich',
+//   team2: 'Borrussia Dortmund',
+//   players: [
+//     [
+//       'Neuer',
+//       'Pavard',
+//       'Martinez',
+//       'Alaba',
+//       'Davies',
+//       'Kimmich',
+//       'Goretzka',
+//       'Coman',
+//       'Muller',
+//       'Gnarby',
+//       'Lewandowski',
+//     ],
+//     [
+//       'Burki',
+//       'Schulz',
+//       'Hummels',
+//       'Akanji',
+//       'Hakimi',
+//       'Weigl',
+//       'Witsel',
+//       'Hazard',
+//       'Brandt',
+//       'Sancho',
+//       'Gotze',
+//     ],
+//   ],
+//   score: '4:0',
+//   scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+//   date: 'Nov 9th, 2037',
+//   odds: {
+//     team1: 1.33,
+//     x: 3.25,
+//     team2: 6.5,
+//   },
+// };
 
-const [players1, players2] = game.players;
-console.log(players1, players2);
+// const [players1, players2] = game.players;
+// console.log(players1, players2);
 
-const [gk, ...fieldPlayers] = players1;
-console.log(gk, fieldPlayers);
+// const [gk, ...fieldPlayers] = players1;
+// console.log(gk, fieldPlayers);
 
-const allPlayers = [...players1, ...players2];
-console.log(allPlayers);
+// const allPlayers = [...players1, ...players2];
+// console.log(allPlayers);
 
-const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
+// const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
 
-console.log(players1Final);
+// console.log(players1Final);
 
-const {
-  odds: { team1: team1, x: draw, team2: team2 },
-} = game;
-console.log(draw);
+// const {
+//   odds: { team1: team1, x: draw, team2: team2 },
+// } = game;
+// console.log(draw);
 
-const printGoals = function (...playerNames) {
-  console.log(playerNames);
-  console.log(` ${playerNames.length} goals were scored`);
-};
+// const printGoals = function (...playerNames) {
+//   console.log(playerNames);
+//   console.log(` ${playerNames.length} goals were scored`);
+// };
 
-printGoals(...game.scored);
+// printGoals(...game.scored);
 
-team1 < team2 && console.log(`team 1 likely to win`);
-team1 > team2 && console.log(`team 2 likely to win`);
+// team1 < team2 && console.log(`team 1 likely to win`);
+// team1 > team2 && console.log(`team 2 likely to win`);
 
 // 1. create array of all players in team1
 // const player1 = [...game.players[0]];
