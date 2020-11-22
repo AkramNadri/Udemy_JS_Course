@@ -2,19 +2,47 @@
 
 // array destructuring = unpacking values from and arry or object into seperate variables, break down into smaller structures like variables.
 
+const weekdays = ['mon', 'tues', 'wed', 'thurs', 'fri', 'sat', 'sun'];
+
+const openingHours = {
+  [weekdays[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [weekdays[4]]: {
+    open: 11,
+    close: 23,
+  },
+  [weekdays[5]]: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
+
 const restaurant = {
   name: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+  // ES5 old method of adding property to object
+  // openingHours: openingHours,
 
-  order: function (starterIndex, mainIndex) {
+  // ES6 enhanced object literals
+  openingHours,
+
+  // Older style of writing a function, which required the property name followed by function.
+  // order: function (starterIndex, mainIndex) {
+  //   return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  // },
+
+  // newer style of writing functions do not require the keyword function in place here or the : colon
+  order(starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
 
   // added default values to orderDelivery function, if no value is passed to a argument the default value will be used instead.
-  orderDelivery: function ({
+  orderDelivery({
     // starterIndex will always have a default value of 1.
     starterIndex = 1,
     // mainIndex default value always 0
@@ -30,50 +58,40 @@ const restaurant = {
     );
   },
 
-  orderPasta: function (ingredient1, ingredient2, ingredient3) {
+  orderPasta(ingredient1, ingredient2, ingredient3) {
     console.log(
       `Here is your pasta with ${ingredient1}, ${ingredient2}, ${ingredient3}`
     );
   },
 
-  orderPizza: function (mainIngredients, ...otherIngredients) {
+  orderPizza(mainIngredients, ...otherIngredients) {
     console.log(mainIngredients);
     console.log(otherIngredients);
   },
-
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
 };
+
+console.log(restaurant);
+
+/////////////////////////////////////////////////////////////
+// Enhanced Object Literals
 
 ///////////////////////////////////////////////////////////
 // For Of Loop
 
-const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+// const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
 
-for (const item of menu) console.log(item);
+// for (const item of menu) console.log(item);
 
-// old way of destructuring an item
-// for (const item of menu.entries()) {
-//   console.log(`${item[0] + 1}: ${item}[1]`);
+// // old way of destructuring an item
+// // for (const item of menu.entries()) {
+// //   console.log(`${item[0] + 1}: ${item}[1]`);
+// // }
+
+// // new way of destructuring an item
+// for (const [i, el] of menu.entries()) {
+//   console.log(`${i + 1}: ${el}`);
 // }
-
-// new way of destructuring an item
-for (const [i, el] of menu.entries()) {
-  console.log(`${i + 1}: ${el}`);
-}
-console.log(menu.entries());
+// console.log(menu.entries());
 ///////////////////////////////////////////////////////////
 // Coding Challenge #1
 
