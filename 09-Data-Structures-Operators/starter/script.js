@@ -70,10 +70,34 @@ const restaurant = {
   },
 };
 
-// console.log(restaurant);
+// Looping Objects: Object keys, values and entries. ///////////
+// we can loop over objects which are not iterables but in a indirect way
+// Property NAMES
+const properties = Object.keys(openingHours);
+console.log(properties);
 
+let openStr = `we are open on ${properties.length} days `;
+// loop over property names which are also called keys
+for (const day of Object.keys(openingHours)) {
+  openStr += `${day}, `;
+}
+
+console.log(openStr);
+
+// Property VALUES
+const values = Object.values(openingHours);
+console.log(values);
+
+// entries equals name plus values together
+const entries = Object.entries(openingHours);
+// console.log(entries);
+
+// we can use destructuring here to list the property and values inside the openingHours object
+for (const [key, { open, close }] of entries) {
+  console.log(`On ${key} we open at ${open} and close at ${close}`);
+}
 /////////////////////////////////////////////
-// Optional Chaining
+//  Optional Chaining
 
 // checking if property exists in the object, will return and error if no property exist
 // if (restaurant.openingHours && restaurant.openingHours.mon)
@@ -91,37 +115,37 @@ const restaurant = {
 // console.log(restaurant.openingHours?.mon?.open);
 
 // Example
-const days = ['mon', 'tues', 'wed', 'thurs', 'fri', 'sat', 'sun'];
-for (const day of days) {
-  // use nullish coalescing operator and optional chaining operator working together.
-  const open = restaurant.openingHours[day]?.open ?? 'closed';
-  console.log(`On ${day}, we open at ${open}`);
-}
+// const days = ['mon', 'tues', 'wed', 'thurs', 'fri', 'sat', 'sun'];
+// for (const day of days) {
+//   // use nullish coalescing operator and optional chaining operator working together.
+//   const open = restaurant.openingHours[day]?.open ?? 'closed';
+//   console.log(`On ${day}, we open at ${open}`);
+// }
 
 // Methods
 // check to see if method exists with ?. optional chaining
-console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+// console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
 
 // Risoto does not exist, so the string message will print
 // this would return undefined, but since we used nullish coalescing the this statement goes to the second operand
-console.log(restaurant.Risoto?.(0, 1) ?? 'Method does not exist');
+// console.log(restaurant.Risoto?.(0, 1) ?? 'Method does not exist');
 
 // Arrays optional chaining
-const users = [
-  {
-    name: 'Akram',
-    email: 'akakak@',
-  },
-];
+// const users = [
+//   {
+//     name: 'Akram',
+//     email: 'akakak@',
+//   },
+// ];
 
 // ?. tests if the value on the left exists "users[0]"
 // optional chaining and nullish coalescing are almost always used together so that we can actually do something in case we dont get something from the object.
-console.log(users[0]?.name ?? 'User array empty');
+// console.log(users[0]?.name ?? 'User array empty');
 
 // Without using optional chaining we would have to write something like this
 
-if (users.length > 0) console.log(users[0].name);
-else console.log('user array empty');
+// if (users.length > 0) console.log(users[0].name);
+// else console.log('user array empty');
 
 /////////////////////////////////////////////////////////////
 // Enhanced Object Literals
@@ -168,46 +192,46 @@ TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Th
 GOOD LUCK 😀
 */
 
-// const game = {
-//   team1: 'Bayern Munich',
-//   team2: 'Borrussia Dortmund',
-//   players: [
-//     [
-//       'Neuer',
-//       'Pavard',
-//       'Martinez',
-//       'Alaba',
-//       'Davies',
-//       'Kimmich',
-//       'Goretzka',
-//       'Coman',
-//       'Muller',
-//       'Gnarby',
-//       'Lewandowski',
-//     ],
-//     [
-//       'Burki',
-//       'Schulz',
-//       'Hummels',
-//       'Akanji',
-//       'Hakimi',
-//       'Weigl',
-//       'Witsel',
-//       'Hazard',
-//       'Brandt',
-//       'Sancho',
-//       'Gotze',
-//     ],
-//   ],
-//   score: '4:0',
-//   scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
-//   date: 'Nov 9th, 2037',
-//   odds: {
-//     team1: 1.33,
-//     x: 3.25,
-//     team2: 6.5,
-//   },
-// };
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
 
 // const [players1, players2] = game.players;
 // console.log(players1, players2);
