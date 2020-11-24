@@ -70,7 +70,58 @@ const restaurant = {
   },
 };
 
-console.log(restaurant);
+// console.log(restaurant);
+
+/////////////////////////////////////////////
+// Optional Chaining
+
+// checking if property exists in the object, will return and error if no property exist
+// if (restaurant.openingHours && restaurant.openingHours.mon)
+//   console.log(restaurant.openingHours.mon.open);
+
+// if (restaurant.openingHours.fri.open)
+// console.log(restaurant.openingHours.fri.open);
+
+// only if the property before the ? exists, then the open property will be read
+// a property exists if it is not null and not undefined.
+// now instead of getting an error we get undefined
+// console.log(restaurant.openingHours.mon?.open);
+
+// if openingHours and mon do not exists
+// console.log(restaurant.openingHours?.mon?.open);
+
+// Example
+const days = ['mon', 'tues', 'wed', 'thurs', 'fri', 'sat', 'sun'];
+for (const day of days) {
+  // use nullish coalescing operator and optional chaining operator working together.
+  const open = restaurant.openingHours[day]?.open ?? 'closed';
+  console.log(`On ${day}, we open at ${open}`);
+}
+
+// Methods
+// check to see if method exists with ?. optional chaining
+console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+
+// Risoto does not exist, so the string message will print
+// this would return undefined, but since we used nullish coalescing the this statement goes to the second operand
+console.log(restaurant.Risoto?.(0, 1) ?? 'Method does not exist');
+
+// Arrays optional chaining
+const users = [
+  {
+    name: 'Akram',
+    email: 'akakak@',
+  },
+];
+
+// ?. tests if the value on the left exists "users[0]"
+// optional chaining and nullish coalescing are almost always used together so that we can actually do something in case we dont get something from the object.
+console.log(users[0]?.name ?? 'User array empty');
+
+// Without using optional chaining we would have to write something like this
+
+if (users.length > 0) console.log(users[0].name);
+else console.log('user array empty');
 
 /////////////////////////////////////////////////////////////
 // Enhanced Object Literals
