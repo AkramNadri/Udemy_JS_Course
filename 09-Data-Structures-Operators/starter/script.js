@@ -143,6 +143,12 @@ for (const [i, player] of game.scored.entries()) {
   console.log(`Goal ${i + 1}: ${player}`);
 }
 
+// 2. dont destruct the object, use the elements inside to calculate the average
+
+for (const gameOdds in game.odds) {
+  console.log(`${game.odds[gameOdds]} `);
+}
+
 ////////////////////////////////////////////////////////////////
 
 // Looping Objects: Object keys, values and entries. ///////////
