@@ -139,14 +139,36 @@ const game = {
 };
 
 // 1.
-for (const [i, player] of game.scored.entries()) {
-  console.log(`Goal ${i + 1}: ${player}`);
-}
+// for (const [i, player] of game.scored.entries()) {
+//   console.log(`Goal: ${i + 1}  ${player}`);
+// }
 
 // 2. dont destruct the object, use the elements inside to calculate the average
 
-for (const gameOdds in game.odds) {
-  console.log(`${game.odds[gameOdds]} `);
+// placing values of game.odds into new variable odds
+// const odds = Object.values(game.odds);
+// let average = 0;
+// // looping odds and placing values into odd.
+// // each iteration of the loop adds odd value to average variable.
+// for (const odd of odds) average += odd;
+// // dividing average by the number of elements in odds - .length
+// average /= odds.length;
+// console.log(average);
+
+const odds = Object.values(game.odds);
+let average = 0;
+for (const odd of odds) average += odd;
+average /= odds.length;
+console.log(average);
+
+// 3.
+
+// create 2 variables of team and odd which takes name and values from game.odds
+for (const [team, odd] of Object.entries(game.odds)) {
+  // ternary operator which converts x to draw if true, and while false prints string with name of the team
+  const teamStr = team === 'x' ? 'draw' : `victory ${game[team]}`;
+  // template literal which prints the teamStr and odd values
+  console.log(`Odd of ${teamStr} ${odd}`);
 }
 
 ////////////////////////////////////////////////////////////////
