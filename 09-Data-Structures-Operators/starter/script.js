@@ -139,67 +139,117 @@ const game = {
 };
 
 ///////////////////////////////////////////////////////////////
+// MAPS: ITERATION
+
+// Array of arrays
+// question contains Map Array which contains arrays inside
+const question = new Map([
+  ['question', 'what is the best programming language in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct!!'],
+  [false, 'Try Again'],
+]);
+
+console.log(question);
+
+console.log(Object.entries(openingHours));
+// convert object to Map
+// whenever you need a map and you already have an object
+const hoursMap = new Map(Object.entries(openingHours));
+console.log(hoursMap);
+
+// quiz app
+// first question is the Map, second question is the key
+console.log(question.get('question'));
+
+// Iteration is possible on Map
+// we only want to print an element if the key is number
+for (const [key, value] of question) {
+  if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+}
+
+// to get answer from user we use prompt
+// const answer = Number(prompt('Your answer'));
+const answer = 3;
+console.log(answer);
+
+// checks to see if answer is correct
+// this will return true, we then take the true key and place it into the question Map which returns the value 'Correct!!'
+console.log(question.get(question.get('correct') === answer));
+
+// Sometimes we need to convert Map back to Array
+// here we deconstruct the map using the SPREAD operator which creates an array of elements.
+console.log([...question]);
+// displays all the keys
+console.log([...question.keys()]);
+// displays all the values
+console.log([...question.values()]);
+
+///////////////////////////////////////////////////////////////
 // MAPS: FUNDEMENTALS
 // Map is a datastructure to map values to keys
 // data is store in key/value pairs in objects
 // the keys can have any types - it can even be objects, array or other maps
 
 // create variable and set it to Map
-const rest = new Map();
+// const rest = new Map();
 
-// set key= 'name, value='Italiano'
-rest.set('name', 'Italiano');
+// // set key= 'name, value='Italiano'
+// rest.set('name', 'Italiano');
 
-// key = 1, value='Italy'
-rest.set(1, 'Firenze, Italy');
-// key = 2, value = 'Lisbon, Portugal'
-console.log(rest.set(2, 'Lisbon, Portugal'));
+// // key = 1, value='Italy'
+// rest.set(1, 'Firenze, Italy');
+// // key = 2, value = 'Lisbon, Portugal'
+// console.log(rest.set(2, 'Lisbon, Portugal'));
 
-// setting key and values to the Map of rest variable
-rest
-  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
-  .set('open', 11)
-  .set('close', 23)
-  // can have boolean keys
-  .set(true, 'we are open')
-  .set(false, 'we are closed');
+// // setting key and values to the Map of rest variable
+// rest
+//   .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+//   .set('open', 11)
+//   .set('close', 23)
+//   // can have boolean keys
+//   .set(true, 'we are open')
+//   .set(false, 'we are closed');
 
-// in order to read data from a Map we use the 'get' method
-console.log(rest.get('name'));
-console.log(rest.get(true));
+// // in order to read data from a Map we use the 'get' method
+// console.log(rest.get('name'));
+// console.log(rest.get(true));
 
-// here we set time variable to 21 and check condition of open and close in the rest Map.
-const time = 21;
-console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+// // here we set time variable to 21 and check condition of open and close in the rest Map.
+// const time = 21;
+// console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
 
-// Methodsd available to Map - we already used get and set
-// 'has' checks if Map contains a certain key
-console.log(rest.has('categories'));
+// // Methodsd available to Map - we already used get and set
+// // 'has' checks if Map contains a certain key
+// console.log(rest.has('categories'));
 
-// delete elements from the Map
-rest.delete(2);
-console.log(rest);
+// // delete elements from the Map
+// rest.delete(2);
+// console.log(rest);
 
-// Map also has size property
-console.log(rest.size);
+// // Map also has size property
+// console.log(rest.size);
 
-// removes everything from Map
-rest.clear();
-console.log(rest);
+// // removes everything from Map
+// rest.clear();
+// console.log(rest);
 
-// use Array or Objects as Map keys
-// in order to use this key we must create a array variable which we can use as a key
-// Array arr is the key here
-const arr = [1, 2];
-rest.set(arr, 'Test');
-console.log(rest);
+// // use Array or Objects as Map keys
+// // in order to use this key we must create a array variable which we can use as a key
+// // Array arr is the key here
+// const arr = [1, 2];
+// rest.set(arr, 'Test');
+// console.log(rest);
 
-// we can use the key to retrieve the value
-console.log(rest.get(arr));
+// // we can use the key to retrieve the value
+// console.log(rest.get(arr));
 
-// we can use document.querySelector as a key
-rest.set(document.querySelector('h1'), 'Heading');
-console.log(rest);
+// // we can use document.querySelector as a key
+// rest.set(document.querySelector('h1'), 'Heading');
+// console.log(rest);
 ///////////////////////////////////////////////////////////////
 // ** SETS **
 // SET - collection of unique values, can never have duplicates
