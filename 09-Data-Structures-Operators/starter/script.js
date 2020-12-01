@@ -138,6 +138,72 @@ const game = {
   },
 };
 
+///////////////////////////////////////////////////////////////
+// ** SETS **
+// SET - collection of unique values, can never have duplicates
+// SET has all unique values and you cannot retrieve a specific element from the SET, you can only check if the value exists or not in the SET
+// Use an Array if you want to create a list of values that are retrievable
+// keep Sets in mind when you need to work with unique values
+
+// need to pass in an iterable in Set argument
+// Sets are also iterable
+// Set elements are unique
+const ordersSet = new Set([
+  'Pasta',
+  'Pizza',
+  'Pizza',
+  'Risotto',
+  'Pasta',
+  'Pizza',
+]);
+
+// will not display duplicates
+console.log(ordersSet);
+
+console.log(new Set('Akram'));
+
+// get the size of the set without the duplicates
+console.log(ordersSet.size);
+
+// check to see if value exists in Set
+// returns true or false
+console.log(ordersSet.has('Pizza'));
+console.log(ordersSet.has('Bread'));
+
+// add to Set
+// only one of the values here will be added to the set
+ordersSet.add('Garlic Bread');
+ordersSet.add('Garlic Bread');
+console.log(ordersSet);
+
+// deletes element from Set
+ordersSet.delete('Risotto');
+
+// deletes everything from the Set
+// ordersSet.clear();
+// console.log(ordersSet);
+
+// can loop through a Set
+for (const order of ordersSet) console.log(order);
+
+// the main use case for a Set is to remove duplicates values from Arrays
+// Example
+const stuff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+
+// placing array stuff into Set stuffUnique
+// this will remove duplicates and only contain unique values
+// use the ... spread operator to add elements to Set array
+const stuffUnique = [...new Set(stuff)];
+console.log(stuffUnique);
+console.log(
+  new Set(['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).size
+);
+
+// size of the string in the set
+console.log(new Set('AkramNadri').size);
+
+//////////////////////////////////////////////////////////////
+
 // 1.
 // for (const [i, player] of game.scored.entries()) {
 //   console.log(`Goal: ${i + 1}  ${player}`);
@@ -155,21 +221,21 @@ const game = {
 // average /= odds.length;
 // console.log(average);
 
-const odds = Object.values(game.odds);
-let average = 0;
-for (const odd of odds) average += odd;
-average /= odds.length;
-console.log(average);
+// const odds = Object.values(game.odds);
+// let average = 0;
+// for (const odd of odds) average += odd;
+// average /= odds.length;
+// console.log(average);
 
-// 3.
+// // 3.
 
-// create 2 variables of team and odd which takes name and values from game.odds
-for (const [team, odd] of Object.entries(game.odds)) {
-  // ternary operator which converts x to draw if true, and while false prints string with name of the team
-  const teamStr = team === 'x' ? 'draw' : `victory ${game[team]}`;
-  // template literal which prints the teamStr and odd values
-  console.log(`Odd of ${teamStr} ${odd}`);
-}
+// // create 2 variables of team and odd which takes name and values from game.odds
+// for (const [team, odd] of Object.entries(game.odds)) {
+//   // ternary operator which converts x to draw if true, and while false prints string with name of the team
+//   const teamStr = team === 'x' ? 'draw' : `victory ${game[team]}`;
+//   // template literal which prints the teamStr and odd values
+//   console.log(`Odd of ${teamStr} ${odd}`);
+// }
 
 ////////////////////////////////////////////////////////////////
 
