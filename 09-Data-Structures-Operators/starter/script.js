@@ -139,6 +139,68 @@ const game = {
 };
 
 ///////////////////////////////////////////////////////////////
+// MAPS: FUNDEMENTALS
+// Map is a datastructure to map values to keys
+// data is store in key/value pairs in objects
+// the keys can have any types - it can even be objects, array or other maps
+
+// create variable and set it to Map
+const rest = new Map();
+
+// set key= 'name, value='Italiano'
+rest.set('name', 'Italiano');
+
+// key = 1, value='Italy'
+rest.set(1, 'Firenze, Italy');
+// key = 2, value = 'Lisbon, Portugal'
+console.log(rest.set(2, 'Lisbon, Portugal'));
+
+// setting key and values to the Map of rest variable
+rest
+  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+  .set('open', 11)
+  .set('close', 23)
+  // can have boolean keys
+  .set(true, 'we are open')
+  .set(false, 'we are closed');
+
+// in order to read data from a Map we use the 'get' method
+console.log(rest.get('name'));
+console.log(rest.get(true));
+
+// here we set time variable to 21 and check condition of open and close in the rest Map.
+const time = 21;
+console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+
+// Methodsd available to Map - we already used get and set
+// 'has' checks if Map contains a certain key
+console.log(rest.has('categories'));
+
+// delete elements from the Map
+rest.delete(2);
+console.log(rest);
+
+// Map also has size property
+console.log(rest.size);
+
+// removes everything from Map
+rest.clear();
+console.log(rest);
+
+// use Array or Objects as Map keys
+// in order to use this key we must create a array variable which we can use as a key
+// Array arr is the key here
+const arr = [1, 2];
+rest.set(arr, 'Test');
+console.log(rest);
+
+// we can use the key to retrieve the value
+console.log(rest.get(arr));
+
+// we can use document.querySelector as a key
+rest.set(document.querySelector('h1'), 'Heading');
+console.log(rest);
+///////////////////////////////////////////////////////////////
 // ** SETS **
 // SET - collection of unique values, can never have duplicates
 // SET has all unique values and you cannot retrieve a specific element from the SET, you can only check if the value exists or not in the SET
@@ -148,59 +210,59 @@ const game = {
 // need to pass in an iterable in Set argument
 // Sets are also iterable
 // Set elements are unique
-const ordersSet = new Set([
-  'Pasta',
-  'Pizza',
-  'Pizza',
-  'Risotto',
-  'Pasta',
-  'Pizza',
-]);
+// const ordersSet = new Set([
+//   'Pasta',
+//   'Pizza',
+//   'Pizza',
+//   'Risotto',
+//   'Pasta',
+//   'Pizza',
+// ]);
 
-// will not display duplicates
-console.log(ordersSet);
-
-console.log(new Set('Akram'));
-
-// get the size of the set without the duplicates
-console.log(ordersSet.size);
-
-// check to see if value exists in Set
-// returns true or false
-console.log(ordersSet.has('Pizza'));
-console.log(ordersSet.has('Bread'));
-
-// add to Set
-// only one of the values here will be added to the set
-ordersSet.add('Garlic Bread');
-ordersSet.add('Garlic Bread');
-console.log(ordersSet);
-
-// deletes element from Set
-ordersSet.delete('Risotto');
-
-// deletes everything from the Set
-// ordersSet.clear();
+// // will not display duplicates
 // console.log(ordersSet);
 
-// can loop through a Set
-for (const order of ordersSet) console.log(order);
+// console.log(new Set('Akram'));
 
-// the main use case for a Set is to remove duplicates values from Arrays
-// Example
-const stuff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+// // get the size of the set without the duplicates
+// console.log(ordersSet.size);
 
-// placing array stuff into Set stuffUnique
-// this will remove duplicates and only contain unique values
-// use the ... spread operator to add elements to Set array
-const stuffUnique = [...new Set(stuff)];
-console.log(stuffUnique);
-console.log(
-  new Set(['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).size
-);
+// // check to see if value exists in Set
+// // returns true or false
+// console.log(ordersSet.has('Pizza'));
+// console.log(ordersSet.has('Bread'));
 
-// size of the string in the set
-console.log(new Set('AkramNadri').size);
+// // add to Set
+// // only one of the values here will be added to the set
+// ordersSet.add('Garlic Bread');
+// ordersSet.add('Garlic Bread');
+// console.log(ordersSet);
+
+// // deletes element from Set
+// ordersSet.delete('Risotto');
+
+// // deletes everything from the Set
+// // ordersSet.clear();
+// // console.log(ordersSet);
+
+// // can loop through a Set
+// for (const order of ordersSet) console.log(order);
+
+// // the main use case for a Set is to remove duplicates values from Arrays
+// // Example
+// const stuff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+
+// // placing array stuff into Set stuffUnique
+// // this will remove duplicates and only contain unique values
+// // use the ... spread operator to add elements to Set array
+// const stuffUnique = [...new Set(stuff)];
+// console.log(stuffUnique);
+// console.log(
+//   new Set(['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).size
+// );
+
+// // size of the string in the set
+// console.log(new Set('AkramNadri').size);
 
 //////////////////////////////////////////////////////////////
 
