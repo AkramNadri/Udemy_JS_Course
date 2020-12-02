@@ -137,6 +137,70 @@ const game = {
     team2: 6.5,
   },
 };
+/////////////////////////////////////////////////////////////////
+// Working with Strings 1
+
+const airline = 'Canada Air';
+const plane = 'A320';
+
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[2]);
+console.log('B737'[0]);
+
+console.log(airline.length);
+console.log('B737'.length);
+
+console.log(airline.indexOf('r'));
+console.log(airline.lastIndexOf('n'));
+console.log(airline.indexOf('Canada'));
+
+// Slice method - extract part of a String, needs index as argument
+
+// the begin parameter, its where the extraction will start
+// 0 based
+console.log(airline.slice(4));
+// stops extracting before reaching 7
+console.log(airline.slice(4, 7));
+
+// index start at 0 and ends at the first space found ' '.
+// helpful to find the first word in a string
+console.log(airline.slice(0, airline.indexOf(' ')));
+
+// index begins extracting after last empty space found
+console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+
+console.log(airline.slice(-2));
+console.log(airline.slice(1, -1));
+
+const checkMiddleStead = function (seat) {
+  // B and E are middle seats
+  const s = seat.slice(-1);
+  if (s === 'B' || s === 'E') console.log('You got the middle seat');
+  else {
+    console.log('You got lucky');
+  }
+};
+
+checkMiddleStead('11B');
+checkMiddleStead('23C');
+checkMiddleStead('3E');
+
+// How this all works !?
+// We know strings are primitives, so why do they have methods ?
+// Should methods only be available on Objects and Arrays ?
+// Whenever we call a method on a string, JS automatically behind the scenes convert that String primitive to a String Object with the same content, its on that object that the methods are called. This process is called Boxing, takes our string and puts it in a box which is called object.
+
+// Example below
+console.log(new String('Akram'));
+
+// typeOf indicates this String to be an Object
+// methods are available to be used on String because JS converts the String into an Object
+// Conversion occurs whenever we call a method on a String
+// When the operation is done, the object is converted back to a String primitive.
+console.log(typeof new String('Akram'));
+// converting back to String
+console.log(typeof new String('Akram').slice(1));
 
 ///////////////////////////////////////
 // Coding Challenge #3
