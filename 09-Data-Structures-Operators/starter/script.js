@@ -154,15 +154,45 @@ const passengerCorrect =
   passengerLower[0].toUpperCase() + passengerLower.slice(1);
 console.log(passengerCorrect);
 
+// created a function that takes any string argument and modifies the string so that the first index is capatilized and the rest lower case.
 const nameFixer = function (name) {
   const passengerLower = name.toLowerCase();
-  // name = passengerLower;
   const passengerCorrect =
     passengerLower[0].toUpperCase() + passengerLower.slice(1);
   console.log(passengerCorrect);
 };
+// calling nameFixer function
+nameFixer('aKrAm');
 
-nameFixer('rick'); /////////////////////////////////////////////////////////////////
+// Comparing emails
+const email = 'hello@ak.com';
+const loginEmail = '   HeLLo@Ak.com  \n';
+
+const lowerEmail = loginEmail.toLowerCase();
+const trimmedEmail = lowerEmail.trim();
+console.log(trimmedEmail);
+
+// since loginEmail is converted to object you can call methods on it
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+console.log(email === normalizedEmail);
+
+// Replacing
+
+const priceGB = '288,97*';
+const priceUS = priceGB.replace('*', '$').replace(',', '.');
+console.log(priceUS);
+
+const announcement =
+  'All passengers come to boarding door 23, boarding door 23';
+
+// target all occurances of 'door'
+console.log(announcement.replaceAll('door', 'gate'));
+
+// this also replaces all occurances of 'door'
+console.log(announcement.replace(/door/g, 'gate'));
+
+/////////////////////////////////////////////////////////////////
 // Working with Strings 1
 
 // const airline = 'Canada Air';
