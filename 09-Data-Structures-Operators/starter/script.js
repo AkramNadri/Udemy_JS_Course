@@ -138,55 +138,243 @@ const game = {
   },
 };
 
+///////////////////////////////////////
+// Coding Challenge #3
+
+/* 
+Let's continue with our football betting app! This time, we have a map with a log of the events that happened during the game. The values are the events themselves, and the keys are the minutes in which each event happened (a football game has 90 minutes plus some extra time).
+
+1. Create an array 'events' of the different game events that happened (no duplicates).
+
+2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+
+3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes).
+
+4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
+
+      [FIRST HALF] 17: ⚽️ GOAL
+GOOD LUCK 😀
+*/
+
+// const gameEvents = new Map([
+//   [17, '⚽️ GOAL'],
+//   [36, '🔁 Substitution'],
+//   [47, '⚽️ GOAL'],
+//   [61, '🔁 Substitution'],
+//   [64, '🔶 Yellow card'],
+//   [69, '🔴 Red card'],
+//   [70, '🔁 Substitution'],
+//   [72, '🔁 Substitution'],
+//   [76, '⚽️ GOAL'],
+//   [80, '⚽️ GOAL'],
+//   [92, '🔶 Yellow card'],
+// ]);
+
+// 1
+// const events = [...new Set(gameEvents.values())];
+// console.log(events);
+
+// // 2
+// gameEvents.delete(64);
+// console.log(gameEvents);
+
+// // 3
+// console.log(`An event on average occured every ${90 / gameEvents.size}`);
+
+// const time = [...gameEvents.keys()].pop();
+// console.log(time);
+
+// console.log(`An event on average occured every ${time / gameEvents.size}`);
+
+// for (const [min, event] of gameEvents) {
+//   console.log(min, event);
+//   const half = min <= 45 ? 'FIRST' : 'SECOND';
+//   console.log(`${half} half ${min}: ${event}`);
+// }
+// 1
+// const events = [...new Set(gameEvents.values())];
+// console.log(events);
+
+// // 2
+// gameEvents.delete(64);
+// console.log(gameEvents);
+
+// // 3
+// console.log(`An event happened on average every ${90 / gameEvents.size}`);
+
+// const time = [...gameEvents.keys()].pop();
+// console.log(time);
+
+// console.log(`An event happened on average every ${time / gameEvents.size}`);
+
+// // 4
+// for (const [key, value] of gameEvents) {
+//   console.log(key, value);
+
+//   const half = key <= 45 ? 'FIRST' : 'SECOND';
+//   console.log(`${half} HALF ${key}: ${value}`);
+// }
+
+// // 1)
+// const events = [...new Set(gameEvents.values())];
+// console.log(events);
+
+// // 2)
+// gameEvents.delete(64);
+// console.log(gameEvents);
+
+// // 3)
+// console.log(
+//   `An event happened, on average, every ${90 / gameEvents.size} minutes`
+// );
+
+// const time = [...gameEvents.keys()].pop();
+// console.log(time);
+// console.log(
+//   `An event happened, on average, every ${time / gameEvents.size} minutes`
+// );
+
+// for (const [min, event] of gameEvents) {
+//   console.log(min, event);
+//   const half = min <= 45 ? 'FIRST' : 'SECOND';
+//   console.log(`${half} HALF ${min}: ${event}`);
+// }
+
+// 1.
+// const stuffUnique = [...new Set(stuff)];
+// const events = [...new Set(gameEvents.values())];
+// console.log(events);
+
+// // 2. Remove 64
+// gameEvents.delete(64);
+// console.log(gameEvents);
+
+// //3.
+
+// console.log(
+//   `An event happened, on average, every ${90 / gameEvents.size} minutes`
+// );
+// const time = [...gameEvents.keys()].pop();
+// console.log(time);
+// console.log(
+//   `An event happened, on average, every ${time / gameEvents.size} minutes`
+// );
+
+// // 4. Loop over the events
+
+// for (const [min, event] of gameEvents.entries()) {
+//   console.log(min, event);
+
+//   const half = min <= 45 ? 'FIRST' : 'SECOND';
+//   console.log(`[${half} HALF] ${min}: ${event}`);
+// }
+
+/*
+///////////////////////////////////////////////////////////////
+// which data structure to use ?
+/*
+Sources of Data
+1. From the program itself
+2. From the UI - data input from user
+3. From external source - Data fetched for example from web API
+
+
+- Array or Set - 
+Do we just need a simple list of values if so then use Array or Set.
+
+- Object or Map -
+If we need key/Value pairs we need Object or Map.
+
+
+*** Most commong source of Data comes from Web API's ***
+Data from web API usually comes in a special data format which is called JSON. JSON is essentially just text, but can be converted to JavaScript Object because it uses the same formatting as JavaScript objects and arrays. Creating an Array of objects is extremely common in JavaScript. 
+
+
+** When to use them ? **
+
+ * Arrays vs Sets *
+
+Arrays  - Use when you need ordered list of values (might contain duplicates).
+        - Use when you need to manipulate data
+
+Sets  - Use when you need to work with unique values
+      - Use when high-performance is really important
+      - Use to remove duplicates from arrays
+
+
+
+Should use these key/value data structures whenever we need to describe the values using keys.
+ * Objects vs Maps
+
+Objects - More traditional key/value store
+        - Easier to write and access values with . and []
+
+    * USE when you need to include functions(methods)
+    * USE when working with JSON(can convert to map)
+
+
+
+Maps  - Better performance
+      - Keys can have ANY data type
+      - Easy to iterate
+      - Easy to compute size
+
+
+    * USE when you simply need to map key to values
+    * USE when you need keys that are NOT strings
+
+
+*/
+
 ///////////////////////////////////////////////////////////////
 // MAPS: ITERATION
 
 // Array of arrays
 // question contains Map Array which contains arrays inside
-const question = new Map([
-  ['question', 'what is the best programming language in the world?'],
-  [1, 'C'],
-  [2, 'Java'],
-  [3, 'JavaScript'],
-  ['correct', 3],
-  [true, 'Correct!!'],
-  [false, 'Try Again'],
-]);
+// const question = new Map([
+//   ['question', 'what is the best programming language in the world?'],
+//   [1, 'C'],
+//   [2, 'Java'],
+//   [3, 'JavaScript'],
+//   ['correct', 3],
+//   [true, 'Correct!!'],
+//   [false, 'Try Again'],
+// ]);
 
-console.log(question);
+// console.log(question);
 
-console.log(Object.entries(openingHours));
-// convert object to Map
-// whenever you need a map and you already have an object
-const hoursMap = new Map(Object.entries(openingHours));
-console.log(hoursMap);
+// console.log(Object.entries(openingHours));
+// // convert object to Map
+// // whenever you need a map and you already have an object
+// const hoursMap = new Map(Object.entries(openingHours));
+// console.log(hoursMap);
 
-// quiz app
-// first question is the Map, second question is the key
-console.log(question.get('question'));
+// // quiz app
+// // first question is the Map, second question is the key
+// console.log(question.get('question'));
 
-// Iteration is possible on Map
-// we only want to print an element if the key is number
-for (const [key, value] of question) {
-  if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
-}
+// // Iteration is possible on Map
+// // we only want to print an element if the key is number
+// for (const [key, value] of question) {
+//   if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+// }
 
-// to get answer from user we use prompt
-// const answer = Number(prompt('Your answer'));
-const answer = 3;
-console.log(answer);
+// // to get answer from user we use prompt
+// // const answer = Number(prompt('Your answer'));
+// const answer = 3;
+// console.log(answer);
 
-// checks to see if answer is correct
-// this will return true, we then take the true key and place it into the question Map which returns the value 'Correct!!'
-console.log(question.get(question.get('correct') === answer));
+// // checks to see if answer is correct
+// // this will return true, we then take the true key and place it into the question Map which returns the value 'Correct!!'
+// console.log(question.get(question.get('correct') === answer));
 
-// Sometimes we need to convert Map back to Array
-// here we deconstruct the map using the SPREAD operator which creates an array of elements.
-console.log([...question]);
-// displays all the keys
-console.log([...question.keys()]);
-// displays all the values
-console.log([...question.values()]);
+// // Sometimes we need to convert Map back to Array
+// // here we deconstruct the map using the SPREAD operator which creates an array of elements.
+// console.log([...question]);
+// // displays all the keys
+// console.log([...question.keys()]);
+// // displays all the values
+// console.log([...question.values()]);
 
 ///////////////////////////////////////////////////////////////
 // MAPS: FUNDEMENTALS
