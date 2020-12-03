@@ -137,95 +137,160 @@ const game = {
     team2: 6.5,
   },
 };
+
+///////////////////////////////////////
+// Coding Challenge #4
+
+/* 
+Write a program that receives a list of variable names written in underscore_case and convert them to camelCase.
+
+The input will come from a textarea inserted into the DOM (see code below), and conversion will happen when the button is pressed.
+
+THIS TEST DATA (pasted to textarea)
+underscore_case
+ first_name
+Some_Variable 
+  calculate_AGE
+delayed_departure
+
+SHOULD PRODUCE THIS OUTPUT (5 separate console.log outputs)
+underscoreCase      ✅
+firstName           ✅✅
+someVariable        ✅✅✅
+calculateAge        ✅✅✅✅
+delayedDeparture    ✅✅✅✅✅
+
+HINT 1: Remember which character defines a new line in the textarea 😉
+
+HINT 2: The solution only needs to work for a variable made out of 2 words, like a_b
+
+HINT 3: Start without worrying about the ✅. Tackle that only after you have the variable name conversion working 😉
+
+HINT 4: This challenge is difficult on purpose, so start watching the solution in case you're stuck. Then pause and continue!
+
+Afterwards, test with your own test data!
+GOOD LUCK 😀
+*/
+
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
+document.querySelector('button').addEventListener('click', function () {
+  // takes the value input in text area box and places it into text variable
+  const text = document.querySelector('textarea').value;
+  const rows = text.split('\n');
+
+  // console.log(rows);
+
+  // loop over the rows, find the entries and create 2 variables for them
+
+  for (const [i, row] of rows.entries()) {
+    // console.log(i, row);
+
+    // convert all the strings to lower case
+    // trim removes any spaces
+    // split will split the strings into seperate elements where ever it find the _ character
+    const [first, second] = row.toLowerCase().trim().split('_');
+    // console.log(first, second);
+
+    // output takes the first string element, takes the second string element and replaces the first index of the string to upperCase.
+    const output = `${first}${second.replace(
+      second[0],
+      second[0].toUpperCase()
+    )}`;
+    console.log(`${output.padEnd(20)}${'💰'.repeat(i + 1)}`);
+  }
+});
+
 /////////////////////////////////////////////////////////////////
 // Working with Strings 3
 // creates an array with each string split by +
 
 // Split **
-console.log('a+very+nice+string'.split('+'));
+// console.log('a+very+nice+string'.split('+'));
 
-// creates an array with each string split by space ' '.
-console.log('Akram Nadri'.split(' '));
+// // creates an array with each string split by space ' '.
+// console.log('Akram Nadri'.split(' '));
 
-// can directly name variables with splitting string, the first element[0] on the split will go into firstName, and second elements at index[1] will go into lastName
-const [firstName, lastName] = 'Akram Nadri'.split(' ');
-console.log(firstName, lastName);
+// // can directly name variables with splitting string, the first element[0] on the split will go into firstName, and second elements at index[1] will go into lastName
+// const [firstName, lastName] = 'Akram Nadri'.split(' ');
+// console.log(firstName, lastName);
 
-// Join **
-// we can place anything inside the join parameters, it will place the value in between each element
-const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' <(^o^)> ');
-console.log(newName);
+// // Join **
+// // we can place anything inside the join parameters, it will place the value in between each element
+// const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' <(^o^)> ');
+// console.log(newName);
 
-const capatilizeName = function (name) {
-  // creates an array with each string split into its own element by spaces (' ')
-  const names = name.split(' ');
-  console.log(names);
+// const capatilizeName = function (name) {
+//   // creates an array with each string split into its own element by spaces (' ')
+//   const names = name.split(' ');
+//   console.log(names);
 
-  // each iteration we will push to this array
-  const namesUpper = [];
+//   // each iteration we will push to this array
+//   const namesUpper = [];
 
-  for (const n of names) {
-    // n[0]toUpperCase capitilizes the first index[0] of the string
-    // n.slice(1) starts at the second index[2] of the array and attaches it to namesUpper
-    // namesUpper.push(n[0].toUpperCase() + n.slice(1));
-    namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
-  }
-  console.log(namesUpper);
+//   for (const n of names) {
+//     // n[0]toUpperCase capitilizes the first index[0] of the string
+//     // n.slice(1) starts at the second index[2] of the array and attaches it to namesUpper
+//     // namesUpper.push(n[0].toUpperCase() + n.slice(1));
+//     namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+//   }
+//   console.log(namesUpper);
 
-  // since each of the strings are their own element, we need to join them together by using .join and placing a space(' ') between each element
-  console.log(namesUpper.join(' '));
-};
+//   // since each of the strings are their own element, we need to join them together by using .join and placing a space(' ') between each element
+//   console.log(namesUpper.join(' '));
+// };
 
-// feeding lower case names into the function
-capatilizeName('jessica ann smith davis');
-capatilizeName('akram nadri');
+// // feeding lower case names into the function
+// capatilizeName('jessica ann smith davis');
+// capatilizeName('akram nadri');
 
-// Padding
-// add padding to a string at the start
-const message = 'Go to gate 23';
+// // Padding
+// // add padding to a string at the start
+// const message = 'Go to gate 23';
 
-// we want the length of the string equal to 25 and adding + to the padded area until the full length of the string = 25.
-console.log(message.padStart(25, '+'));
+// // we want the length of the string equal to 25 and adding + to the padded area until the full length of the string = 25.
+// console.log(message.padStart(25, '+'));
 
-// more plus + added here because the original string length was shorter, which in return caused more + to print in order to pad the entire length of the string to equal 25
-console.log('Akram'.padStart(25, '+'));
+// // more plus + added here because the original string length was shorter, which in return caused more + to print in order to pad the entire length of the string to equal 25
+// console.log('Akram'.padStart(25, '+'));
 
-// We can also add padding to the end of the string
-// now the entire strings length equals 35 with the padding added at the end
-console.log('Akram'.padStart(25, '+').padEnd(35, '+'));
+// // We can also add padding to the end of the string
+// // now the entire strings length equals 35 with the padding added at the end
+// console.log('Akram'.padStart(25, '+').padEnd(35, '+'));
 
-// When you see credit card info online, only the 4 first numbers appear and the rest are hidden
+// // When you see credit card info online, only the 4 first numbers appear and the rest are hidden
 
-const maskCreditCard = function (number) {
-  // converting number to string
-  const str = number + '';
+// const maskCreditCard = function (number) {
+//   // converting number to string
+//   const str = number + '';
 
-  // we take the last 4 numbers from the string
-  const last = str.slice(-4);
-  console.log(last);
+//   // we take the last 4 numbers from the string
+//   const last = str.slice(-4);
+//   console.log(last);
 
-  // here we add * to the last 4 numbers to the length of the str
-  return last.padStart(str.length, '*');
-};
+//   // here we add * to the last 4 numbers to the length of the str
+//   return last.padStart(str.length, '*');
+// };
 
-console.log(maskCreditCard(43563212323421234));
-console.log(maskCreditCard('4562234565432345'));
+// console.log(maskCreditCard(43563212323421234));
+// console.log(maskCreditCard('4562234565432345'));
 
-// Repeat
-// repeat the same string multiple times
+// // Repeat
+// // repeat the same string multiple times
 
-const message2 = 'Bad weather... All departures Delayed... ';
+// const message2 = 'Bad weather... All departures Delayed... ';
 
-// this will repeat the above string 5 times
-console.log(message2.repeat(5));
+// // this will repeat the above string 5 times
+// console.log(message2.repeat(5));
 
-const planesInLine = function (n) {
-  console.log(`There are ${n} planes in line ${'✈️'.repeat(n)}`);
-};
+// const planesInLine = function (n) {
+//   console.log(`There are ${n} planes in line ${'✈️'.repeat(n)}`);
+// };
 
-planesInLine(5);
-planesInLine(3);
-planesInLine(12);
+// planesInLine(5);
+// planesInLine(3);
+// planesInLine(12);
 
 /////////////////////////////////////////////////////////////////
 // Working with Strings 2
