@@ -141,7 +141,7 @@ const game = {
 // Working with Strings 2
 
 const airline = 'Canada Air';
-const plane = 'A320';
+// const plane = 'A320';
 
 console.log(airline.toLowerCase());
 console.log(airline.toUpperCase());
@@ -190,8 +190,35 @@ const announcement =
 console.log(announcement.replaceAll('door', 'gate'));
 
 // this also replaces all occurances of 'door'
+// the 'g' here stands for global
 console.log(announcement.replace(/door/g, 'gate'));
 
+// three simple methods that return booleans
+// Includes, Starts-with, Ends-with
+
+const plane = 'Airbus A320neo';
+console.log(plane.includes('A320'));
+console.log(plane.includes('Boeing'));
+console.log(plane.startsWith('A3'));
+
+if (plane.startsWith('Airbus') && plane.endsWith('neo')) {
+  console.log('Part of the new Airbus family');
+}
+
+// Practice exercise
+const checkBaggage = function (items) {
+  // must use toLowercase method to convert items to lower case because capitilization matters here
+  const baggage = items.toLowerCase();
+  if (baggage.includes('knife') || baggage.includes('gun')) {
+    console.log('You are not allowed on board');
+  } else {
+    console.log('Welcome aboard');
+  }
+};
+
+checkBaggage('Laptop, food and a Knife');
+checkBaggage('I have socks and camera');
+checkBaggage('got some snacks and a gun for protection');
 /////////////////////////////////////////////////////////////////
 // Working with Strings 1
 
