@@ -138,87 +138,177 @@ const game = {
   },
 };
 /////////////////////////////////////////////////////////////////
+// Working with Strings 3
+// creates an array with each string split by +
+
+// Split **
+console.log('a+very+nice+string'.split('+'));
+
+// creates an array with each string split by space ' '.
+console.log('Akram Nadri'.split(' '));
+
+// can directly name variables with splitting string, the first element[0] on the split will go into firstName, and second elements at index[1] will go into lastName
+const [firstName, lastName] = 'Akram Nadri'.split(' ');
+console.log(firstName, lastName);
+
+// Join **
+// we can place anything inside the join parameters, it will place the value in between each element
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' <(^o^)> ');
+console.log(newName);
+
+const capatilizeName = function (name) {
+  // creates an array with each string split into its own element by spaces (' ')
+  const names = name.split(' ');
+  console.log(names);
+
+  // each iteration we will push to this array
+  const namesUpper = [];
+
+  for (const n of names) {
+    // n[0]toUpperCase capitilizes the first index[0] of the string
+    // n.slice(1) starts at the second index[2] of the array and attaches it to namesUpper
+    // namesUpper.push(n[0].toUpperCase() + n.slice(1));
+    namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+  console.log(namesUpper);
+
+  // since each of the strings are their own element, we need to join them together by using .join and placing a space(' ') between each element
+  console.log(namesUpper.join(' '));
+};
+
+// feeding lower case names into the function
+capatilizeName('jessica ann smith davis');
+capatilizeName('akram nadri');
+
+// Padding
+// add padding to a string at the start
+const message = 'Go to gate 23';
+
+// we want the length of the string equal to 25 and adding + to the padded area until the full length of the string = 25.
+console.log(message.padStart(25, '+'));
+
+// more plus + added here because the original string length was shorter, which in return caused more + to print in order to pad the entire length of the string to equal 25
+console.log('Akram'.padStart(25, '+'));
+
+// We can also add padding to the end of the string
+// now the entire strings length equals 35 with the padding added at the end
+console.log('Akram'.padStart(25, '+').padEnd(35, '+'));
+
+// When you see credit card info online, only the 4 first numbers appear and the rest are hidden
+
+const maskCreditCard = function (number) {
+  // converting number to string
+  const str = number + '';
+
+  // we take the last 4 numbers from the string
+  const last = str.slice(-4);
+  console.log(last);
+
+  // here we add * to the last 4 numbers to the length of the str
+  return last.padStart(str.length, '*');
+};
+
+console.log(maskCreditCard(43563212323421234));
+console.log(maskCreditCard('4562234565432345'));
+
+// Repeat
+// repeat the same string multiple times
+
+const message2 = 'Bad weather... All departures Delayed... ';
+
+// this will repeat the above string 5 times
+console.log(message2.repeat(5));
+
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes in line ${'✈️'.repeat(n)}`);
+};
+
+planesInLine(5);
+planesInLine(3);
+planesInLine(12);
+
+/////////////////////////////////////////////////////////////////
 // Working with Strings 2
 
-const airline = 'Canada Air';
-// const plane = 'A320';
+// const airline = 'Canada Air';
+// // const plane = 'A320';
 
-console.log(airline.toLowerCase());
-console.log(airline.toUpperCase());
-console.log('Akram'.toUpperCase());
+// console.log(airline.toLowerCase());
+// console.log(airline.toUpperCase());
+// console.log('Akram'.toUpperCase());
 
-// Fix capitilization in name
-const passenger = 'aKram';
-const passengerLower = passenger.toLowerCase();
-const passengerCorrect =
-  passengerLower[0].toUpperCase() + passengerLower.slice(1);
-console.log(passengerCorrect);
+// // Fix capitilization in name
+// const passenger = 'aKram';
+// const passengerLower = passenger.toLowerCase();
+// const passengerCorrect =
+//   passengerLower[0].toUpperCase() + passengerLower.slice(1);
+// console.log(passengerCorrect);
 
-// created a function that takes any string argument and modifies the string so that the first index is capatilized and the rest lower case.
-const nameFixer = function (name) {
-  const passengerLower = name.toLowerCase();
-  const passengerCorrect =
-    passengerLower[0].toUpperCase() + passengerLower.slice(1);
-  console.log(passengerCorrect);
-};
-// calling nameFixer function
-nameFixer('aKrAm');
+// // created a function that takes any string argument and modifies the string so that the first index is capatilized and the rest lower case.
+// const nameFixer = function (name) {
+//   const passengerLower = name.toLowerCase();
+//   const passengerCorrect =
+//     passengerLower[0].toUpperCase() + passengerLower.slice(1);
+//   console.log(passengerCorrect);
+// };
+// // calling nameFixer function
+// nameFixer('aKrAm');
 
-// Comparing emails
-const email = 'hello@ak.com';
-const loginEmail = '   HeLLo@Ak.com  \n';
+// // Comparing emails
+// const email = 'hello@ak.com';
+// const loginEmail = '   HeLLo@Ak.com  \n';
 
-const lowerEmail = loginEmail.toLowerCase();
-const trimmedEmail = lowerEmail.trim();
-console.log(trimmedEmail);
+// const lowerEmail = loginEmail.toLowerCase();
+// const trimmedEmail = lowerEmail.trim();
+// console.log(trimmedEmail);
 
-// since loginEmail is converted to object you can call methods on it
-const normalizedEmail = loginEmail.toLowerCase().trim();
-console.log(normalizedEmail);
-console.log(email === normalizedEmail);
+// // since loginEmail is converted to object you can call methods on it
+// const normalizedEmail = loginEmail.toLowerCase().trim();
+// console.log(normalizedEmail);
+// console.log(email === normalizedEmail);
 
-// Replacing
+// // Replacing
 
-const priceGB = '288,97*';
-const priceUS = priceGB.replace('*', '$').replace(',', '.');
-console.log(priceUS);
+// const priceGB = '288,97*';
+// const priceUS = priceGB.replace('*', '$').replace(',', '.');
+// console.log(priceUS);
 
-const announcement =
-  'All passengers come to boarding door 23, boarding door 23';
+// const announcement =
+//   'All passengers come to boarding door 23, boarding door 23';
 
-// target all occurances of 'door'
-console.log(announcement.replaceAll('door', 'gate'));
+// // target all occurances of 'door'
+// console.log(announcement.replaceAll('door', 'gate'));
 
-// this also replaces all occurances of 'door'
-// the 'g' here stands for global
-console.log(announcement.replace(/door/g, 'gate'));
+// // this also replaces all occurances of 'door'
+// // the 'g' here stands for global
+// console.log(announcement.replace(/door/g, 'gate'));
 
-// three simple methods that return booleans
-// Includes, Starts-with, Ends-with
+// // three simple methods that return booleans
+// // Includes, Starts-with, Ends-with
 
-const plane = 'Airbus A320neo';
-console.log(plane.includes('A320'));
-console.log(plane.includes('Boeing'));
-console.log(plane.startsWith('A3'));
+// const plane = 'Airbus A320neo';
+// console.log(plane.includes('A320'));
+// console.log(plane.includes('Boeing'));
+// console.log(plane.startsWith('A3'));
 
-if (plane.startsWith('Airbus') && plane.endsWith('neo')) {
-  console.log('Part of the new Airbus family');
-}
+// if (plane.startsWith('Airbus') && plane.endsWith('neo')) {
+//   console.log('Part of the new Airbus family');
+// }
 
-// Practice exercise
-const checkBaggage = function (items) {
-  // must use toLowercase method to convert items to lower case because capitilization matters here
-  const baggage = items.toLowerCase();
-  if (baggage.includes('knife') || baggage.includes('gun')) {
-    console.log('You are not allowed on board');
-  } else {
-    console.log('Welcome aboard');
-  }
-};
+// // Practice exercise
+// const checkBaggage = function (items) {
+//   // must use toLowercase method to convert items to lower case because capitilization matters here
+//   const baggage = items.toLowerCase();
+//   if (baggage.includes('knife') || baggage.includes('gun')) {
+//     console.log('You are not allowed on board');
+//   } else {
+//     console.log('Welcome aboard');
+//   }
+// };
 
-checkBaggage('Laptop, food and a Knife');
-checkBaggage('I have socks and camera');
-checkBaggage('got some snacks and a gun for protection');
+// checkBaggage('Laptop, food and a Knife');
+// checkBaggage('I have socks and camera');
+// checkBaggage('got some snacks and a gun for protection');
 /////////////////////////////////////////////////////////////////
 // Working with Strings 1
 
