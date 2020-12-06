@@ -170,37 +170,168 @@ HINT 4: This challenge is difficult on purpose, so start watching the solution i
 
 Afterwards, test with your own test data!
 GOOD LUCK 😀
+
 */
 
 document.body.append(document.createElement('textarea'));
+
 document.body.append(document.createElement('button'));
 
 document.querySelector('button').addEventListener('click', function () {
-  // takes the value input in text area box and places it into text variable
   const text = document.querySelector('textarea').value;
-  const rows = text.split('\n');
+  const row = text.split('\n');
+  // console.log(row);
 
-  // console.log(rows);
+  for (const rows of row) {
+    const newRow = rows.toLowerCase().trim().split('_');
 
-  // loop over the rows, find the entries and create 2 variables for them
-
-  for (const [i, row] of rows.entries()) {
-    // console.log(i, row);
-
-    // convert all the strings to lower case
-    // trim removes any spaces
-    // split will split the strings into seperate elements where ever it find the _ character
-    const [first, second] = row.toLowerCase().trim().split('_');
+    const [first, second] = newRow;
     // console.log(first, second);
 
-    // output takes the first string element, takes the second string element and replaces the first index of the string to upperCase.
     const output = `${first}${second.replace(
       second[0],
       second[0].toUpperCase()
     )}`;
-    console.log(`${output.padEnd(20)}${'💰'.repeat(i + 1)}`);
+    console.log(output);
   }
 });
+
+// document.body.append(document.createElement('textarea'));
+// document.body.append(document.createElement('button'));
+
+// document.querySelector('button').addEventListener('click', function () {
+//   const text = document.querySelector('textarea').value;
+//   const row = text.split('\n');
+
+//   // console.log(row);
+
+//   for (const rows of row) {
+//     const newRow = rows.toLowerCase().trim().split('_');
+//     const [first, second] = newRow;
+//     // console.log(first, second);
+
+//     const output = `${first}${second.replace(
+//       second[0],
+//       second[0].toUpperCase()
+//     )}`;
+//     console.log(output);
+//   }
+// });
+
+// document.body.append(document.createElement('textarea'));
+// document.body.append(document.createElement('button'));
+
+// document.querySelector('button').addEventListener('click', function () {
+//   const text = document.querySelector('textarea').value;
+//   const rows = text.split('\n');
+//   // console.log(rows);
+
+//   for (const row of rows) {
+//     const newRow = row.toLowerCase().trim().split('_');
+//     const [first, second] = newRow;
+//     // console.log(first, second);
+
+//     const output = `${first}${second.replace(
+//       second[0],
+//       second[0].toUpperCase()
+//     )}`;
+//     console.log(output);
+//   }
+// });
+
+// document.body.append(document.createElement('textarea'));
+// document.body.append(document.createElement('button'));
+
+// document.querySelector('button').addEventListener('click', function () {
+//   const text = document.querySelector('textarea').value;
+//   const row = text.split('\n');
+
+//   console.log(row);
+
+//   for (const rows of row) {
+//     const newRow = rows.toLowerCase().trim().split('_');
+//     const [first, second] = newRow;
+//     console.log(first, second);
+//     console.log(newRow);
+
+//     const output = `${first}${second.replace(
+//       second[0],
+//       second[0].toUpperCase()
+//     )}`;
+//     console.log(output);
+//   }
+// });
+
+// document.body.append(document.createElement('textarea'));
+// document.body.append(document.createElement('button'));
+
+// document.querySelector('button').addEventListener('click', function () {
+//   const text = document.querySelector('textarea').value;
+//   const row = text.split('\n');
+//   console.log(text);
+
+//   for (const rows of row) {
+//     const x = rows.toLowerCase().trim().split('_');
+
+//     const [first, second] = x;
+//     console.log(first, second);
+
+//     const output = `${first}${second.replace(
+//       second[0],
+//       second[0].toUpperCase()
+//     )}`;
+
+//     console.log(output);
+
+//     // console.log(x);
+//   }
+// });
+// document.body.append(document.createElement('textarea'));
+// document.body.append(document.createElement('button'));
+
+// document.querySelector('button').addEventListener('click', function () {
+//   const text = document.querySelector('textarea').value;
+//   const rows = text.split('\n');
+
+//   for (const [i, row] of rows.entries()) {
+//     const [first, second] = row.toLowerCase().trim().split('_');
+//     // console.log(first, second);
+
+//     const output = `${first}${second.replace(
+//       second[0],
+//       second[0].toUpperCase()
+//     )}`;
+//     console.log(`${output.padEnd(20)}${'!'.repeat(i + 1)}`);
+//     console.log(output);
+//   }
+// });
+
+// document.querySelector('button').addEventListener('click', function () {
+//   // takes the value input in text area box and places it into text variable
+//   const text = document.querySelector('textarea').value;
+//   const rows = text.split('\n');
+
+//   // console.log(rows);
+
+//   // loop over the rows, find the entries and create 2 variables for them
+
+//   for (const [i, row] of rows.entries()) {
+//     // console.log(i, row);
+
+//     // convert all the strings to lower case
+//     // trim removes any spaces
+//     // split will split the strings into seperate elements where ever it find the _ character
+//     const [first, second] = row.toLowerCase().trim().split('_');
+//     // console.log(first, second);
+
+//     // output takes the first string element, takes the second string element and replaces the first index of the string to upperCase.
+//     const output = `${first}${second.replace(
+//       second[0],
+//       second[0].toUpperCase()
+//     )}`;
+//     console.log(`${output.padEnd(20)}${'💰'.repeat(i + 1)}`);
+//   }
+// });
 
 /////////////////////////////////////////////////////////////////
 // Working with Strings 3
