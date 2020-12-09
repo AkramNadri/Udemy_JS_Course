@@ -1,33 +1,101 @@
 'use strict';
 
 ////////////////////////////////////////////////////////////////
+// THE CALL AND APPLY METHODS
+
+const canadaAir = {
+  airline: 'Canada Air',
+  iataCode: 'LH',
+  bookings: [],
+  // book: function(){} same as below
+  book(flightNum, name) {
+    console.log(
+      // this points at the variables inside canadaAir
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+  },
+};
+
+// calling the book method inside canadaAir object
+canadaAir.book(239, 'Akram Nadri');
+canadaAir.book(543, 'John Smith');
+console.log(canadaAir);
+
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+};
+
+// creating function book which takes method from canadaAir object, book is now a regular function, it is not a method.
+const book = canadaAir.book;
+
+// This function is now a regular function call, in a regular function call the 'this' keyword points to undefined.
+// this does NOT work
+// book(23, 'Sarah Williams'); // cannot read property 'airline' of undefined...
+
+// THIS KEYWORD
+// ***** this keyword - how to tell JS explicitly or manually what the this keyword should look like ???
+// ******** There are 3 function methods to do that - They are called CALL // APPLY // BIND.
+
+// a function is really just an object, and objects have methods and therefor functions can have methods too
+// the first argument is exactly what we want the this keyword to point to - followed by the rest of the rest of the arguments.
+// the call method will call the book function, the this keyword set to 'eurowings. This allows us to manually set the this keyword of any function that we want to call.
+// how do we tell JS that we want to create a booking on the new eurowings object, we need to tell JS what the 'this' keyword explicitly points to
+book.call(eurowings, 23, 'Sarah Williams'); // this pointing to eurowings
+console.log(eurowings);
+
+// the first argument will manually point the this keyword to the object.
+book.call(canadaAir, 239, 'Mary Cooper'); // this pointing to canadaAir
+console.log(canadaAir);
+
+const swiss = {
+  airline: 'Swiss Air Lines',
+  iataCode: 'LX',
+  bookings: [],
+};
+
+book.call(swiss, 123, 'Fred Wilson');
+console.log(swiss);
+
+// APPLY METHOD
+// Similiar method to the CALL method
+// Apply method is not used that much anymore
+const flightDate = [583, 'George Cooper'];
+book.apply(swiss, flightDate);
+console.log(swiss);
+
+// this is the same as above, much simpler with spread operator
+book.call(swiss, ...flightDate);
+////////////////////////////////////////////////////////////////
 // Functions returning functions
 
-const greet = function (greeting) {
-  // when greet is called, this block of code will execute and any arguments sent to it will be in the name argument.
-  return function (name) {
-    console.log(`${greeting} ${name}`);
-  };
-};
+// const greet = function (greeting) {
+//   // when greet is called, this block of code will execute and any arguments sent to it will be in the name argument.
+//   return function (name) {
+//     console.log(`${greeting} ${name}`);
+//   };
+// };
 
-// Challenege - arrow function
-// one arrow function returning another function
-const greetArrow = greeting => name => {
-  console.log(` ${greeting} ${name}`);
-};
+// // Challenege - arrow function
+// // one arrow function returning another function
+// const greetArrow = greeting => name => {
+//   console.log(` ${greeting} ${name}`);
+// };
 
-// greetHey is now a function, when greetHey is called it will run the block of code inside lines 7, 8.
-// const greetHey = greet('hey');
-const greetArr = greetArrow('Hi');
-greetArr('Ak');
+// // greetHey is now a function, when greetHey is called it will run the block of code inside lines 7, 8.
+// // const greetHey = greet('hey');
+// const greetArr = greetArrow('Hi');
+// greetArr('Ak');
 
-// console.log(greetHey);
+// // console.log(greetHey);
 
-// greetHey('Akram');
-// greetHey('Pardis');
+// // greetHey('Akram');
+// // greetHey('Pardis');
 
-// Passing 2 arguments to greet function
-greet('Hello')('Akram');
+// // Passing 2 arguments to greet function
+// greet('Hello')('Akram');
 ////////////////////////////////////////////////////////////////
 
 // FUNCTIONS ACCEPTING CALLBACK FUNCTIONS
