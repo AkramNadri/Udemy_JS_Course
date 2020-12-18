@@ -16,7 +16,7 @@ const canadaAir = {
     this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
   },
 };
-
+// im back
 // calling the book method inside canadaAir object
 canadaAir.book(239, 'Akram Nadri');
 canadaAir.book(543, 'John Smith');
@@ -68,6 +68,39 @@ console.log(swiss);
 
 // this is the same as above, much simpler with spread operator
 book.call(swiss, ...flightDate);
+
+// Bind method
+
+// using call method we have to pass in the object we want the this keyword to point to
+// book.call(eurowings, 23, 'Sarah Williams') ;
+
+// once we bind a method to the object, the this keyword will always point to this object.
+// book is the method and bookEw is the object
+const bookEw = book.bind(eurowings);
+const bookCanAir = book.bind(canadaAir);
+const bookSwiss = book.bind(swiss);
+bookEw(25, 'Steven William');
+
+// This allows us to set/pass values to argument
+// can set in stone values here
+// values we place in here will override any other values we call to this method
+// Here for example, 23 will always be passed to the first argument in the book method(book method is inside canadaAir object)
+// specifiying parts of the argument before hand is a common pattern called partial application - a part of the argument of the original argument is already applied.
+const bookEW23 = book.bind(eurowings, 23);
+// passing string to name argument in book method
+bookEW23('Akram Nadri');
+bookEW23('Martha Cooper');
+
+// With Event Listeners
+canadaAir.planes = 300;
+canadaAir.buyPlane = function () {
+  console.log(this);
+
+  this.planes++;
+  console.log(this.planes);
+};
+
+document.querySelector('.buy').addEventListener('click', canadaAir.buyPlane);
 ////////////////////////////////////////////////////////////////
 // Functions returning functions
 
