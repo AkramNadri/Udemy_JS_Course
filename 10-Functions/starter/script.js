@@ -242,7 +242,6 @@ FIRST CLASS FUNCTIONS
 // const flight = 'LH234';
 // const akram = {
 //   name: 'Akram Nadri',
-//   passport: 234567789,
 // };
 
 // const checkIn = function (flightNum, passenger) {
@@ -287,16 +286,43 @@ FIRST CLASS FUNCTIONS
 // We pass a reference to the function
 
 // Default parameters //////////////////////////////////////////
+const bookings = [];
+
+const createBooking = function (
+  flightNum,
+  numPassengers = 1,
+  price = 199 * numPassengers
+) {
+  // numPassengers = numPassengers || 1;
+  // price = price || '199';
+
+  const booking = {
+    flightNum,
+    numPassengers,
+    price,
+  };
+  console.log(booking);
+  console.log(bookings);
+
+  bookings.push(booking);
+};
+
+createBooking('LH123');
+createBooking('LH123', 2, 800);
+createBooking('LH123', 2);
+createBooking('LH444', undefined, 2);
 
 // const bookings = [];
 
 // // ES6 we can set the default values inside the paramaters.
 // // default values can contain any expression.
 // // we can use the values of the other parameters that were set BEFORE it.
+
 // const createBooking = function (
+//   ES6
 //   flightNum,
 //   numPassengers = 1,
-//   price = 199 * numPassengers
+//   price  = 199 * numPassengers
 // ) {
 //   // ES5
 //   // old way setting default parameter
