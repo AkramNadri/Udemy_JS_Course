@@ -29,6 +29,7 @@ const eurowings = {
 };
 
 // creating function book which takes method from canadaAir object, book is now a regular function, it is not a method.
+// this function does not have access to canadaAir properties
 const book = canadaAir.book;
 
 // This function is now a regular function call, in a regular function call the 'this' keyword points to undefined.
@@ -40,7 +41,7 @@ const book = canadaAir.book;
 // ******** There are 3 function methods to do that - They are called CALL // APPLY // BIND.
 
 // a function is really just an object, and objects have methods and therefor functions can have methods too
-// the first argument is exactly what we want the this keyword to point to - followed by the rest of the rest of the arguments.
+// the first argument is exactly what we want the this keyword to point to - followed by the rest of the arguments.
 // the call method will call the book function, the this keyword set to 'eurowings. This allows us to manually set the this keyword of any function that we want to call.
 // how do we tell JS that we want to create a booking on the new eurowings object, we need to tell JS what the 'this' keyword explicitly points to
 book.call(eurowings, 23, 'Sarah Williams'); // this pointing to eurowings
@@ -139,7 +140,7 @@ document.querySelector('.buy').addEventListener('click', canadaAir.buyPlane);
 
 // const upperFirstWord = function (str) {
 //   const [first, ...others] = str.split(' ');
-//   return [first.toUpperCase(), ...others].join(' ');
+//   return [first.toUppe  rCase(), ...others].join(' ');
 // };
 
 // upperFirstWord('hello there');
@@ -238,6 +239,38 @@ FIRST CLASS FUNCTIONS
 
 // How passing arguments works: Value vs Reference
 
+const flight = 'LH234';
+const akram = {
+  name: 'Akram Nadri',
+  passport: 234234234,
+};
+
+const checkIn = function (flightNum, passenger) {
+  flightNum = 'LH999';
+  passenger.name = 'Mr. ' + passenger.name;
+
+  if (passenger.passport === 234234234) {
+    alert('Check in');
+  } else {
+    alert('Wrong passport');
+  }
+};
+
+checkIn(flight, akram);
+console.log(flight);
+console.log(akram);
+
+// is the same as doing...
+// these variables simply point at the object address on the heap
+const flightNum = flight;
+const passenger = akram;
+
+const newPassport = function (person) {
+  person.passport = Math.trunc(Math.random() * 10000000000);
+};
+
+newPassport(akram);
+checkIn(flight, akram);
 ////////////////////////////////////////
 // const flight = 'LH234';
 // const akram = {
@@ -286,31 +319,31 @@ FIRST CLASS FUNCTIONS
 // We pass a reference to the function
 
 // Default parameters //////////////////////////////////////////
-const bookings = [];
+// const bookings = []
 
-const createBooking = function (
-  flightNum,
-  numPassengers = 1,
-  price = 199 * numPassengers
-) {
-  // numPassengers = numPassengers || 1;
-  // price = price || '199';
+// const createBooking = function (
+//   flightNum,
+//   numPassengers = 1,
+//   price = 199 * numPassengers
+// ) {
+//   // numPassengers = numPassengers || 1;
+//   // price = price || '199';
 
-  const booking = {
-    flightNum,
-    numPassengers,
-    price,
-  };
-  console.log(booking);
-  console.log(bookings);
+//   const booking = {
+//     flightNum,
+//     numPassengers,
+//     price,
+//   };
+//   console.log(booking);
+//   console.log(bookings);
 
-  bookings.push(booking);
-};
+//   bookings.push(booking);
+// };
 
-createBooking('LH123');
-createBooking('LH123', 2, 800);
-createBooking('LH123', 2);
-createBooking('LH444', undefined, 2);
+// createBooking('LH123');
+// createBooking('LH123', 2, 800);
+// createBooking('LH123', 2);
+// createBooking('LH444', undefined, 2);
 
 // const bookings = [];
 
