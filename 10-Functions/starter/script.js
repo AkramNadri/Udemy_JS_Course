@@ -140,6 +140,54 @@ document.querySelector('.buy').addEventListener('click', canadaAir.buyPlane);
 
 // const upperFirstWord = function (str) {
 //   const [first, ...others] = str.split(' ');
+//   return [first.toUpperCase(), ...others].join(' ');
+// };
+
+// const transformer = function (str, fn) {
+//   console.log(`Original string: ${str}`);
+//   console.log(`Transformed string: ${fn(str)}`);
+//   console.log(`Transformed by: ${fn.name}`);
+// };
+
+// transformer('JavaScript is the best!', upperFirstWord);
+// transformer('JavaScript is the best!', oneWord);
+
+// const high5 = function () {
+//   console.log('!!!!!');
+// };
+
+// document.body.addEventListener('click', high5);
+
+// ['akram', 'martha', 'adam'].forEach(high5);
+
+// const addTwoNumbers = function (a, b) {
+//   const sum = a + b;
+//   return sum;
+// };
+
+// const multiplyTwoNumbers = function (a, b) {
+//   const sum = a * b;
+//   return sum;
+// };
+
+// const toUpperString = function (str) {
+//   str.toUpperString();
+//   return str;
+// };
+
+// const miniCalc = function (num1, num2, fn) {
+//   console.log(`${fn.name} ${num1} ${num2} = ${fn(num1, num2)}`);
+// };
+
+// // const oneWord = function (str) {
+// //   return str.replace(/ /g, '').toLowerCase();
+// // };
+
+// miniCalc(1, 2, addTwoNumbers);
+// miniCalc(2, 2, multiplyTwoNumbers);
+
+// const upperFirstWord = function (str) {
+//   const [first, ...others] = str.split(' ');
 //   return [first.toUppe  rCase(), ...others].join(' ');
 // };
 
@@ -239,38 +287,38 @@ FIRST CLASS FUNCTIONS
 
 // How passing arguments works: Value vs Reference
 
-const flight = 'LH234';
-const akram = {
-  name: 'Akram Nadri',
-  passport: 234234234,
-};
+// const flight = 'LH234';
+// const akram = {
+//   name: 'Akram Nadri',
+//   passport: 234234234,
+// };
 
-const checkIn = function (flightNum, passenger) {
-  flightNum = 'LH999';
-  passenger.name = 'Mr. ' + passenger.name;
+// const checkIn = function (flightNum, passenger) {
+//   flightNum = 'LH999';
+//   passenger.name = 'Mr. ' + passenger.name;
 
-  if (passenger.passport === 234234234) {
-    alert('Check in');
-  } else {
-    alert('Wrong passport');
-  }
-};
+//   if (passenger.passport === 234234234) {
+//     alert('Check in');
+//   } else {
+//     alert('Wrong passport');
+//   }
+// };
 
-checkIn(flight, akram);
-console.log(flight);
-console.log(akram);
+// checkIn(flight, akram);
+// console.log(flight);
+// console.log(akram);
 
-// is the same as doing...
-// these variables simply point at the object address on the heap
-const flightNum = flight;
-const passenger = akram;
+// // is the same as doing...
+// // these variables simply point at the object address on the heap
+// const flightNum = flight;
+// const passenger = akram;
 
-const newPassport = function (person) {
-  person.passport = Math.trunc(Math.random() * 10000000000);
-};
+// const newPassport = function (person) {
+//   person.passport = Math.trunc(Math.random() * 10000000000);
+// };
 
-newPassport(akram);
-checkIn(flight, akram);
+// newPassport(akram);
+// checkIn(flight, akram);
 ////////////////////////////////////////
 // const flight = 'LH234';
 // const akram = {
