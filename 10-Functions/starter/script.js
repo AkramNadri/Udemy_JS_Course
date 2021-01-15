@@ -87,23 +87,38 @@ bookEw(25, 'Steven William');
 // values we place in here will override any other values we call to this method
 // Here for example, 23 will always be passed to the first argument in the book method(book method is inside canadaAir object)
 // specifiying parts of the argument before hand is a common pattern called partial application - a part of the argument of the original argument is already applied.
-const bookEW23 = book.bind(eurowings, 23);
-// passing string to name argument in book method
-bookEW23('Akram Nadri');
-bookEW23('Martha Cooper');
+// const bookEW23 = book.bind(eurowings, 23);
+// // passing string to name argument in book method
+// bookEW23('Akram Nadri');
+// bookEW23('Martha Cooper');
 
-// With Event Listeners
-canadaAir.planes = 300;
-canadaAir.buyPlane = function () {
-  console.log(this);
+// // With Event Listeners
+// canadaAir.planes = 300;
+// canadaAir.buyPlane = function () {
+//   console.log(this);
 
-  this.planes++;
-  console.log(this.planes);
-};
+//   this.planes++;
+//   console.log(this.planes);
+// };
 
-document.querySelector('.buy').addEventListener('click', canadaAir.buyPlane);
-////////////////////////////////////////////////////////////////
-// Functions returning functions
+// document.querySelector('.buy').addEventListener('click', canadaAir.buyPlane);
+
+// ////////////////////////////////////////////////////////////////
+// // Functions returning functions
+
+// const greet = function (greeting) {
+//   return function (name) {
+//     console.log(`${greeting} ${name} `);
+//   };
+// };
+
+// const greetArr = greeting => name => console.log(`${greeting} ${name}`);
+
+// const greeterHey = greet('Hey');
+// greeterHey('Akram');
+// greeterHey('Steven');
+
+// greetArr('Hi')('Ak');
 
 // const greet = function (greeting) {
 //   // when greet is called, this block of code will execute and any arguments sent to it will be in the name argument.
@@ -112,7 +127,7 @@ document.querySelector('.buy').addEventListener('click', canadaAir.buyPlane);
 //   };
 // };
 
-// // Challenege - arrow function
+// // Challenge - arrow function
 // // one arrow function returning another function
 // const greetArrow = greeting => name => {
 //   console.log(` ${greeting} ${name}`);
