@@ -10,7 +10,7 @@ const canadaAir = {
   // book: function(){} same as below
   book(flightNum, name) {
     console.log(
-      // this points at the variables inside canadaAir
+      // this points at the properties inside canadaAir
       `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
     );
     this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
@@ -21,6 +21,7 @@ const canadaAir = {
 canadaAir.book(239, 'Akram Nadri');
 canadaAir.book(543, 'John Smith');
 console.log(canadaAir);
+console.log(canadaAir.bookings);
 
 const eurowings = {
   airline: 'Eurowings',
@@ -36,7 +37,7 @@ const book = canadaAir.book;
 // this does NOT work
 // book(23, 'Sarah Williams'); // cannot read property 'airline' of undefined...
 
-// THIS KEYWORD
+// THIS KEYWORD ****************************//************ */
 // ***** this keyword - how to tell JS explicitly or manually what the this keyword should look like ???
 // ******** There are 3 function methods to do that - They are called CALL // APPLY // BIND.
 
@@ -115,7 +116,7 @@ bookEw(25, 'Steven William');
 // const greetArr = greeting => name => console.log(`${greeting} ${name}`);
 
 // const greeterHey = greet('Hey');
-// greeterHey('Akram');
+// greeterHey(f'Akram');
 // greeterHey('Steven');
 
 // greetArr('Hi')('Ak');
