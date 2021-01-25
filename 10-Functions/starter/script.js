@@ -10,23 +10,58 @@ const lufthansa = {
   iataCode: 'LH',
   bookings: [],
   name: 'Akram',
+
   // before
   // book: function(){
   // }
   // after - similar way of creating a method
+
   book(flightNum, name) {
     console.log(
       `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
     );
+
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
   },
 };
 
 lufthansa.book(239, 'Jonas Schmedtmann');
 lufthansa.book(635, 'John Smith');
 
-var divStr = '<div class="text-warning"> Hi Beebee! </div>';
-document.getElementsByTagName('h1')[0].innerHTML += divStr;
+console.log(lufthansa);
 
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+};
+
+// copied book function in lufthansa object and created a new book function.
+const book = lufthansa.book;
+
+// does not work
+// book(23, 'Sarah Williams');\
+
+book.call(eurowings, 23, 'Sara williams');
+console.log(eurowings);
+
+book.call(lufthansa, 23, 'Micheal Jordan');
+console.log(lufthansa);
+
+const swiss = {
+  airline: 'Swiss',
+  iataCode: 'LX',
+  bookings: [],
+};
+
+book.call(swiss, 45, 'Mary Cooper');
+console.log(swiss);
+
+const flightDate = [583, 'George Cooper'];
+book.apply(swiss, flightDate);
+console.log(swiss);
+
+book.call(swiss, ...flightDate);
 // const canadaAir = {
 //   airline: 'Canada Air',
 //   iataCode: 'LH',
