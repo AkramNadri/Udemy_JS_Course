@@ -169,13 +169,56 @@ lufthansa.buyPlane = function () {
   console.log(this.planes);
 };
 
+lufthansa.poll = 1;
+lufthansa.answerPoll = function () {
+  console.log(this);
+  this.poll++;
+  console.log(this.poll);
+};
+
 // the . in front of buy means that its a class
 // in an event handler function, the this keyword always points to the element on which the handler is attached too.
 document
   .querySelector('.buy')
   .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
 
+// binding function to lufthansa object, now the this keyword in function points to lufthansa object.
+document
+  .querySelector('.poll')
+  .addEventListener('click', lufthansa.answerPoll.bind(lufthansa));
+
 console.log(lufthansa);
+
+// partial application
+// means we can preset parameters
+
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+// we are binding addTax function to addGST with the first parameter rate preset to 0.23.
+// we set the first parameter as null because we dont need to point the this keyword to anything
+const addGST = addTax.bind(null, 0.23);
+
+// this is what our addTax function looks like now
+// addGST = value => value + value * 0.23;
+
+// since the rate parameter is already preset, we only pass the value argument to addTax function
+// using bing gives us a new function
+console.log(addGST(100));
+
+// Challenge
+
+const addTaxRate = function (rate) {
+  return function (value) {
+    return value + value * rate;
+  };
+};
+
+const addGST2 = addTaxRate(0.23);
+
+console.log(addGST2(100));
+console.log(addGST2(23));
+
 ////////////////////////////////////////////////////////////////
 
 // using call method we have to pass in the object we want the this keyword to point to
