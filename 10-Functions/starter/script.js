@@ -133,7 +133,9 @@ book.call(swiss, ...flightDate);
 
 // Bind method ******************************************
 ////////////////////////////////////////////////////////////////
+
 // THE BIND METHOD
+
 // manually set the this keyword for any function call
 // bind does not immediately call the function
 // it returns a new function where the this keyword is bound
@@ -173,6 +175,7 @@ document
   .querySelector('.buy')
   .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
 
+console.log(lufthansa);
 ////////////////////////////////////////////////////////////////
 
 // using call method we have to pass in the object we want the this keyword to point to
