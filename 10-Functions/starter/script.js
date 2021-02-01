@@ -1,6 +1,20 @@
 'use strict';
 ////////////////////////////////////////////////////////////////
+// /**
+//  * https://leetcode.com/problems/shuffle-string/submissions/
+//  * @param {string} s
+//  * @param {number[]} indices
+//  * @return {string}
+//  */
+// var restoreString = function (s, indices) {
+//   let ret = [];
+//   for (let i = 0; i < indices.length; i++) {
+//     ret[indices[i]] = s[i];
+//   }
+//   return ret.join('');
+// };
 
+// console.log(restoreString('codeleet', [4, 5, 6, 7, 0, 2, 1, 3]));
 ////////////////////////////////////////////////////////////////
 // THE CALL AND APPLY METHODS
 
@@ -183,11 +197,11 @@ document
   .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
 
 // binding function to lufthansa object, now the this keyword in function points to lufthansa object.
-document
-  .querySelector('.poll')
-  .addEventListener('click', lufthansa.answerPoll.bind(lufthansa));
+// document
+//   .querySelector('.poll')
+//   .addEventListener('click', lufthansa.answerPoll.bind(lufthansa));
 
-console.log(lufthansa);
+// console.log(lufthansa);
 
 // partial application
 // means we can preset parameters
@@ -241,6 +255,8 @@ Here are your tasks:
 
 2. Call this method whenever the user clicks the "Answer poll" button.
 
+
+
 3. Create a method 'displayResults' which displays the poll results. The method takes a string as an input (called 'type'), which can be either 'string' or 'array'. If type is 'array', simply display the results array as it is, using console.log(). This should be the default option. If type is 'string', display a string like "Poll results are 13, 2, 4, 1". 
 
 4. Run the 'displayResults' method at the end of each 'registerNewAnswer' method call.
@@ -259,21 +275,42 @@ const poll = {
 
   // create a method called 'registerNewAnswer'
   registerNewAnswer() {
+    // 1.1 Display prompt for user to input
     // get answer
-    const answer = prompt(
-      `${this.question}\n ${this.options.join('\n')}\n(Write option number)`
+    const answer = Number(
+      prompt(
+        `${this.question}\n ${this.options.join('\n')}\n(Write option number)`
+      )
     );
-    console.log(answer);
+
+    // 1.2 based on number, update answers array
+    // register answer
+    typeof answer === 'number' &&
+      answer < this.answers.length &&
+      this.answers[answer]++;
+
+    // 4. Run displayResults method at the end of each method call
+    this.displayResults();
+    this.displayResults('string');
+  },
+
+  // 3. create method called displayResults which displays poll results
+  displayResults(type = 'array') {
+    if (type === 'array') {
+      console.log(this.answers);
+    } else if (type === 'string') {
+      console.log(`Poll results are ${this.answers.join(', ')}`);
+    }
   },
 };
 
-// 1.2 based on number update answers array
-// register answer
-typeof answer === 'number' &&
-  answer < this.answers.length() &&
-  this.answers[answer]++;
+// 2. Call this method whenever the user clicks the 'answer poll; button
+document
+  .querySelector('.poll')
+  .addEventListener('click', poll.registerNewAnswer.bind(poll));
 
-poll.registerNewAnswer();
+poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
+
 ////////////////////////////////////////////////////////////////
 
 // using call method we have to pass in the object we want the this keyword to point to
