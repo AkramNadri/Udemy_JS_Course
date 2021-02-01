@@ -20,63 +20,63 @@
 
 // Practice 2
 
-const lufthansa = {
-  airline: 'Lufthansa',
-  iataCode: 'LH',
-  bookings: [],
-  name: 'Akram',
+// const lufthansa = {
+//   airline: 'Lufthansa',
+//   iataCode: 'LH',
+//   bookings: [],
+//   name: 'Akram',
 
-  // before
-  // book: function(){
-  // }
-  // after - similar way of creating a method
+//   // before
+//   // book: function(){
+//   // }
+//   // after - similar way of creating a method
 
-  book(flightNum, name) {
-    console.log(
-      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
-    );
+//   book(flightNum, name) {
+//     console.log(
+//       `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+//     );
 
-    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
-  },
-};
+//     this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+//   },
+// };
 
-lufthansa.book(239, 'Jonas Schmedtmann');
-lufthansa.book(635, 'John Smith');
+// lufthansa.book(239, 'Jonas Schmedtmann');
+// lufthansa.book(635, 'John Smith');
 
-console.log(lufthansa);
+// console.log(lufthansa);
 
-const eurowings = {
-  airline: 'Eurowings',
-  iataCode: 'EW',
-  bookings: [],
-};
+// const eurowings = {
+//   airline: 'Eurowings',
+//   iataCode: 'EW',
+//   bookings: [],
+// };
 
-// copied book function in lufthansa object and created a new book function.
-const book = lufthansa.book;
+// // copied book function in lufthansa object and created a new book function.
+// const book = lufthansa.book;
 
-// does not work
-// book(23, 'Sarah Williams');\
+// // does not work
+// // book(23, 'Sarah Williams');\
 
-book.call(eurowings, 23, 'Sara williams');
-console.log(eurowings);
+// book.call(eurowings, 23, 'Sara williams');
+// console.log(eurowings);
 
-book.call(lufthansa, 23, 'Micheal Jordan');
-console.log(lufthansa);
+// book.call(lufthansa, 23, 'Micheal Jordan');
+// console.log(lufthansa);
 
-const swiss = {
-  airline: 'Swiss',
-  iataCode: 'LX',
-  bookings: [],
-};
+// const swiss = {
+//   airline: 'Swiss',
+//   iataCode: 'LX',
+//   bookings: [],
+// };
 
-book.call(swiss, 45, 'Mary Cooper');
-console.log(swiss);
+// book.call(swiss, 45, 'Mary Cooper');
+// console.log(swiss);
 
-const flightDate = [583, 'George Cooper'];
-book.apply(swiss, flightDate);
-console.log(swiss);
+// const flightDate = [583, 'George Cooper'];
+// book.apply(swiss, flightDate);
+// console.log(swiss);
 
-book.call(swiss, ...flightDate);
+// book.call(swiss, ...flightDate);
 // const canadaAir = {
 //   airline: 'Canada Air',
 //   iataCode: 'LH',
@@ -157,81 +157,81 @@ book.call(swiss, ...flightDate);
 // one book function for each of the airlines
 // Instead of using Call all the time, we could just Bind once
 // we can always use these functions
-const bookEw = book.bind(eurowings);
-const bookLH = book.bind(lufthansa);
-const bookLX = book.bind(swiss);
+// const bookEw = book.bind(eurowings);
+// const bookLH = book.bind(lufthansa);
+// const bookLX = book.bind(swiss);
 
-// using the bind functions here
-bookEw(23, 'Steven Williams');
-bookLH(11, 'Cat Smith');
-bookLX(43, 'Billy Bob');
+// // using the bind functions here
+// bookEw(23, 'Steven Williams');
+// bookLH(11, 'Cat Smith');
+// bookLX(43, 'Billy Bob');
 
-// we can set the parameters
-// this one only needs the name because the first argument already contains the flight number
-// preset the 23
-const bookEW23 = book.bind(eurowings, 23);
-// all we need to pass is the passenger name, since the flight number is preset in the argument.
-bookEW23('Akram Nadri');
-bookEW23('Martha Stewart');
+// // we can set the parameters
+// // this one only needs the name because the first argument already contains the flight number
+// // preset the 23
+// const bookEW23 = book.bind(eurowings, 23);
+// // all we need to pass is the passenger name, since the flight number is preset in the argument.
+// bookEW23('Akram Nadri');
+// bookEW23('Martha Stewart');
 
-// with event listener
-lufthansa.planes = 300;
-lufthansa.buyPlane = function () {
-  console.log(this);
+// // with event listener
+// lufthansa.planes = 300;
+// lufthansa.buyPlane = function () {
+//   console.log(this);
 
-  this.planes++;
-  console.log(this.planes);
-};
+//   this.planes++;
+//   console.log(this.planes);
+// };
 
-lufthansa.poll = 1;
-lufthansa.answerPoll = function () {
-  console.log(this);
-  this.poll++;
-  console.log(this.poll);
-};
+// lufthansa.poll = 1;
+// lufthansa.answerPoll = function () {
+//   console.log(this);
+//   this.poll++;
+//   console.log(this.poll);
+// };
 
-// the . in front of buy means that its a class
-// in an event handler function, the this keyword always points to the element on which the handler is attached too.
-document
-  .querySelector('.buy')
-  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
-
-// binding function to lufthansa object, now the this keyword in function points to lufthansa object.
+// // the . in front of buy means that its a class
+// // in an event handler function, the this keyword always points to the element on which the handler is attached too.
 // document
-//   .querySelector('.poll')
-//   .addEventListener('click', lufthansa.answerPoll.bind(lufthansa));
+//   .querySelector('.buy')
+//   .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
 
-// console.log(lufthansa);
+// // binding function to lufthansa object, now the this keyword in function points to lufthansa object.
+// // document
+// //   .querySelector('.poll')
+// //   .addEventListener('click', lufthansa.answerPoll.bind(lufthansa));
 
-// partial application
-// means we can preset parameters
+// // console.log(lufthansa);
 
-const addTax = (rate, value) => value + value * rate;
-console.log(addTax(0.1, 200));
+// // partial application
+// // means we can preset parameters
 
-// we are binding addTax function to addGST with the first parameter rate preset to 0.23.
-// we set the first parameter as null because we dont need to point the this keyword to anything
-const addGST = addTax.bind(null, 0.23);
+// const addTax = (rate, value) => value + value * rate;
+// console.log(addTax(0.1, 200));
 
-// this is what our addTax function looks like now
-// addGST = value => value + value * 0.23;
+// // we are binding addTax function to addGST with the first parameter rate preset to 0.23.
+// // we set the first parameter as null because we dont need to point the this keyword to anything
+// const addGST = addTax.bind(null, 0.23);
 
-// since the rate parameter is already preset, we only pass the value argument to addTax function
-// using bing gives us a new function
-console.log(addGST(100));
+// // this is what our addTax function looks like now
+// // addGST = value => value + value * 0.23;
 
-// Challenge
+// // since the rate parameter is already preset, we only pass the value argument to addTax function
+// // using bing gives us a new function
+// console.log(addGST(100));
 
-const addTaxRate = function (rate) {
-  return function (value) {
-    return value + value * rate;
-  };
-};
+// // Challenge
 
-const addGST2 = addTaxRate(0.23);
+// const addTaxRate = function (rate) {
+//   return function (value) {
+//     return value + value * rate;
+//   };
+// };
 
-console.log(addGST2(100));
-console.log(addGST2(23));
+// const addGST2 = addTaxRate(0.23);
+
+// console.log(addGST2(100));
+// console.log(addGST2(23));
 
 ///////////////////////////////////////
 // Coding Challenge #1
@@ -273,28 +273,22 @@ const poll = {
   // This generates [0, 0, 0, 0]. More in the next section 😃
   answers: new Array(4).fill(0),
 
-  // create a method called 'registerNewAnswer'
   registerNewAnswer() {
-    // 1.1 Display prompt for user to input
-    // get answer
     const answer = Number(
       prompt(
-        `${this.question}\n ${this.options.join('\n')}\n(Write option number)`
+        `${this.question}\n ${this.options.join('\n')} \n(Write option number)`
       )
     );
 
-    // 1.2 based on number, update answers array
-    // register answer
+    // typeof is checking the value type of answer, answer must be a number, answer must be less then answers.length, then increment answers array based off input
     typeof answer === 'number' &&
-      answer < this.answers.length &&
+      answer <= this.answers.length &&
       this.answers[answer]++;
 
-    // 4. Run displayResults method at the end of each method call
     this.displayResults();
     this.displayResults('string');
   },
 
-  // 3. create method called displayResults which displays poll results
   displayResults(type = 'array') {
     if (type === 'array') {
       console.log(this.answers);
@@ -304,12 +298,50 @@ const poll = {
   },
 };
 
-// 2. Call this method whenever the user clicks the 'answer poll; button
+poll.displayResults.call({ answers: [1, 1, 1, 1] });
+poll.registerNewAnswer();
+
 document
   .querySelector('.poll')
   .addEventListener('click', poll.registerNewAnswer.bind(poll));
 
-poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
+// create a method called 'registerNewAnswer'
+//   registerNewAnswer() {
+//     // 1.1 Display prompt for user to input
+//     // get answer
+//     const answer = Number(
+//       prompt(
+//         `${this.question}\n ${this.options.join('\n')}\n(Write option number)`
+//       )
+//     );
+
+//     // 1.2 based on number, update answers array
+//     // register answer
+//     typeof answer === 'number' &&
+//       answer < this.answers.length &&
+//       this.answers[answer]++;
+
+//     // 4. Run displayResults method at the end of each method call
+//     this.displayResults();
+//     this.displayResults('string');
+//   },
+
+//   // 3. create method called displayResults which displays poll results
+//   displayResults(type = 'array') {
+//     if (type === 'array') {
+//       console.log(this.answers);
+//     } else if (type === 'string') {
+//       console.log(`Poll results are ${this.answers.join(', ')}`);
+//     }
+//   },
+// };
+
+// // 2. Call this method whenever the user clicks the 'answer poll; button
+// document
+//   .querySelector('.poll')
+//   .addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+// poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
 
 ////////////////////////////////////////////////////////////////
 
