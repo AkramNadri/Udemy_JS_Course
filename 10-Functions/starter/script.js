@@ -276,34 +276,54 @@ const poll = {
   registerNewAnswer() {
     const answer = Number(
       prompt(
-        `${this.question}\n ${this.options.join('\n')} \n(Write option number)`
+        `${this.question} \n ${this.options.join(
+          '\n '
+        )} \n (Write option number)`
       )
     );
+    console.log(answer);
 
-    // typeof is checking the value type of answer, answer must be a number, answer must be less then answers.length, then increment answers array based off input
+    // check to see if answer is a number, answer less then answers array and increment answers array based on answer.
     typeof answer === 'number' &&
-      answer <= this.answers.length &&
+      answer < this.answers.length &&
       this.answers[answer]++;
 
-    this.displayResults();
-    this.displayResults('string');
-  },
-
-  displayResults(type = 'array') {
-    if (type === 'array') {
-      console.log(this.answers);
-    } else if (type === 'string') {
-      console.log(`Poll results are ${this.answers.join(', ')}`);
-    }
+    console.log(this.answers);
   },
 };
 
-poll.displayResults.call({ answers: [1, 1, 1, 1] });
 poll.registerNewAnswer();
+//   registerNewAnswer() {
+//     const answer = Number(
+//       prompt(
+//         `${this.question}\n ${this.options.join('\n')} \n(Write option number)`
+//       )
+//     );
 
-document
-  .querySelector('.poll')
-  .addEventListener('click', poll.registerNewAnswer.bind(poll));
+//     // typeof is checking the value type of answer, answer must be a number, answer must be less then answers.length, then increment answers array based off input
+//     typeof answer === 'number' &&
+//       answer <= this.answers.length &&
+//       this.answers[answer]++;
+
+//     this.displayResults();
+//     this.displayResults('string');
+//   },
+
+//   displayResults(type = 'array') {
+//     if (type === 'array') {
+//       console.log(this.answers);
+//     } else if (type === 'string') {
+//       console.log(`Poll results are ${this.answers.join(', ')}`);
+//     }
+//   },
+// };
+
+// poll.displayResults.call({ answers: [1, 1, 1, 1] });
+// poll.registerNewAnswer();
+
+// document
+//   .querySelector('.poll')
+//   .addEventListener('click', poll.registerNewAnswer.bind(poll));
 
 // create a method called 'registerNewAnswer'
 //   registerNewAnswer() {
