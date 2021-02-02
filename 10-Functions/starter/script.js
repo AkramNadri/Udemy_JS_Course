@@ -255,8 +255,6 @@ Here are your tasks:
 
 2. Call this method whenever the user clicks the "Answer poll" button.
 
-
-
 3. Create a method 'displayResults' which displays the poll results. The method takes a string as an input (called 'type'), which can be either 'string' or 'array'. If type is 'array', simply display the results array as it is, using console.log(). This should be the default option. If type is 'string', display a string like "Poll results are 13, 2, 4, 1". 
 
 4. Run the 'displayResults' method at the end of each 'registerNewAnswer' method call.
@@ -289,10 +287,32 @@ const poll = {
       this.answers[answer]++;
 
     console.log(this.answers);
+
+    this.displayResults();
+  },
+
+  displayResults(type = 'array') {
+    if (type === 'array') {
+      console.log(`${this.answers}`);
+    } else if (type === 'string') {
+      console.log(`Poll results are ${this.answers.join(', ')}`);
+    }
   },
 };
 
-poll.registerNewAnswer();
+document
+  .querySelector('.poll')
+  .addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+// poll.registerNewAnswer();
+
+// We use the call method to point the this keyword to the new answers object we created and passed new array.
+// answers here is a new object
+poll.displayResults.call({ answers: [1, 2, 3, 4] });
+
+// create a new object answers with array value, call will point the this keyword to this new object, and type is equal to string.
+poll.displayResults.call({ answers: [1, 2, 3, 4] }, 'string');
+
 //   registerNewAnswer() {
 //     const answer = Number(
 //       prompt(
