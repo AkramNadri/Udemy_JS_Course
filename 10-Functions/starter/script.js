@@ -1,38 +1,70 @@
 'use strict';
 
 ////////////////////////////////////////////////////////////////
+// CLOSURES
+
+// A closure is not a feathure that we explicitly use, we dont create closure manulaly like we create an array or new function.
+// Closure happens automatically in certain situations, we just need to recognize those situations so that we can take a closer look at closures.
+
+// Take a look at a closure
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passenger`);
+  };
+};
+
+const booker = secureBooking();
+
+booker();
+booker();
+booker();
+booker();
+
+console.dir(booker);
+
+////////////////////////////////////////////////////////////////
 // IMMEDIATELY INVOKED FUNCTION EXPRESSIONS(IIFE)
 
 // Sometimes in JS we need a function that is only executed once, and then never again. A function that dissapears after it is called. Common technique for Async/Await
 // IIFE is a pattern used by developers
 
-const runOnce = function () {
-  console.log('This will never run again');
-};
+// const runOnce = function () {
+//   console.log('This will never run again');
+// };
 
-runOnce();
+// runOnce();
 
-// error: Function statements require a function name
-// But, we can trick JS into thinking that this is just an expression, we could do that by wrapping everything into paranthesis. Transform statement into expression.
+// // error: Function statements require a function name
+// // But, we can trick JS into thinking that this is just an expression, we could do that by wrapping everything into paranthesis. Transform statement into expression.
 
-// Example of IIFE.
-(function () {
-  console.log('This will never run again');
-  const isPrivate = 23;
-})();
+// // Example of IIFE.
+// (function () {
+//   console.log('This will never run again');
+//   const isPrivate = 23;
+// })();
 
-// We dont have access to isPrivate var because of scoping.
-// we are trying to access isPrivate from the outside which will not work because the scopechain works the other way around.
-// The inner scope would have access to anything defined in global scope.
-console.log(isPrivate);
+// // We dont have access to isPrivate var because of scoping.
+// // we are trying to access isPrivate from the outside which will not work because the scopechain works the other way around.
+// // The inner scope would have access to anything defined in global scope.
+// // console.log(isPrivate);
 
-// Same as above, arrow function
-// wrap function in paranthesis which will transform to IIFE.
-(() => console.log('This will never run again 2'))();
+// // Same as above, arrow function
+// // wrap function in paranthesis which will transform to IIFE.
+// (() => console.log('This will never run again 2'))();
 
-{
-  const isPrivate = 23;
-}
+// // we cannot access this variable
+// // Scoping - const can only be access within the scope block
+// // var can be access outside scope block
+// {
+//   const isPrivate = 23;
+//   var notPrivate = 46;
+// }
+
+// console.log(notPrivate);
+// console.log(isPrivate);
 
 ////////////////////////////////////////////////////////////////
 // /**
