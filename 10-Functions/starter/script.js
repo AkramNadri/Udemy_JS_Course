@@ -1,4 +1,39 @@
 'use strict';
+
+////////////////////////////////////////////////////////////////
+// IMMEDIATELY INVOKED FUNCTION EXPRESSIONS(IIFE)
+
+// Sometimes in JS we need a function that is only executed once, and then never again. A function that dissapears after it is called. Common technique for Async/Await
+// IIFE is a pattern used by developers
+
+const runOnce = function () {
+  console.log('This will never run again');
+};
+
+runOnce();
+
+// error: Function statements require a function name
+// But, we can trick JS into thinking that this is just an expression, we could do that by wrapping everything into paranthesis. Transform statement into expression.
+
+// Example of IIFE.
+(function () {
+  console.log('This will never run again');
+  const isPrivate = 23;
+})();
+
+// We dont have access to isPrivate var because of scoping.
+// we are trying to access isPrivate from the outside which will not work because the scopechain works the other way around.
+// The inner scope would have access to anything defined in global scope.
+console.log(isPrivate);
+
+// Same as above, arrow function
+// wrap function in paranthesis which will transform to IIFE.
+(() => console.log('This will never run again 2'))();
+
+{
+  const isPrivate = 23;
+}
+
 ////////////////////////////////////////////////////////////////
 // /**
 //  * https://leetcode.com/problems/shuffle-string/submissions/
@@ -265,53 +300,53 @@ BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
 GOOD LUCK 😀
 */
 
-const poll = {
-  question: 'What is your favourite programming language?',
-  options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
-  // This generates [0, 0, 0, 0]. More in the next section 😃
-  answers: new Array(4).fill(0),
+// const poll = {
+//   question: 'What is your favourite programming language?',
+//   options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+//   // This generates [0, 0, 0, 0]. More in the next section 😃
+//   answers: new Array(4).fill(0),
 
-  registerNewAnswer() {
-    const answer = Number(
-      prompt(
-        `${this.question} \n ${this.options.join(
-          '\n '
-        )} \n (Write option number)`
-      )
-    );
-    console.log(answer);
+//   registerNewAnswer() {
+//     const answer = Number(
+//       prompt(
+//         `${this.question} \n ${this.options.join(
+//           '\n '
+//         )} \n (Write option number)`
+//       )
+//     );
+//     console.log(answer);
 
-    // check to see if answer is a number, answer less then answers array and increment answers array based on answer.
-    typeof answer === 'number' &&
-      answer < this.answers.length &&
-      this.answers[answer]++;
+//     // check to see if answer is a number, answer less then answers array and increment answers array based on answer.
+//     typeof answer === 'number' &&
+//       answer < this.answers.length &&
+//       this.answers[answer]++;
 
-    console.log(this.answers);
+//     console.log(this.answers);
 
-    this.displayResults();
-  },
+//     this.displayResults();
+//   },
 
-  displayResults(type = 'array') {
-    if (type === 'array') {
-      console.log(`${this.answers}`);
-    } else if (type === 'string') {
-      console.log(`Poll results are ${this.answers.join(', ')}`);
-    }
-  },
-};
+//   displayResults(type = 'array') {
+//     if (type === 'array') {
+//       console.log(`${this.answers}`);
+//     } else if (type === 'string') {
+//       console.log(`Poll results are ${this.answers.join(', ')}`);
+//     }
+//   },
+// };
 
-document
-  .querySelector('.poll')
-  .addEventListener('click', poll.registerNewAnswer.bind(poll));
+// document
+//   .querySelector('.poll')
+//   .addEventListener('click', poll.registerNewAnswer.bind(poll));
 
-// poll.registerNewAnswer();
+// // poll.registerNewAnswer();
 
-// We use the call method to point the this keyword to the new answers object we created and passed new array.
-// answers here is a new object
-poll.displayResults.call({ answers: [1, 2, 3, 4] });
+// // We use the call method to point the this keyword to the new answers object we created and passed new array.
+// // answers here is a new object
+// poll.displayResults.call({ answers: [1, 2, 3, 4] });
 
-// create a new object answers with array value, call will point the this keyword to this new object, and type is equal to string.
-poll.displayResults.call({ answers: [1, 2, 3, 4] }, 'string');
+// // create a new object answers with array value, call will point the this keyword to this new object, and type is equal to string.
+// poll.displayResults.call({ answers: [1, 2, 3, 4] }, 'string');
 
 //   registerNewAnswer() {
 //     const answer = Number(
