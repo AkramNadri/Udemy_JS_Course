@@ -1,29 +1,60 @@
 'use strict';
+////////////////////////////////////////////////////////////////
+// 3 EXAMPLES OF CLOSURES
+
+let f;
+
+const g = function () {
+  const a = 23;
+
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  const b = 777;
+
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+// f Closure is currently set to g
+g();
+f();
+console.dir(f);
+
+// reasigned f function - f Closure is now assigned to h
+h();
+f();
+
+console.dir(f);
 
 ////////////////////////////////////////////////////////////////
 // CLOSURES
 
-// A closure is not a feathure that we explicitly use, we dont create closure manulaly like we create an array or new function.
+// A closure is not a feature that we explicitly use, we dont create closure manualy like we create an array or new function.
 // Closure happens automatically in certain situations, we just need to recognize those situations so that we can take a closer look at closures.
 
-// Take a look at a closure
-const secureBooking = function () {
-  let passengerCount = 0;
+// // Take a look at a closure
+// const secureBooking = function () {
+//   let passengerCount = 0;
 
-  return function () {
-    passengerCount++;
-    console.log(`${passengerCount} passenger`);
-  };
-};
+//   return function () {
+//     passengerCount++;
+//     console.log(`${passengerCount} passenger`);
+//   };
+// };
 
-const booker = secureBooking();
+// const booker = secureBooking();
 
-booker();
-booker();
-booker();
-booker();
+// booker();
+// booker();
+// booker();
+// booker();
 
-console.dir(booker);
+// console.dir(booker);
 
 ////////////////////////////////////////////////////////////////
 // IMMEDIATELY INVOKED FUNCTION EXPRESSIONS(IIFE)
