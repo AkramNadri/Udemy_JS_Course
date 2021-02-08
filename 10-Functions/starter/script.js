@@ -2,16 +2,23 @@
 ////////////////////////////////////////////////////////////////
 // 3 EXAMPLES OF CLOSURES
 
+// Example 1 is displaying how a Closure can be reasigned.
+
 let f;
 
+// f Closure is the environment varibale of g
+// environment variable: const a = 23;
 const g = function () {
   const a = 23;
 
+  // f Closure is g, and environment variable contains const a = 23;
   f = function () {
     console.log(a * 2);
   };
 };
 
+// f Closure is environment variable of h
+// environment variable: const b = 777;
 const h = function () {
   const b = 777;
 
@@ -26,10 +33,14 @@ f();
 console.dir(f);
 
 // reasigned f function - f Closure is now assigned to h
+// the old closure dissapears and gets reasigned to h
 h();
 f();
 
+// f Closure is now h - [[Scopes]]: Closure(h){b:777}
 console.dir(f);
+
+// EXAMPLE 2 - CLOSURES
 
 ////////////////////////////////////////////////////////////////
 // CLOSURES
