@@ -1,62 +1,87 @@
 'use strict';
+
+////////////////////////////////////////////////////////////////
+// CODING CHALLENGE #2
+
+/* 
+
+This is more of a thinking challenge than a coding challenge 🤓
+Take the IIFE below and at the end of the function, attach an event listener that changes the color of the selected h1 element ('header') to blue, each time the BODY element is clicked. Do NOT select the h1 element again!
+
+And now explain to YOURSELF (or someone around you) WHY this worked! Take all the time you need. Think about WHEN exactly the callback function is executed, and what that means for the variables involved in this example.
+GOOD LUCK 😀
+
+*/
+
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+
+  document.querySelector('body').addEventListener('click', function () {
+    // this function has the Closure of the IIFY above, it contains all the environment variables, it has access to the header variable. Once the IIFY executes it is removed from the call stack, and its variables are no longer accessible, but this function still has access due to Closure.
+    header.style.color = 'blue';
+    console.dir(header);
+  });
+})();
+
 ////////////////////////////////////////////////////////////////
 // 3 EXAMPLES OF CLOSURES
 
 // Example 1 is displaying how a Closure can be reasigned.
 
-let f;
+// let f;
 
-// f Closure is the environment varibale of g
-// environment variable: const a = 23;
-const g = function () {
-  const a = 23;
+// // f Closure is the environment varibale of g
+// // environment variable: const a = 23;
+// const g = function () {
+//   const a = 23;
 
-  // f Closure is g, and environment variable contains const a = 23;
-  f = function () {
-    console.log(a * 2);
-  };
-};
+//   // f Closure is g, and environment variable contains const a = 23;
+//   f = function () {
+//     console.log(a * 2);
+//   };
+// };
 
 // f Closure is environment variable of h
 // environment variable: const b = 777;
-const h = function () {
-  const b = 777;
+// const h = function () {
+//   const b = 777;
 
-  f = function () {
-    console.log(b * 2);
-  };
-};
+//   f = function () {
+//     console.log(b * 2);
+//   };
+// };
 
-// f Closure is currently set to g
-g();
-f();
-console.dir(f);
+// // f Closure is currently set to g
+// g();
+// f();
+// console.dir(f);
 
-// reasigned f function - f Closure is now assigned to h
-// the old closure dissapears and gets reasigned to h
-h();
-f();
+// // reasigned f function - f Closure is now assigned to h
+// // the old closure dissapears and gets reasigned to h
+// h();
+// f();
 
-// f Closure is now h - [[Scopes]]: Closure(h){b:777}
-console.dir(f);
+// // f Closure is now h - [[Scopes]]: Closure(h){b:777}
+// console.dir(f);
 
-// EXAMPLE 2 - CLOSURES
+// // EXAMPLE 2 - CLOSURES
 
-const boardPassengers = function (n, wait) {
-  const perGroup = n / 3;
+// const boardPassengers = function (n, wait) {
+//   const perGroup = n / 3;
 
-  // Use a timer, this function will be called after 1 second
-  setTimeout(function () {
-    console.log(`We are now boarding all ${n} passengers`);
-    console.log(`There are 3 groups, each with ${perGroup} passengers`);
-  }, wait * 1000);
+//   // Use a timer, this function will be called after 1 second
+//   setTimeout(function () {
+//     console.log(`We are now boarding all ${n} passengers`);
+//     console.log(`There are 3 groups, each with ${perGroup} passengers`);
+//   }, wait * 1000);
 
-  console.log(`Will start boarding in ${wait} seconds`);
-};
+//   console.log(`Will start boarding in ${wait} seconds`);
+// };
 
-// Closure has priority over Scope chain.
-const perGroup = 1000;
-boardPassengers(180, 3);
+// // Closure has priority over Scope chain.
+// const perGroup = 1000;
+// boardPassengers(180, 3);
 
 ////////////////////////////////////////////////////////////////
 // CLOSURES
