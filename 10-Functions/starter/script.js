@@ -42,6 +42,22 @@ console.dir(f);
 
 // EXAMPLE 2 - CLOSURES
 
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+
+  // Use a timer, this function will be called after 1 second
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGroup} passengers`);
+  }, wait * 1000);
+
+  console.log(`Will start boarding in ${wait} seconds`);
+};
+
+// Closure has priority over Scope chain.
+const perGroup = 1000;
+boardPassengers(180, 3);
+
 ////////////////////////////////////////////////////////////////
 // CLOSURES
 
