@@ -76,3 +76,76 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 /////////////////////////////////////////////////
 
 // Simple Array Methods
+
+// Why do arrays have methods ?
+// Methods are simply functions that we can call on objects, they are functions attached to objects. Arrays themselves are also objects. These array methods are simply functions that are attached to all arrays that we create in JavaScript. Arrays are objects and they have access to special built in methods that we can essentially see as tools for arrays.
+
+// let arr = ['a', 'b', 'c', 'd', 'e'];
+
+// // SLICE METHOD
+// // this does not mutate the original arr array
+// // returns a new array but only with the extracted parts
+// console.log(arr.slice(2));
+
+// // end parameter minus the beginning one
+// console.log(arr.slice(2, 4));
+
+// // negative parameter will start selecting indexes from the end of array
+// // count backwards from array
+// console.log(arr.slice(-2));
+
+// // -1 selects the last element in the array
+// console.log(arr.slice(-1));
+
+// // parameter begins at b and parameter 2 ends at c
+// console.log(arr.slice(1, -2));
+
+// console.log(arr.slice(0, -2));
+
+// // create shallow copy of array
+// console.log(arr.slice());
+
+// // spread operator to create shallow copy of array
+// console.log(...arr);
+
+// // SPLICE - mutates original array
+
+// // extracts elements from array
+// // console.log(arr.splice(2));
+
+// // the extracted elements are gone from the orginal array
+// console.log(arr);
+
+// // most of the time the value splice methods returns does not interest us. Delete one or more elements from an array using splice.
+
+// // remove the last element in the array
+// arr.splice(-1);
+// console.log(arr); // a, b, c, d
+
+// // removes b ,c - which leaves a, d
+// // the first paremeter is similar to the slice method, and the second parameter is how many items we want to delete
+// arr.splice(1, 2);
+// console.log(arr); // a, d
+
+// REVERSE - does mutate array
+// Tip - sometimes we do not want to mutate the original array, in this case we do not want to use certain array methods.
+
+// let arr = ['a', 'b', 'c', 'd', 'e'];
+
+// const arr2 = ['j', 'i', 'h', 'g', 'f'];
+
+// // will reverse the array and mutate
+// console.log(arr2.reverse());
+
+// // arr2 array has been mutated - not the same as orginal.
+// console.log(arr2);
+
+// //CONCAT - used to concat two arrays
+// const letters = arr.concat(arr2);
+// console.log(letters);
+
+// // spread ... this gives us the same results as above, and does not mutate the original arrays
+// console.log(...arr, ...arr2);
+
+// // JOIN
+// console.log(letters.join(' - '));
