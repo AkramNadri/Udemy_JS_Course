@@ -13,16 +13,20 @@ GOOD LUCK 😀
 
 */
 
-(function () {
-  const header = document.querySelector('h1');
-  header.style.color = 'red';
+// (function () {
+//   const header = document.querySelector('h1');
+//   header.style.color = 'red';
 
-  document.querySelector('body').addEventListener('click', function () {
-    // this function has the Closure of the IIFY above, it contains all the environment variables, it has access to the header variable. Once the IIFY executes it is removed from the call stack, and its variables are no longer accessible, but this function still has access due to Closure.
-    header.style.color = 'blue';
-    console.dir(header);
-  });
-})();
+//   document.querySelector('body').addEventListener(
+//     'click',
+
+//     // this function has the Closure of the IIFY above, it contains all the environment variables, it has access to the header variable. Once the IIFY executes it is removed from the call stack, and its variables are no longer accessible, but this function still has access due to Closure.
+//     function () {
+//       header.style.color = 'blue';
+//       console.dir(header);
+//     }
+//   );
+// })();
 
 ////////////////////////////////////////////////////////////////
 // 3 EXAMPLES OF CLOSURES
