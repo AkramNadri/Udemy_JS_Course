@@ -73,6 +73,34 @@ const currencies = new Map([
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
+// create a new variable movement which is a copy of movements
+for (const movement of movements) {
+  // if movement is > 0 log message
+  if (movement > 0) {
+    console.log(`You deposited ${movement}`);
+
+    // else if movement
+  } else {
+    // Math.abs is the absolute number, removing the sign ( - )
+    console.log(`You withdrew ${Math.abs(movement)}`);
+    // console.log(`You withdrew ${movement}`);
+  }
+}
+
+// forEach method - does the exact same thing as above in simpler way.
+// forEach is a higher order function, which requires a call back function
+// Loops over the array and each iteration will execute the call back function, also as the forEach method calls the callback function in each iteration, it will pass in this current element of the array as an argument.
+
+console.log(' --- FOR EACH ---');
+
+movements.forEach(function (movement) {
+  if (movement > 0) {
+    console.log(`You deposited ${movement}`);
+  } else {
+    console.log(`You withdrew ${Math.abs(movement)}`);
+  }
+});
+
 /////////////////////////////////////////////////
 
 // Simple Array Methods
