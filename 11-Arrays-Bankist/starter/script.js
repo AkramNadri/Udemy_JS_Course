@@ -74,15 +74,16 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // create a new variable movement which is a copy of movements
-for (const movement of movements) {
+// for (const movement of movements) {
+
+// counter variable added, i is index of element
+for (const [i, movement] of movements.entries()) {
   // if movement is > 0 log message
   if (movement > 0) {
-    console.log(`You deposited ${movement}`);
-
-    // else if movement
+    console.log(`Movement ${i + 1}: You deposited ${movement}`);
   } else {
     // Math.abs is the absolute number, removing the sign ( - )
-    console.log(`You withdrew ${Math.abs(movement)}`);
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
     // console.log(`You withdrew ${movement}`);
   }
 }
@@ -91,15 +92,22 @@ for (const movement of movements) {
 // forEach is a higher order function, which requires a call back function
 // Loops over the array and each iteration will execute the call back function, also as the forEach method calls the callback function in each iteration, it will pass in this current element of the array as an argument.
 
-console.log(' --- FOR EACH ---');
+// forEach logic - at iteration 0; forEach will call the anonymous function and its going to call it with the value of 200, then 450 and so on until it reaches the end of the array.
 
-movements.forEach(function (movement) {
-  if (movement > 0) {
-    console.log(`You deposited ${movement}`);
+console.log(' --- FOR EACH --- ');
+
+// the order of arguments in parameter matter, 1st parameter is current element, 2nd current index, and 3rd the entire array.
+// thats the order in which the arguements are passed into our function.
+// forEach passes 3 things to the function - current element, index and array.
+movements.forEach(function (mov, i, arr) {
+  if (mov > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${mov}, Array: ${arr}`);
   } else {
-    console.log(`You withdrew ${Math.abs(movement)}`);
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(mov)}`);
   }
 });
+
+// What if we need access to a counter variable
 
 /////////////////////////////////////////////////
 
