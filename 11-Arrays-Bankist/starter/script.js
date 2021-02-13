@@ -65,13 +65,33 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // LECTURES
 
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
+
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+// forEach with Maps and Sets
+
 const currencies = new Map([
   ['USD', 'United States dollar'],
   ['EUR', 'Euro'],
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+currencies.forEach(function (value, key, map) {
+  console.log(`${key}: ${value}: ${map}`);
+});
+
+const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
+console.log(currenciesUnique);
+currenciesUnique.forEach(function (value, _value, map) {
+  console.log(`${value}, ${value}`);
+});
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // create a new variable movement which is a copy of movements
 // for (const movement of movements) {
@@ -106,6 +126,18 @@ movements.forEach(function (mov, i, arr) {
     console.log(`Movement ${i + 1}: You withdrew ${Math.abs(mov)}`);
   }
 });
+
+// const heaven = [1, 2, 3, 4, 5, 6, 7];
+
+// console.log(heaven);
+
+// heaven.forEach(function (element, i) {
+//   if (element > 4) {
+//     console.log(`higher heaven level ${element} ${i}`);
+//   } else {
+//     console.log(`lower heaven level ${element}`);
+//   }
+// });
 
 // What if we need access to a counter variable
 
