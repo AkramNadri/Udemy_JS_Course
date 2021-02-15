@@ -73,6 +73,11 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
+
+// CREATING DOM ELEMENTS
+
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
 // forEach with Maps and Sets
 
 const currencies = new Map([
@@ -87,6 +92,8 @@ currencies.forEach(function (value, key, map) {
 
 const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
 console.log(currenciesUnique);
+
+// the _value underscore in front of value here means that we dont care about this value, or its a throw away variable.
 currenciesUnique.forEach(function (value, _value, map) {
   console.log(`${value}, ${value}`);
 });
@@ -97,16 +104,16 @@ currenciesUnique.forEach(function (value, _value, map) {
 // for (const movement of movements) {
 
 // counter variable added, i is index of element
-for (const [i, movement] of movements.entries()) {
-  // if movement is > 0 log message
-  if (movement > 0) {
-    console.log(`Movement ${i + 1}: You deposited ${movement}`);
-  } else {
-    // Math.abs is the absolute number, removing the sign ( - )
-    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
-    // console.log(`You withdrew ${movement}`);
-  }
-}
+// for (const [i, movement] of movements.entries()) {
+//   // if movement is > 0 log message
+//   if (movement > 0) {
+//     console.log(`Movement ${i + 1}: You deposited ${movement}`);
+//   } else {
+//     // Math.abs is the absolute number, removing the sign ( - )
+//     console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
+//     // console.log(`You withdrew ${movement}`);
+//   }
+// }
 
 // forEach method - does the exact same thing as above in simpler way.
 // forEach is a higher order function, which requires a call back function
@@ -114,18 +121,18 @@ for (const [i, movement] of movements.entries()) {
 
 // forEach logic - at iteration 0; forEach will call the anonymous function and its going to call it with the value of 200, then 450 and so on until it reaches the end of the array.
 
-console.log(' --- FOR EACH --- ');
+// console.log(' --- FOR EACH --- ');
 
 // the order of arguments in parameter matter, 1st parameter is current element, 2nd current index, and 3rd the entire array.
 // thats the order in which the arguements are passed into our function.
 // forEach passes 3 things to the function - current element, index and array.
-movements.forEach(function (mov, i, arr) {
-  if (mov > 0) {
-    console.log(`Movement ${i + 1}: You deposited ${mov}, Array: ${arr}`);
-  } else {
-    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(mov)}`);
-  }
-});
+// movements.forEach(function (mov, i, arr) {
+//   if (mov > 0) {
+//     console.log(`Movement ${i + 1}: You deposited ${mov}, Array: ${arr}`);
+//   } else {
+//     console.log(`Movement ${i + 1}: You withdrew ${Math.abs(mov)}`);
+//   }
+// });
 
 // const heaven = [1, 2, 3, 4, 5, 6, 7];
 
