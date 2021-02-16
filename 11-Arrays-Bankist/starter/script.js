@@ -99,6 +99,24 @@ displayMovements(account1.movements);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 
+// DATA TRANSFORMATION: MAP, FILTER, REDUCE
+
+// MAP //////
+
+// MAP: another method used to loop over arrays. Similar to forEach, except map creates a brand new array based on the original array. It maps the values of the original array, thats why we call this method map.
+// MAP - returns a new array containing the results of applying an operation on all orginal array element.
+
+// FILTER //////
+
+// FILTER: returns a new array containing the array elements that passed a specified test condition. Elements that are considered true will be passed to the new created array, all other elements will be filtered out.
+
+// REDUCE //////
+
+// REDUCE: boils ('reduces') all array elements down to one single value (e.g. adding all elements together).
+
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+
 ///////////////////////////////////////
 // Coding Challenge #1
 
@@ -125,36 +143,36 @@ GOOD LUCK 😀
 
 // Create function 'checkDogs' which takes 2 parameters('dogsJulia' and 'dogsKate')
 
-const checkDogs = function (dogsJulia, dogsKate) {
-  // 1. Removed the first and last two
-  const correctedDogsJulia = dogsJulia.splice(1, 2);
+// const checkDogs = function (dogsJulia, dogsKate) {
+//   // 1. Removed the first and last two
+//   const correctedDogsJulia = dogsJulia.splice(1, 2);
 
-  // concat both arrays
-  const concatJuliasAndKates = correctedDogsJulia.concat(dogsKate);
+//   // concat both arrays
+//   const concatJuliasAndKates = correctedDogsJulia.concat(dogsKate);
 
-  concatJuliasAndKates.forEach(function (element, i, arr) {
-    if (element >= 3) {
-      console.log(
-        `Dog number ${i + 1} is an adult, and is ${element} years old `
-      );
-    } else {
-      console.log(`Dog number ${i + 1} is still a puppy 🐶`);
-    }
-  });
+//   concatJuliasAndKates.forEach(function (element, i, arr) {
+//     if (element >= 3) {
+//       console.log(
+//         `Dog number ${i + 1} is an adult, and is ${element} years old `
+//       );
+//     } else {
+//       console.log(`Dog number ${i + 1} is still a puppy 🐶`);
+//     }
+//   });
 
-  // console.log(concatJuliasAndKates);
-  // console.log(correctedDogsJulia);
-};
+//   // console.log(concatJuliasAndKates);
+//   // console.log(correctedDogsJulia);
+// };
 
-console.log('Test Data 1');
+// console.log('Test Data 1');
 
-// test data 1
-checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
+// // test data 1
+// checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
 
-console.log('Test Data 2');
+// console.log('Test Data 2');
 
-// test data 2
-checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
+// // test data 2
+// checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
