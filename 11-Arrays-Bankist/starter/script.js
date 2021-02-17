@@ -99,6 +99,34 @@ displayMovements(account1.movements);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 
+// The Map Method
+
+// The map method will give us a brand new array, this new array will contain in each new position the results of applying a call back function to the original array elements.
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const eurToUsd = 1.1;
+
+// map will pass 3 arguments
+// map method does not mutate original array, will return a new array.
+// here we use a function for each iteration
+const movementsToUsd = movements.map(function (mov) {
+  return mov * eurToUsd;
+});
+
+// same as above, except we do not use function.
+const movementsUSDfor = [];
+
+for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
+
+console.log(movementsToUsd);
+console.log(movementsUSDfor);
+console.log(movementsUSDfor);
+console.log(movementsUSDfor);
+
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+
 // DATA TRANSFORMATION: MAP, FILTER, REDUCE
 
 // MAP //////
