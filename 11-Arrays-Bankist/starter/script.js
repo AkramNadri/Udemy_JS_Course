@@ -1,7 +1,6 @@
 'use strict';
 
 /////////////////////////////////////////////////
-/////////////////////////////////////////////////
 // BANKIST APP
 
 // Data
@@ -85,13 +84,45 @@ displayMovements(account1.movements);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// THE FILTER METHOD - used to filter for elements that satisfy a certain condition.
+
+// Filter method passes 3 arguments, the element, current index and the entire array.
+// Filter method will pass arguments and filter elements in the expression.
+// This is called functional programming, and its more popular with less lines of code.
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
+
+console.log(movements);
+console.log(deposits);
+
+// same as above, except we are using 'for of' loop and pushing into array with push method.
+const depositsFor = [];
+for (const mov of movements) if (mov > 0) depositsFor.push(mov);
+console.log(depositsFor);
+
+const withdrawals = [];
+// for of loop to find withdrawals or number less then 0 and push it to withdrawals array
+for (const mov of movements) if (mov < 0) withdrawals.push(mov);
+console.log(withdrawals);
+
+// Same as above except using the filter method
+// Filter method only returns values that are true for the expression.
+// the => arrow is like having a RETURN.
+const withdrawalsFilter = movements.filter(mov => mov < 0);
+console.log(withdrawalsFilter);
+
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
 
 // COMPUTING USERNAMES
 
 const user = 'Steven Thomas Williams';
 
 const createUserNames = function (accs) {
-  //
+  // here we are creating a new property 'username' inside the accounts objects.
   accs.forEach(function (acc) {
     acc.username = acc.owner
       .toLowerCase() // lower case all characters
