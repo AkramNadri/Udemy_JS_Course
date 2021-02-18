@@ -127,6 +127,27 @@ for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
 console.log(movements);
 console.log(movementsToUsd);
 
+// map passes 3 arguments, the same as forEach
+// map does not mutate original array
+
+// map method will iterate through array and create a new array and will print to the console wants it fully iterates through the array - whereas forEach will print to console each time it iterates through an array.
+const movementsDesc = movements.map(
+  (mov, i) =>
+    `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdraw'} ${Math.abs(
+      mov
+    )}`
+);
+
+//   if (mov > 0) {
+
+//     return `Movement ${i + 1}: You deposited ${mov}`;
+//   } else {
+//     return `Movement ${i + 1}: You withdrew ${Math.abs(mov)}`;
+//   }
+// });
+
+console.log(movementsDesc);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 
