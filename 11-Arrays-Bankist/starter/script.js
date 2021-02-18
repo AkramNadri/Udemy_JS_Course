@@ -112,17 +112,20 @@ const eurToUsd = 1.1;
 // here we use a function for each iteration
 const movementsToUsd = movements.map(function (mov) {
   return mov * eurToUsd;
+  // return 23;
 });
+
+// Code challenge - Create an arrow function as same function above
+// => this is a return
+console.log(movements.map(movement => movement * eurToUsd));
 
 // same as above, except we do not use function.
 const movementsUSDfor = [];
 
 for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
 
+console.log(movements);
 console.log(movementsToUsd);
-console.log(movementsUSDfor);
-console.log(movementsUSDfor);
-console.log(movementsUSDfor);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
