@@ -61,6 +61,7 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 // DOM manipulation
+// This function will display HTML of movements inside the containerMovements class.
 
 const displayMovements = function (movements) {
   containerMovements.innerHTML = '';
@@ -86,62 +87,87 @@ displayMovements(account1.movements);
 /////////////////////////////////////////////////
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
+// REDUCE METHOD
+
+console.log(movements);
+
+//  Reduce - First parameter is call the accumulator is like a snowball, it keeps accumulating the value that we ultimately want to return.
+
+// Accumulator -> snowball
+// reduce loops through the array
+// All the values will add up to one final value
+const balance = movements.reduce(function (acc, curr, i, arr) {
+  // i is the index and acc is the current element in array
+  console.log(`Iteration ${i + 1}: ${acc}`);
+
+  // each iteration we return the updated accumulator plus the new current element.
+  return acc + curr;
+  // the 0 here is the initial value of the accumulator
+}, 0);
+
+console.log(balance); // expected output 3840. Accumulated number of all the elements in the array.
+
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
 // THE FILTER METHOD - used to filter for elements that satisfy a certain condition.
 
 // Filter method passes 3 arguments, the element, current index and the entire array.
 // Filter method will pass arguments and filter elements in the expression.
 // This is called functional programming, and its more popular with less lines of code.
-const deposits = movements.filter(function (mov) {
-  return mov > 0;
-});
+// const deposits = movements.filter(function (mov) {
+//   return mov > 0;
+// });
 
-console.log(movements);
-console.log(deposits);
+// console.log(movements);
+// console.log(deposits);
 
 // same as above, except we are using 'for of' loop and pushing into array with push method.
-const depositsFor = [];
-for (const mov of movements) if (mov > 0) depositsFor.push(mov);
-console.log(depositsFor);
+// const depositsFor = [];
+// for (const mov of movements) if (mov > 0) depositsFor.push(mov);
+// console.log(depositsFor);
 
-const withdrawals = [];
 // for of loop to find withdrawals or number less then 0 and push it to withdrawals array
-for (const mov of movements) if (mov < 0) withdrawals.push(mov);
-console.log(withdrawals);
+// const withdrawals = [];
+// for (const mov of movements) if (mov < 0) withdrawals.push(mov);
+// console.log(withdrawals);
 
 // Same as above except using the filter method
 // Filter method only returns values that are true for the expression.
 // the => arrow is like having a RETURN.
-const withdrawalsFilter = movements.filter(mov => mov < 0);
-console.log(withdrawalsFilter);
+// const withdrawalsFilter = movements.filter(mov => mov < 0);
+// console.log(withdrawalsFilter);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 
 // COMPUTING USERNAMES
 
-const user = 'Steven Thomas Williams';
+// const user = 'Steven Thomas Williams';
 
-const createUserNames = function (accs) {
-  // here we are creating a new property 'username' inside the accounts objects.
-  accs.forEach(function (acc) {
-    acc.username = acc.owner
-      .toLowerCase() // lower case all characters
-      .split(' ') // select all strings that have a space in between
-      .map(name => name[0]) // map iterates username, select index[0]
-      .join(''); // join concats the strings
-  });
+// const createUserNames = function (accs) {
+//   // here we are creating a new property 'username' inside the accounts objects.
+//   accs.forEach(function (acc) {
+//     acc.username = acc.owner
+//       .toLowerCase() // lower case all characters
+//       .split(' ') // select all strings that have a space in between
+//       .map(name => name[0]) // map iterates username, select index[0]
+//       .join(''); // join concats the strings
+//   });
 
-  // const username = user
-  //   .toLowerCase() // lower case all characters
-  //   .split(' ') // select all strings that have a space in between
-  //   .map(name => name[0]) // map iterates username, select index[0]
-  //   .join(''); // join concats the strings
+// const username = user
+//   .toLowerCase() // lower case all characters
+//   .split(' ') // select all strings that have a space in between
+//   .map(name => name[0]) // map iterates username, select index[0]
+//   .join(''); // join concats the strings
 
-  // return username;
-};
+// return username;
+// };
 
-createUserNames(accounts);
-console.log(accounts);
+// createUserNames(accounts);
+// console.log(accounts);
 // const userInitials = username.map(users => users.charAt(0));
 // console.log(userInitials);
 
