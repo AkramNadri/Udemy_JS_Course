@@ -107,6 +107,12 @@ const balance = movements.reduce(function (acc, curr, i, arr) {
 
 console.log(balance); // expected output 3840. Accumulated number of all the elements in the array.
 
+const newBalance = movements.reduce(function (acc, curr, i) {
+  console.log(`Iteration ${i}: Current Acc: ${acc} Current element: ${curr}`);
+
+  return acc + curr;
+}, 0);
+console.log(newBalance);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 
