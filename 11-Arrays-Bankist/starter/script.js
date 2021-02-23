@@ -60,6 +60,8 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+// *****
+
 // DOM manipulation
 // This function will display HTML of movements inside the containerMovements class.
 
@@ -84,51 +86,79 @@ const displayMovements = function (movements) {
 // calling displayMovements, passing account1 object with movements parameter
 displayMovements(account1.movements);
 
+// *****
+
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, curr) => (acc += curr), 0);
+
+  labelBalance.textContent = `${balance} EUR`;
+};
+
+calcDisplayBalance(account1.movements);
+// *****
+
+// Create usernames
+const createUserNames = function (accs) {
+  // here we are creating a new property 'username' inside the accounts objects.
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase() // lower case all characters
+      .split(' ') // select all strings that have a space in between
+      .map(name => name[0]) // map iterates username, select index[0]
+      .join(''); // join concats the strings
+  });
+};
+
+createUserNames(accounts);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-// REDUCE METHOD
+// // REDUCE METHOD
 
-console.log(movements);
+// console.log(movements);
 
-//  Reduce - First parameter is call the accumulator is like a snowball, it keeps accumulating the value that we ultimately want to return.
+// //  Reduce - First parameter is call the accumulator is like a snowball, it keeps accumulating the value that we ultimately want to return.
 
-// Accumulator -> snowball
-// reduce loops through the array
-// All the values will add up to one final value
-const balance = movements.reduce(function (acc, curr, i, arr) {
-  // i is the index and curr is the current element in array
-  console.log(`Iteration ${i + 1}: ${acc}`);
+// // Accumulator -> snowball
+// // reduce loops through the array
+// // All the values will add up to one final value
+// const balance = movements.reduce(function (acc, curr, i, arr) {
+//   // i is the index and curr is the current element in array
+//   console.log(`Iteration ${i + 1}: ${acc}`);
 
-  // each iteration we return the updated accumulator plus the new current element.
-  return acc + curr;
-  // the 0 here is the initial value of the accumulator
-  // each iteration will update the accumulator
-}, 0);
+//   // each iteration we return the updated accumulator plus the new current element.
+//   return acc + curr;
+//   // the 0 here is the initial value of the accumulator
+//   // each iteration will update the accumulator
+// }, 0);
 
-console.log(balance); // expected output 3840. Accumulated number of all the elements in the array.
+// console.log(balance); // expected output 3840. Accumulated number of all the elements in the array.
 
-// same as above - arrow function
-const balance3 = movements.reduce((acc, curr) => (acc += curr), 0);
-console.log(balance3);
+// // same as above - arrow function
+// const balance3 = movements.reduce((acc, curr) => (acc += curr), 0);
+// console.log(balance3);
 
-// Same thing as above but with for loop - this way can become combursome when doing many operations
-let balance2 = 0;
-for (const mov of movements) balance2 += mov;
-console.log(balance2);
+// // Same thing as above but with for loop - this way can become combursome when doing many operations
+// let balance2 = 0;
+// for (const mov of movements) balance2 += mov;
+// console.log(balance2);
 
-// reduce function example
-const newBalance = movements.reduce(function (acc, curr, i) {
-  console.log(
-    `Iteration ${i + 1}: Current Acc: ${acc} Current element: ${curr}`
-  );
+// // reduce function example
+// const newBalance = movements.reduce(function (acc, curr, i) {
+//   console.log(
+//     `Iteration ${i + 1}: Current Acc: ${acc} Current element: ${curr}`
+//   );
 
-  return acc + curr;
+//   return acc + curr;
 
-  // 0 is the initial value of the accumulator
-}, 0);
-console.log(newBalance);
+//   // 0 is the initial value of the accumulator
+// }, 0);
+// console.log(newBalance);
+
+// Maximum value
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 
