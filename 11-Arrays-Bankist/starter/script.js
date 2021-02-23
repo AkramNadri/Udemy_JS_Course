@@ -81,6 +81,7 @@ const displayMovements = function (movements) {
   });
 };
 
+// calling displayMovements, passing account1 object with movements parameter
 displayMovements(account1.movements);
 
 /////////////////////////////////////////////////
@@ -97,20 +98,35 @@ console.log(movements);
 // reduce loops through the array
 // All the values will add up to one final value
 const balance = movements.reduce(function (acc, curr, i, arr) {
-  // i is the index and acc is the current element in array
+  // i is the index and curr is the current element in array
   console.log(`Iteration ${i + 1}: ${acc}`);
 
   // each iteration we return the updated accumulator plus the new current element.
   return acc + curr;
   // the 0 here is the initial value of the accumulator
+  // each iteration will update the accumulator
 }, 0);
 
 console.log(balance); // expected output 3840. Accumulated number of all the elements in the array.
 
+// same as above - arrow function
+const balance3 = movements.reduce((acc, curr) => (acc += curr), 0);
+console.log(balance3);
+
+// Same thing as above but with for loop - this way can become combursome when doing many operations
+let balance2 = 0;
+for (const mov of movements) balance2 += mov;
+console.log(balance2);
+
+// reduce function example
 const newBalance = movements.reduce(function (acc, curr, i) {
-  console.log(`Iteration ${i}: Current Acc: ${acc} Current element: ${curr}`);
+  console.log(
+    `Iteration ${i + 1}: Current Acc: ${acc} Current element: ${curr}`
+  );
 
   return acc + curr;
+
+  // 0 is the initial value of the accumulator
 }, 0);
 console.log(newBalance);
 /////////////////////////////////////////////////
