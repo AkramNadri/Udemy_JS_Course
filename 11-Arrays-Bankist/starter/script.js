@@ -133,27 +133,44 @@ GOOD LUCK 😀
 */
 
 const calcAverageHumanAge = function (ages) {
-  const humanAge = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4)); // 1
+  const dogHumanAge = ages.map(ages => (ages <= 2 ? 2 * ages : 16 + ages * 4));
 
-  const dogsAbove18 = humanAge.filter(ages => ages >= 18); // 2
+  const adultDogs = dogHumanAge.filter(ages => ages >= 18);
 
-  // const avgHumanAge =
-  //   dogsAbove18.reduce((acc, curr) => acc + curr, 0) / dogsAbove18.length;
-
-  // same as above
-
-  const average = dogsAbove18.reduce(
-    (acc, age, i, arr) => acc + age / arr.length,
+  const avgHumanAge = adultDogs.reduce(
+    (acc, curr, i, arr) => acc + curr / adultDogs.length,
     0
   );
 
-  // return avgHumanAge;
-  return average;
+  console.log(avgHumanAge);
+  console.log(adultDogs);
+  console.log(dogHumanAge);
 };
 
-const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
-const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
-console.log(avg1, avg2);
+calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+
+// const calcAverageHumanAge = function (ages) {
+//   const humanAge = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4)); // 1
+
+//   const dogsAbove18 = humanAge.filter(ages => ages >= 18); // 2
+
+//   // const avgHumanAge =
+//   //   dogsAbove18.reduce((acc, curr) => acc + curr, 0) / dogsAbove18.length;
+
+//   // same as above
+
+//   const average = dogsAbove18.reduce(
+//     (acc, age, i, arr) => acc + age / arr.length,
+//     0
+//   );
+
+//   // return avgHumanAge;
+//   return average;
+// };
+
+// const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+// const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+// console.log(avg1, avg2);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
