@@ -91,10 +91,52 @@ displayMovements(account1.movements);
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, curr) => (acc += curr), 0);
 
-  labelBalance.textContent = `${balance} EUR`;
+  labelBalance.textContent = `${balance} €`;
 };
 
 calcDisplayBalance(account1.movements);
+
+// *****
+
+const calcDisplaySummaryIn = function (movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, curr) => (acc += curr), 0);
+
+  labelSumIn.textContent = `${incomes}€`;
+};
+
+calcDisplaySummaryIn(account1.movements);
+
+// *****
+
+const calcDisplaySummaryOut = function (movements) {
+  const incomes = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, curr) => (acc += curr), 0);
+
+  labelSumOut.textContent = `${Math.abs(incomes)}€`;
+};
+
+calcDisplaySummaryOut(account1.movements);
+
+// *****
+// Calculate interest
+const interestRate = function (movements) {
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * 1.2) / 100)
+    .filter((int, i, arr) => {
+      console.log(arr);
+      return int >= 1;
+    })
+    .reduce((acc, int) => acc + int, 0);
+
+  labelSumInterest.textContent = `${interest}`;
+};
+
+interestRate(account1.movements);
+
 // *****
 
 // Create usernames
@@ -110,6 +152,39 @@ const createUserNames = function (accs) {
 };
 
 createUserNames(accounts);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// Magic of chaining methods - we can chain multiple methods
+const eurToUsd = 1.1;
+
+// Pipeline
+// each chained method calls upon the results of the previous method
+const totalDepositsUSD = movements
+  .filter(mov => mov > 0) // can chain method after .filter
+  // .map(mov => mov * eurToUsd) // can chain method after .map
+  .map((mov, i, arr) => {
+    // .map receieves value results from previous method, printing arr will display new array received from .filter
+    // We can inspect the current array at any stage of the pipeline using the third parameter of the call back function.
+    console.log(arr);
+    return mov * eurToUsd;
+  })
+
+  .reduce((acc, curr) => acc + curr, 0); // can NOT chain method after reduce because it returns a value.
+
+console.log(totalDepositsUSD);
+///////////////////////////////////////
+// Coding Challenge #3
+
+/* 
+Rewrite the 'calcAverageHumanAge' function from the previous challenge, but this time as an arrow function, and using chaining!
+
+TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+
+GOOD LUCK 😀
+*/
 
 ///////////////////////////////////////
 // Coding Challenge #2
@@ -132,22 +207,22 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 GOOD LUCK 😀
 */
 
-const calcAverageHumanAge = function (ages) {
-  const dogHumanAge = ages.map(ages => (ages <= 2 ? 2 * ages : 16 + ages * 4));
+// const calcAverageHumanAge = function (ages) {
+//   const dogHumanAge = ages.map(ages => (ages <= 2 ? 2 * ages : 16 + ages * 4));
 
-  const adultDogs = dogHumanAge.filter(ages => ages >= 18);
+//   const adultDogs = dogHumanAge.filter(ages => ages >= 18);
 
-  const avgHumanAge = adultDogs.reduce(
-    (acc, curr, i, arr) => acc + curr / adultDogs.length,
-    0
-  );
+//   const avgHumanAge = adultDogs.reduce(
+//     (acc, curr, i, arr) => acc + curr / adultDogs.length,
+//     0
+//   );
 
-  console.log(avgHumanAge);
-  console.log(adultDogs);
-  console.log(dogHumanAge);
-};
+//   console.log(avgHumanAge);
+//   console.log(adultDogs);
+//   console.log(dogHumanAge);
+// };
 
-calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+// calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
 
 // const calcAverageHumanAge = function (ages) {
 //   const humanAge = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4)); // 1
