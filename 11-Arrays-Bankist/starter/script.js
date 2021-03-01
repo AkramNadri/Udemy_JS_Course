@@ -127,7 +127,7 @@ const interestRate = function (movements) {
     .filter(mov => mov > 0)
     .map(deposit => (deposit * 1.2) / 100)
     .filter((int, i, arr) => {
-      console.log(arr);
+      // console.log(arr);
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
@@ -154,27 +154,49 @@ const createUserNames = function (accs) {
 createUserNames(accounts);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
+// The find method
+// Loops over the array - retrieves an element of the array.
+// Also needs a call back function to return a value
+// Will return the FIRST element of the array which it finds to be true, will not return entire array.
+// Find only returns the element itself and not the array
+const firstWithdrawal = movements.find(mov => mov < 0);
+
+// Using .find to loop through accounts and find owner with string name
+// compare 'Jessica Davis' with account owner
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+
+console.log(account);
+console.log(movements);
+console.log(firstWithdrawal);
+console.log(accounts);
+////////////////////////////////////////////////////////////////
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
 // Magic of chaining methods - we can chain multiple methods
-const eurToUsd = 1.1;
+// const eurToUsd = 1.1;
 
 // Pipeline
 // each chained method calls upon the results of the previous method
-const totalDepositsUSD = movements
-  .filter(mov => mov > 0) // can chain method after .filter
-  // .map(mov => mov * eurToUsd) // can chain method after .map
-  .map((mov, i, arr) => {
-    // .map receieves value results from previous method, printing arr will display new array received from .filter
-    // We can inspect the current array at any stage of the pipeline using the third parameter of the call back function.
-    console.log(arr);
-    return mov * eurToUsd;
-  })
+// const totalDepositsUSD = movements
+// .filter(mov => mov > 0) // can chain method after .filter
+// .map(mov => mov * eurToUsd) // can chain method after .map
+// .map((mov, i, arr) => {
+// .map receieves value results from previous method, printing arr will display new array received from .filter
+// We can inspect the current array at any stage of the pipeline using the third parameter of the call back function.
+//   console.log(arr);
+//   return mov * eurToUsd;
+// })
 
-  .reduce((acc, curr) => acc + curr, 0); // can NOT chain method after reduce because it returns a value.
+// .reduce((acc, curr) => acc + curr, 0); // can NOT chain method after reduce because it returns a value.
 
-console.log(totalDepositsUSD);
-///////////////////////////////////////
+// console.log(totalDepositsUSD);
+
+///////////////////////////////////////////////////////////////
 // Coding Challenge #3
 
 /* 
@@ -186,16 +208,16 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 GOOD LUCK 😀
 */
 
-const calcAverageHumanAge = ages =>
-  ages
-    .map(ages => (ages <= 2 ? 2 * ages : 16 + ages * 4))
-    .filter(ages => ages >= 18)
-    .reduce((acc, curr, i, arr) => acc + curr / arr.length, 0);
+// const calcAverageHumanAge = ages =>
+//   ages
+//     .map(ages => (ages <= 2 ? 2 * ages : 16 + ages * 4))
+//     .filter(ages => ages >= 18)
+//     .reduce((acc, curr, i, arr) => acc + curr / arr.length, 0);
 
-const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
-const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+// const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+// const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 
-console.log(avg1, avg2);
+// console.log(avg1, avg2);
 
 ///////////////////////////////////////
 // Coding Challenge #2
