@@ -32,6 +32,13 @@ const account4 = {
   pin: 4444,
 };
 
+const testAccount = {
+  owner: 'Akram Nadri',
+  movements: [430, 1000, 700, 50, 90],
+  interestRate: 1,
+  pin: 5555,
+};
+
 const accounts = [account1, account2, account3, account4];
 
 // Elements
