@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////
 // BANKIST APP
 
-// Data
+// Data/Accounts
 const account1 = {
   owner: 'Jonas Schmedtmann',
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
@@ -67,7 +67,7 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-// *****
+// *****// *****// *****// *****// *****// *****
 
 // DOM manipulation
 // This function will display HTML of movements inside the containerMovements class.
@@ -91,9 +91,9 @@ const displayMovements = function (movements) {
 };
 
 // calling displayMovements, passing account1 object with movements parameter
-displayMovements(account1.movements);
+// displayMovements(account1.movements);
 
-// *****
+// *****// *****// *****// *****// *****// *****
 
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, curr) => (acc += curr), 0);
@@ -101,38 +101,33 @@ const calcDisplayBalance = function (movements) {
   labelBalance.textContent = `${balance} €`;
 };
 
-calcDisplayBalance(account1.movements);
+// *****// *****// *****// *****// *****// *****
 
-// *****
-
-const calcDisplaySummaryIn = function (movements) {
-  const incomes = movements
+const calcDisplaySummaryIn = function (accs) {
+  const incomes = accs.movements
     .filter(mov => mov > 0)
     .reduce((acc, curr) => (acc += curr), 0);
 
   labelSumIn.textContent = `${incomes}€`;
 };
 
-calcDisplaySummaryIn(account1.movements);
+// *****// *****// *****// *****// *****// *****
 
-// *****
-
-const calcDisplaySummaryOut = function (movements) {
-  const incomes = movements
+const calcDisplaySummaryOut = function (accs) {
+  const incomes = accs.movements
     .filter(mov => mov < 0)
     .reduce((acc, curr) => (acc += curr), 0);
 
   labelSumOut.textContent = `${Math.abs(incomes)}€`;
 };
 
-calcDisplaySummaryOut(account1.movements);
+// *****// *****// *****// *****// *****// *****
 
-// *****
 // Calculate interest
-const interestRate = function (movements) {
-  const interest = movements
+const interestRate = function (accs) {
+  const interest = accs.movements
     .filter(mov => mov > 0)
-    .map(deposit => (deposit * 1.2) / 100)
+    .map(deposit => (deposit * accs.interestRate) / 100)
     .filter((int, i, arr) => {
       // console.log(arr);
       return int >= 1;
@@ -142,9 +137,7 @@ const interestRate = function (movements) {
   labelSumInterest.textContent = `${interest}`;
 };
 
-interestRate(account1.movements);
-
-// *****
+// *****// *****// *****// *****// *****// *****
 
 // Create usernames
 const createUserNames = function (accs) {
@@ -160,6 +153,8 @@ const createUserNames = function (accs) {
 
 createUserNames(accounts);
 
+// *****// *****// *****// *****// *****// *****
+
 // Event handler
 let currentAccount;
 
@@ -174,14 +169,27 @@ btnLogin.addEventListener('click', function (e) {
 
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
     // Display UI and welcome message
+    labelWelcome.textContent = `Welcome back ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    containerApp.style.opacity = 100;
+
+    // clear login input fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+
+    // blur removes the cursor from login pin field
+    inputLoginPin.blur();
 
     // Display movements
+    displayMovements(currentAccount.movements);
 
     // Display balance
+    calcDisplayBalance(currentAccount.movements);
 
     // Display summary
-
-    console.log('Login');
+    calcDisplaySummaryIn(currentAccount);
+    calcDisplaySummaryOut(currentAccount);
+    interestRate(currentAccount);
   }
 });
 
