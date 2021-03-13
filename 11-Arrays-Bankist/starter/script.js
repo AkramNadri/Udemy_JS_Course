@@ -90,9 +90,6 @@ const displayMovements = function (movements) {
   });
 };
 
-// calling displayMovements, passing account1 object with movements parameter
-// displayMovements(account1.movements);
-
 // *****// *****// *****// *****// *****// *****
 
 const calcDisplayBalance = function (movements) {
@@ -129,7 +126,7 @@ const interestRate = function (accs) {
     .filter(mov => mov > 0)
     .map(deposit => (deposit * accs.interestRate) / 100)
     .filter((int, i, arr) => {
-      // console.log(arr);
+      console.log(arr);
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
