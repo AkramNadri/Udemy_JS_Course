@@ -98,10 +98,16 @@ const displayMovements = function (movements) {
 
 // *****// *****// *****// *****// *****// *****
 
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((acc, curr) => (acc += curr), 0);
+const calcDisplayBalance = function (acc) {
+  // here we create a new property in accounts object called balance.
+  // the way we are able to do this is because were not actually creating a new object, instead the new variable points to the same object on the memory heap.
+  // So acc.balance points to the accounts object on the memory heap
+  acc.balance = acc.movements.reduce(
+    (accumulator, curr) => (accumulator += curr),
+    0
+  );
 
-  labelBalance.textContent = `${balance} €`;
+  labelBalance.textContent = `${acc.balance} €`;
 };
 
 // *****// *****// *****// *****// *****// *****
@@ -158,13 +164,30 @@ createUserNames(accounts);
 
 // *****// *****// *****// *****// *****// *****
 
+const updateUI = function (acc) {
+  // Display movements
+  displayMovements(acc.movements);
+
+  // Display balance
+  calcDisplayBalance(acc);
+
+  // Display summary In/Out
+  calcDisplaySummaryIn(acc);
+  calcDisplaySummaryOut(acc);
+};
+
+// *****// *****// *****// *****// *****// *****
+
 // Event handler
 let currentAccount;
 
+// LOGIN BUTTON
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
   e.preventDefault();
 
+  // creating a new variable property inside accounts object
+  // currentAccount variable actually points to the accounts object on the memory heap.
   currentAccount = accounts.find(
     acc => acc.username === inputLoginUsername.value
   );
@@ -183,39 +206,75 @@ btnLogin.addEventListener('click', function (e) {
     // blur removes the cursor from login pin field
     inputLoginPin.blur();
 
-    // Display movements
-    displayMovements(currentAccount.movements);
+    // Same as all the function calls below
+    updateUI(currentAccount);
 
-    // Display balance
-    calcDisplayBalance(currentAccount.movements);
+    // Replacing all the function calls below with a single function above (updateUI)
+    // // Display movements
+    // displayMovements(currentAccount.movements);
 
-    // Display summary
-    calcDisplaySummaryIn(currentAccount);
-    calcDisplaySummaryOut(currentAccount);
-    interestRate(currentAccount);
+    // // Display balance
+    // calcDisplayBalance(currentAccount);
+
+    // // Display summary
+    // calcDisplaySummaryIn(currentAccount);
+    // calcDisplaySummaryOut(currentAccount);
+    // interestRate(currentAccount);
+  }
+});
+
+// *****// *****// *****// *****// *****// *****
+
+// TRANSFER BUTTON
+btnTransfer.addEventListener('click', function (e) {
+  // prevents the form from submitting
+  e.preventDefault();
+
+  // Number here converts the value to a number
+  const amount = Number(inputTransferAmount.value);
+
+  // strictly comparing if username property inside accounts array equals the value in inputTransferTo value.
+  const receiverAccount = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
+  // clears the input fields
+  inputTransferAmount.value = inputTransferTo.value = '';
+
+  if (
+    amount > 0 &&
+    receiverAccount &&
+    currentAccount.balance >= amount &&
+    receiverAccount?.username !== currentAccount.username
+  ) {
+    // Doing the transfer
+    currentAccount.movements.push(-amount);
+    receiverAccount.movements.push(amount);
+
+    // update UI
+    updateUI(currentAccount);
   }
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-// The find method
-// Loops over the array - retrieves an element of the array.
-// Also needs a call back function to return a value
-// Will return the FIRST element of the array which it finds to be true, will not return entire array.
-// Find only returns the element itself and not the array
-const firstWithdrawal = movements.find(mov => mov < 0);
+// // The find method
+// // Loops over the array - retrieves an element of the array.
+// // Also needs a call back function to return a value
+// // Will return the FIRST element of the array which it finds to be true, will not return entire array.
+// // Find only returns the element itself and not the array
+// const firstWithdrawal = movements.find(mov => mov < 0);
 
-// Using .find to loop through accounts and find owner with string name
-// compare 'Jessica Davis' with account owner
-const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+// // Using .find to loop through accounts and find owner with string name
+// // compare 'Jessica Davis' with account owner
+// const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 
-console.log(account);
-console.log(movements);
-console.log(firstWithdrawal);
-console.log(accounts);
+// console.log(account);
+// console.log(movements);
+// console.log(firstWithdrawal);
+// console.log(accounts);
 ////////////////////////////////////////////////////////////////
 
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
