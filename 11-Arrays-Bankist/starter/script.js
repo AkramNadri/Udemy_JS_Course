@@ -258,11 +258,33 @@ btnTransfer.addEventListener('click', function (e) {
 // *****// *****// *****// *****// *****// *****
 
 // THE FINDINDEX METHOD
+// Returns index, not the element itself
+// The findIndex method will return the index of the first element in the array that matches the condition.
 
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
 
-  console.log('DELETE');
+  // correct credentials
+  if (
+    currentAccount.username === inputCloseUsername.value &&
+    currentAccount?.pin === Number(inputClosePin.value)
+  ) {
+    // delete user from data
+    // here we find the index of the current logged in user
+    // we use this index to delete the selected user
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+    // .splice will delete(mutate) selected array, starting at index to 1
+    accounts.splice(index, 1);
+
+    // log user out(hide UI)
+    containerApp.style.opacity = 0;
+  } else {
+    console.log('error');
+  }
+
+  inputCloseUsername.value = inputClosePin.value = '';
 });
 
 // *****// *****// *****// *****// *****// *****
