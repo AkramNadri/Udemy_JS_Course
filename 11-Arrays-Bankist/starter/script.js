@@ -256,6 +256,25 @@ btnTransfer.addEventListener('click', function (e) {
 });
 
 // *****// *****// *****// *****// *****// *****
+// REQUEST LOAN
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = inputLoanAmount.value;
+
+  // selects amount >0 and applies expression of * 0.1 to values in array
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    // Add movement
+    currentAccount.movements.push(amount);
+
+    updateUI(currentAccount);
+  }
+
+  inputLoanAmount.value = '';
+});
+
+// *****// *****// *****// *****// *****// *****
 
 // THE FINDINDEX METHOD
 // Returns index, not the element itself
@@ -286,6 +305,44 @@ btnClose.addEventListener('click', function (e) {
 
   inputCloseUsername.value = inputClosePin.value = '';
 });
+
+// *****// *****// *****// *****// *****// *****
+// SOME AND EVERY
+
+let movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+console.log(movements);
+// we use includes method to test if an array includes a certain value
+// includes method will return true if any value in the array equals -130.
+
+// EQUALITY
+console.log(movements.includes(-130)); // true
+
+// what if we want to test for some condition instead ?
+// Any positive movements in this array ? any number above zero
+
+// SOME: CONDITION
+console.log(movements.some(mov => mov === -130)); // true
+
+const anyDeposits = movements.some(mov => mov > 5000); // false
+console.log(anyDeposits);
+
+// EVERY
+// similar to some method - every only returns true only if all of the elements satisfy the condition that we pass in
+// only then the every method will return true
+
+// not all values in array are above 0, this will return false
+console.log(movements.every(mov => mov > 0)); // false
+
+// all values are above zero, will return true
+console.log(account4.movements.every(mov => mov > 0)); // true
+
+// Seperate callback
+// DRY principle = Dont Repeat Yourself
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.every(deposit));
+console.log(movements.filter(deposit));
 
 // *****// *****// *****// *****// *****// *****
 
