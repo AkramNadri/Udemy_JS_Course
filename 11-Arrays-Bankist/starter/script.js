@@ -307,47 +307,69 @@ btnClose.addEventListener('click', function (e) {
 });
 
 // *****// *****// *****// *****// *****// *****
-// SOME AND EVERY
-
-let movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-console.log(movements);
-// we use includes method to test if an array includes a certain value
-// includes method will return true if any value in the array equals -130.
-
-// EQUALITY
-console.log(movements.includes(-130)); // true
-
-// what if we want to test for some condition instead ?
-// Any positive movements in this array ? any number above zero
-
-// SOME: CONDITION
-console.log(movements.some(mov => mov === -130)); // true
-
-const anyDeposits = movements.some(mov => mov > 5000); // false
-console.log(anyDeposits);
-
-// EVERY
-// similar to some method - every only returns true only if all of the elements satisfy the condition that we pass in
-// only then the every method will return true
-
-// not all values in array are above 0, this will return false
-console.log(movements.every(mov => mov > 0)); // false
-
-// all values are above zero, will return true
-console.log(account4.movements.every(mov => mov > 0)); // true
-
-// Seperate callback
-// DRY principle = Dont Repeat Yourself
-const deposit = mov => mov > 0;
-console.log(movements.some(deposit));
-console.log(movements.every(deposit));
-console.log(movements.filter(deposit));
 
 // *****// *****// *****// *****// *****// *****
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// *****// *****// *****// *****// *****// *****
+// FLAT AND FLATMAP
+
+// flat will return array as a single array
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat());
+
+// here we have deeper nested array
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+
+// here we can select how deep we go into the nested arrays, by indicating a number in the flat argument (2) - second level of nesting
+console.log(arrDeep.flat(2));
+
+// putting all movements into one array
+const accountMovements = accounts.map(acc => acc.movements);
+console.log(accountMovements);
+
+// *****// *****// *****// *****// *****// *****
+
+// SOME AND EVERY
+
+// let movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// console.log(movements);
+// // we use includes method to test if an array includes a certain value
+// // includes method will return true if any value in the array equals -130.
+
+// // EQUALITY
+// console.log(movements.includes(-130)); // true
+
+// // what if we want to test for some condition instead ?
+// // Any positive movements in this array ? any number above zero
+
+// // SOME: CONDITION
+// console.log(movements.some(mov => mov === -130)); // true
+
+// const anyDeposits = movements.some(mov => mov > 5000); // false
+// console.log(anyDeposits);
+
+// // EVERY
+// // similar to some method - every only returns true only if all of the elements satisfy the condition that we pass in
+// // only then the every method will return true
+
+// // not all values in array are above 0, this will return false
+// console.log(movements.every(mov => mov > 0)); // false
+
+// // all values are above zero, will return true
+// console.log(account4.movements.every(mov => mov > 0)); // true
+
+// // Seperate callback
+// // DRY principle = Dont Repeat Yourself
+// const deposit = mov => mov > 0;
+// console.log(movements.some(deposit));
+// console.log(movements.every(deposit));
+// console.log(movements.filter(deposit));
+
+// *****// *****// *****// *****// *****// *****
 
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
