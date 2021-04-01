@@ -327,8 +327,32 @@ const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
 console.log(arrDeep.flat(2));
 
 // putting all movements into one array
-const accountMovements = accounts.map(acc => acc.movements);
-console.log(accountMovements);
+// Without method chaining
+// const accountMovements = accounts.map(acc => acc.movements);
+// console.log(accountMovements);
+
+// const allMovements = accountMovements.flat();
+// console.log(allMovements);
+
+// const overallBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+// console.log(overallBalance);
+
+// With method chaining
+// advantage instead of creating new variables to hold the changes to the current array, we chain the methods and make changes along the way.
+// Using map first and then flat the results is a common practice
+// flat
+const overalBalance1 = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance1);
+
+// flatMap
+// Here flatMap combines map and flat
+const overalBalance2 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance2);
 
 // *****// *****// *****// *****// *****// *****
 
