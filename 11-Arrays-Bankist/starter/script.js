@@ -78,10 +78,14 @@ const inputClosePin = document.querySelector('.form__input--pin');
 // DOM manipulation
 // This function will display HTML of movements inside the containerMovements class.
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
 
-  movements.forEach(function (mov, i) {
+  // if sort = true, make a copy of movements with slice, then sort the array by ascending order.
+  // slice here creates a shallow copy of the movements array, does not mutate original array. We then use that shallow copy and sort over array passing 2 arguments a, b which will compare the two elements.
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -191,7 +195,7 @@ btnLogin.addEventListener('click', function (e) {
   currentAccount = accounts.find(
     acc => acc.username === inputLoginUsername.value
   );
-  console.log(currentAccount);
+  // console.log(currentAccount);
 
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
     // Display UI and welcome message
@@ -307,6 +311,16 @@ btnClose.addEventListener('click', function (e) {
 });
 
 // *****// *****// *****// *****// *****// *****
+// SORT BUTTON
+
+let sorted = false;
+
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+});
 
 // *****// *****// *****// *****// *****// *****
 
@@ -314,17 +328,58 @@ btnClose.addEventListener('click', function (e) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // *****// *****// *****// *****// *****// *****
+
+// SORTING ARRAYS
+
+// let movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// //Strings
+// // will sort arrays based on alphabetical order
+// const owners = ['Jonas', 'Zack', 'Adam', 'Martha'];
+// console.log(owners);
+// console.log(owners.sort());
+
+// //NUMBERS
+// // will sort number array based on the first digit of the number
+// console.log(movements);
+// console.log(movements.sort());
+
+// a is the current value, and b is the next value as were looping through the array
+
+// return < 0  A, B (keep order)
+// return > 0 B, A (switch order)
+// sorting in ascending order
+// sort method keeps looping over the array, applying callback function until everything is in ascending order.
+// Ascending = Lowest number to the highest number.
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+// We can simply put a - b, same as above
+// movements.sort((a, b) => a - b);
+// console.log(movements);
+
+// Descending = Highest number to lowest.
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (a < b) return 1;
+// });
+// movements.sort((a, b) => b - a);
+// console.log(movements);
+
+// *****// *****// *****// *****// *****// *****
+
 // FLAT AND FLATMAP
 
 // flat will return array as a single array
-const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
-console.log(arr.flat());
+// const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+// console.log(arr.flat());
 
-// here we have deeper nested array
-const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+// // here we have deeper nested array
+// const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
 
-// here we can select how deep we go into the nested arrays, by indicating a number in the flat argument (2) - second level of nesting
-console.log(arrDeep.flat(2));
+// // here we can select how deep we go into the nested arrays, by indicating a number in the flat argument (2) - second level of nesting
+// console.log(arrDeep.flat(2));
 
 // putting all movements into one array
 // Without method chaining
@@ -341,18 +396,18 @@ console.log(arrDeep.flat(2));
 // advantage instead of creating new variables to hold the changes to the current array, we chain the methods and make changes along the way.
 // Using map first and then flat the results is a common practice
 // flat
-const overalBalance1 = accounts
-  .map(acc => acc.movements)
-  .flat()
-  .reduce((acc, mov) => acc + mov, 0);
-console.log(overalBalance1);
+// const overalBalance1 = accounts
+//   .map(acc => acc.movements)
+//   .flat()
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(overalBalance1);
 
-// flatMap
-// Here flatMap combines map and flat
-const overalBalance2 = accounts
-  .flatMap(acc => acc.movements)
-  .reduce((acc, mov) => acc + mov, 0);
-console.log(overalBalance2);
+// // flatMap
+// // Here flatMap combines map and flat
+// const overalBalance2 = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(overalBalance2);
 
 // *****// *****// *****// *****// *****// *****
 
