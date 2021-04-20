@@ -43,8 +43,16 @@ const account6 = {
   owner: 'Paradis Honarvar',
   movements: [430, 1000, 700, 50, 90],
   interestRate: 1,
-  pin: 5555,
+  pin: 6666,
 };
+
+const account6 = {
+  owner: 'Moe Al',
+  movements: [430, 1000, 700, 50, 90],
+  interestRate: 1,
+  pin: 7777,
+};
+
 const accounts = [account1, account2, account3, account4];
 
 // Elements
