@@ -380,7 +380,17 @@ const y = Array.from({ length: 7 }, () => 1);
 console.log(y);
 
 // curr is current element and i is current index
-const z = Array.from({ length: 7 }, (cur, i) => i + 1);
+// _curr is a throw away value because we do not need the current value here
+// this is how we create and array programmatically
+const z = Array.from({ length: 7 }, (_curr, i) => i + 1);
+console.log(z);
+
+// Create an array with 100 random dice rolls
+const randomDiceRoll = Array.from(
+  { length: 100 },
+  (_curr, i) => i + Math.random()
+);
+console.log(randomDiceRoll);
 // *****// *****// *****// *****// *****// *****
 
 // SORTING ARRAYS
