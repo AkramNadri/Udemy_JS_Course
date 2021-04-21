@@ -46,7 +46,7 @@ const account6 = {
   pin: 6666,
 };
 
-const account6 = {
+const account7 = {
   owner: 'Moe Al',
   movements: [430, 1000, 700, 50, 90],
   interestRate: 1,
@@ -129,7 +129,7 @@ const calcDisplaySummaryIn = function (accs) {
     .filter(mov => mov > 0)
     .reduce((acc, curr) => (acc += curr), 0);
 
-  labelSumIn.textContent = `${incomes}€`;
+  labelSumIn.textContent = `${Math.abs(incomes)}€`;
 };
 
 // *****// *****// *****// *****// *****// *****
@@ -331,20 +331,56 @@ btnSort.addEventListener('click', function (e) {
 });
 
 // example below
-let sorted = false;
+let sorted2 = false;
 
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
 
   // if sorted does not equal false will then sort
-  displayMovements(currentAccount.movements, !sorted);
-  sorted = !sorted;
+  displayMovements(currentAccount.movements, !sorted2);
+  sorted2 = !sorted2;
 });
 // *****// *****// *****// *****// *****// *****
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// *****// *****// *****// *****// *****// *****
+//CREATING AND FILLING ARRAYS
+
+const arr = [1, 2, 3, 4, 5, 6, 7];
+console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+
+// create a new empty array with 7 empty elements
+// creates a new empty argument with that length
+const x = new Array(7);
+console.log(x);
+
+// empty array
+console.log(x.map(() => 5));
+
+// Fill method ****
+// fill inserts the passed value to the empty array
+// specifiy at which index to start filling
+// value is 1, and index start point is 3
+// index 5 and above is empty
+// will place the value 1 between indexes 3 and 5
+x.fill(1, 3, 5);
+
+console.log(x);
+
+// we place value 23 in the arr array at index 4 to 6
+arr.fill(23, 4, 6);
+console.log(arr);
+
+// Array.from function ****
+// Array here is a function and we are calling the from method on it
+// creates array with length of 7 and places value 1 into array
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+// curr is current element and i is current index
+const z = Array.from({ length: 7 }, (cur, i) => i + 1);
 // *****// *****// *****// *****// *****// *****
 
 // SORTING ARRAYS
