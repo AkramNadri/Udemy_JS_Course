@@ -53,6 +53,13 @@ const account7 = {
   pin: 7777,
 };
 
+const account8 = {
+  owner: 'John Smith',
+  movements: [430, 1000, 700, 50, 90],
+  interestRate: 1,
+  pin: 8888,
+};
+
 const accounts = [account1, account2, account3, account4];
 
 // Elements
