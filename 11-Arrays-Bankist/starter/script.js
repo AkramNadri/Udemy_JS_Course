@@ -353,62 +353,141 @@ btnSort.addEventListener('click', function (e) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // *****// *****// *****// *****// *****// *****
+// WHICH ARRAY METHOD TO USE ?
+// 23 different array methods
+
+// Must ask the question what do I want to do with the array ?
+
+// *** Do i want to mutate the array ?
+
+// add to original:
+// .push (end)
+// .unshift (start)
+
+// Remove from original:
+// .pop (end)
+// .shift (start)
+// .splice (any)
+
+// Others
+// .reverse
+// .sort
+// .fill
+
+// *** Want new array ?
+
+// Computed from original:
+// .map (loop)
+
+// Filtered using condition:
+// .filter
+
+// Portion of original:
+// .slice
+
+// Adding original to other:
+// .concat
+
+// Flattening the original:
+// .flat
+// .flatMap
+
+// *** Want an array Index ?
+
+// Based on value:
+// .indexOf
+
+// Based on test condition:
+// .findIndex
+
+// *** Want array element ?
+
+// Based on test condition:
+// .find
+
+// *** Know if array includes ?
+
+// Based on value:
+// .includes
+
+// Based on test condition:
+// .some (true if some satisfy condition)
+// .every (true if all satisfy condition)
+
+// *** Want new string ?
+
+// Based on seperator string:
+// .join
+
+// *** Transform to value ?
+
+// Based on accumulator:
+// .join (Boil down array to single value of any type: number, string, boolean or even new array or object)
+
+// *** Simply loop over an array ?
+
+// Based on callback:
+// .forEach (does not create new value or new array, just loops over it)
+
+// *****// *****// *****// *****// *****// *****
 //CREATING AND FILLING ARRAYS
 
-const arr = [1, 2, 3, 4, 5, 6, 7];
-console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+// const arr = [1, 2, 3, 4, 5, 6, 7];
+// console.log(new Array(1, 2, 3, 4, 5, 6, 7));
 
-// create a new empty array with 7 empty elements
-// creates a new empty argument with that length
-const x = new Array(7);
-console.log(x);
+// // create a new empty array with 7 empty elements
+// // creates a new empty argument with that length
+// const x = new Array(7);
+// console.log(x);
 
-// empty array
-console.log(x.map(() => 5));
+// // empty array
+// console.log(x.map(() => 5));
 
-// Fill method ****
-// fill inserts the passed value to the empty array
-// specifiy at which index to start filling
-// value is 1, and index start point is 3
-// index 5 and above is empty
-// will place the value 1 between indexes 3 and 5
-x.fill(1, 3, 5);
+// // Fill method ****
+// // fill inserts the passed value to the empty array
+// // specifiy at which index to start filling
+// // value is 1, and index start point is 3
+// // index 5 and above is empty
+// // will place the value 1 between indexes 3 and 5
+// x.fill(1, 3, 5);
 
-console.log(x);
+// console.log(x);
 
-// we place value 23 in the arr array at index 4 to 6
-arr.fill(23, 4, 6);
-console.log(arr);
+// // we place value 23 in the arr array at index 4 to 6
+// arr.fill(23, 4, 6);
+// console.log(arr);
 
-// Array.from function ****
-// Array here is a function and we are calling the from method on it
-// creates array with length of 7 and places value 1 into array
-const y = Array.from({ length: 7 }, () => 1);
-console.log(y);
+// // Array.from function ****
+// // Array here is a function and we are calling the from method on it
+// // creates array with length of 7 and places value 1 into array
+// const y = Array.from({ length: 7 }, () => 1);
+// console.log(y);
 
-// curr is current element and i is current index
-// _curr is a throw away value because we do not need the current value here
-// this is how we create and array programmatically
-const z = Array.from({ length: 7 }, (_curr, i) => i + 1);
-console.log(z);
+// // curr is current element and i is current index
+// // _curr is a throw away value because we do not need the current value here
+// // this is how we create and array programmatically
+// const z = Array.from({ length: 7 }, (_curr, i) => i + 1);
+// console.log(z);
 
-// Create an array with 100 random dice rolls
-// const randomDiceRoll = Array.from(
-//   { length: 100 },
-//   (_curr, i) => i + Math.random()
-// );
-// console.log(randomDiceRoll);
+// // Create an array with 100 random dice rolls
+// // const randomDiceRoll = Array.from(
+// //   { length: 100 },
+// //   (_curr, i) => i + Math.random()
+// // );
+// // console.log(randomDiceRoll);
 
-// Event when labelBalance is clicked to display all values in .movements__value div
-// Array.from creates a new array of movementsUI from the values found in .movements__value
-labelBalance.addEventListener('click', function () {
-  const movementsUI = Array.from(
-    document.querySelectorAll('.movements__value')
-  );
+// // Event when labelBalance is clicked to display all values in .movements__value div
+// // Array.from creates a new array of movementsUI from the values found in .movements__value
+// labelBalance.addEventListener('click', function () {
+//   const movementsUI = Array.from(
+//     document.querySelectorAll('.movements__value')
+//   );
 
-  // map iterates over array and selects each element, here we replace the pound sign € with empty string in each element
-  console.log(movementsUI.map(element => element.textContent.replace('€', '')));
-});
+//   // map iterates over array and selects each element, here we replace the pound sign € with empty string in each element
+//   console.log(
+//     movementsUI.map(element => Number(element.textContent.replace('€', '')))
+//   );
+// });
 
 // *****// *****// *****// *****// *****// *****
 
