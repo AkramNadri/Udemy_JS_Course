@@ -393,11 +393,23 @@ const z = Array.from({ length: 7 }, (_curr, i) => i + 1);
 console.log(z);
 
 // Create an array with 100 random dice rolls
-const randomDiceRoll = Array.from(
-  { length: 100 },
-  (_curr, i) => i + Math.random()
-);
-console.log(randomDiceRoll);
+// const randomDiceRoll = Array.from(
+//   { length: 100 },
+//   (_curr, i) => i + Math.random()
+// );
+// console.log(randomDiceRoll);
+
+// Event when labelBalance is clicked to display all values in .movements__value div
+// Array.from creates a new array of movementsUI from the values found in .movements__value
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value')
+  );
+
+  // map iterates over array and selects each element, here we replace the pound sign € with empty string in each element
+  console.log(movementsUI.map(element => element.textContent.replace('€', '')));
+});
+
 // *****// *****// *****// *****// *****// *****
 
 // SORTING ARRAYS
