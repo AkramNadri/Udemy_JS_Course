@@ -353,6 +353,51 @@ btnSort.addEventListener('click', function (e) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // *****// *****// *****// *****// *****// *****
+// ARRAY METHODS PRACTICE
+
+// 1.
+// contains all movements arrays
+// flatMap iterates over arrays and concatenates all arrays into one array
+const bankDepositSum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((sum, cur) => sum + cur, 0);
+
+console.log(bankDepositSum);
+
+// 2.
+// one way of doing it
+// const numDeposits1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov >= 1000).length;
+
+const numDeposits1000 = accounts
+  .flatMap(acc => acc.movements)
+  // prefix increment ++count
+  // count the number of deposits over or equal to 1000
+  .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
+
+console.log(numDeposits1000);
+
+// prefix increment example
+// let a = 10;
+// console.log(++a);
+// console.log(a);
+
+// 3. Sum of deposits and sum of withdrawals
+
+const sums = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (acc, cur) => {
+      cur > 0 ? (acc.deposits += cur) : (acc.withdrawals += cur);
+      return acc;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+
+console.log(sums);
+// *****// *****// *****// *****// *****// *****
 // WHICH ARRAY METHOD TO USE ?
 // 23 different array methods
 
