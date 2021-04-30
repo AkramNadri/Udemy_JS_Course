@@ -397,6 +397,20 @@ const sums = accounts
   );
 
 console.log(sums);
+
+// Example 2
+const sums1 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (acc, cur) => {
+      cur > 0 ? (acc.deposits += cur) : (acc.withdrawals += cur);
+      return acc;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+
+console.log(sums1);
+
 // *****// *****// *****// *****// *****// *****
 // WHICH ARRAY METHOD TO USE ?
 // 23 different array methods
