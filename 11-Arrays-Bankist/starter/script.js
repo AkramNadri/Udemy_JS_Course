@@ -386,19 +386,22 @@ console.log(numDeposits1000);
 
 // 3. Sum of deposits and sum of withdrawals
 
-const sums = accounts
+// destructuring with {}
+const { deposits, withdrawals } = accounts
   .flatMap(acc => acc.movements)
   .reduce(
     (acc, cur) => {
-      cur > 0 ? (acc.deposits += cur) : (acc.withdrawals += cur);
+      // cur > 0 ? (acc.deposits += cur) : (acc.withdrawals += cur);
+      acc[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+
       return acc;
     },
     { deposits: 0, withdrawals: 0 }
   );
 
-console.log(sums);
+console.log(deposits, withdrawals);
 
-// Example 2
+// Example 2 -- same as above
 const sums1 = accounts
   .flatMap(acc => acc.movements)
   .reduce(
@@ -410,6 +413,27 @@ const sums1 = accounts
   );
 
 console.log(sums1);
+
+// 4. Title Case
+// this is a nice title -> This Is a Nice Title
+
+const convertTitleCase = function (title) {
+  const capatilize = str => str[0].toUpperCase() + str.slice(1);
+
+  const exceptions = ['a', 'an', 'the', 'and', 'but', 'or', 'on', 'in', 'with'];
+
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => (exceptions.includes(word) ? word : capatilize(word)))
+    .join(' ');
+
+  return capatilize(titleCase);
+};
+
+console.log(convertTitleCase('this is a nice title'));
+console.log(convertTitleCase('this is a LONG title but not too long'));
+console.log(convertTitleCase('and here is another title with an EXAMPLE'));
 
 // *****// *****// *****// *****// *****// *****
 // WHICH ARRAY METHOD TO USE ?
