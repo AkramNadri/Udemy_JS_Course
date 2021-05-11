@@ -436,6 +436,7 @@ const ownersEatTooLittle = dogs
   .filter(dog => dog.curFood < dog.recFood)
   .flatMap(dog => dog.owners);
 
+// logs to console owners dogs that eats to little
 console.log(ownersEatTooLittle);
 
 // *****// *****// *****// *****// *****// *****
