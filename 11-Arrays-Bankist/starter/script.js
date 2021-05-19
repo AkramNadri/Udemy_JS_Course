@@ -452,6 +452,11 @@ console.log(`${ownersEatTooMuch.join(' ,')} dogs eat too much `);
 
 console.log(`${ownersEatTooLittle.join(' ,')} dogs eat too little`);
 
+// 5.
+
+const dogExactFood = dogs.some(dog => dog.curFood === dog.recFood);
+
+console.log(dogExactFood);
 // *****// *****// *****// *****// *****// *****
 // ARRAY METHODS PRACTICE
 
