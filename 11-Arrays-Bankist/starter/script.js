@@ -446,6 +446,12 @@ const ownersEatTooLittle = dogs
 // logs to console owners dogs that eats to little
 console.log(ownersEatTooLittle);
 
+// 4.
+
+console.log(`${ownersEatTooMuch.join(' ,')} dogs eat too much `);
+
+console.log(`${ownersEatTooLittle.join(' ,')} dogs eat too little`);
+
 // *****// *****// *****// *****// *****// *****
 // ARRAY METHODS PRACTICE
 
