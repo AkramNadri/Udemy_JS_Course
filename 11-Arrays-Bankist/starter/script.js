@@ -466,6 +466,15 @@ const dogEatingOkay = dog =>
 
 console.log(dogs.some(dogEatingOkay));
 
+// 7. Create an array containing the dogs that are eating an OKAY amount of food (try to reuse the condition used in 6.)
+
+console.log(dogs.filter(dogEatingOkay));
+
+// 8. Create a shallow copy of the dogs array and sort it by recommended food portion in an ascending order (keep in mind that the portions are inside the array's objects)
+
+const dogSorted = dogs.slice().sort((a, b) => a.recFood - b.curFood);
+console.log(dogSorted);
+
 // *****// *****// *****// *****// *****// *****
 // ARRAY METHODS PRACTICE
 
