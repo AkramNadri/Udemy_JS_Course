@@ -457,6 +457,15 @@ console.log(`${ownersEatTooLittle.join(' ,')} dogs eat too little`);
 const dogExactFood = dogs.some(dog => dog.curFood === dog.recFood);
 
 console.log(dogExactFood);
+
+// 6. Log to the console whether there is any dog eating an OKAY amount of food (just true or false)
+// current > (recommended * 0.90) && current < (recommended * 1.10)
+
+const dogEatingOkay = dog =>
+  dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1;
+
+console.log(dogs.some(dogEatingOkay));
+
 // *****// *****// *****// *****// *****// *****
 // ARRAY METHODS PRACTICE
 
