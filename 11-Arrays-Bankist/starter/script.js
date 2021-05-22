@@ -459,7 +459,11 @@ console.log(dogs.some(okayAmountFood));
 
 console.log(dogs.filter(okayAmountFood));
 
-// 8.
+// 8. Create a shallow copy of the dogs array and sort it by recommended food portion in an ascending order (keep in mind that the portions are inside the array's objects)
+
+const dogSorted = dogs.slice().sort((a, b) => a.recommendedFood - b.curFood);
+
+console.log(dogSorted);
 
 //////////////////////////////////////////////////////////
 // Code challenge 4 - attempt 1
@@ -530,8 +534,8 @@ console.log(dogs.filter(okayAmountFood));
 
 // // 8. Create a shallow copy of the dogs array and sort it by recommended food portion in an ascending order (keep in mind that the portions are inside the array's objects)
 
-// const dogSorted = dogs.slice().sort((a, b) => a.recFood - b.curFood);
-// console.log(dogSorted);
+// const dogSorted1 = dogs.slice().sort((a, b) => a.recFood - b.curFood);
+// console.log(dogSorted1);
 
 // *****// *****// *****// *****// *****// *****
 // ARRAY METHODS PRACTICE
