@@ -164,7 +164,7 @@ btnLogin.addEventListener('click', function (e) {
   );
   console.log(currentAccount);
 
-  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+  if (currentAccount?.pin === +inputLoginPin.value) {
     // Display UI and message
     labelWelcome.textContent = `Welcome back, ${
       currentAccount.owner.split(' ')[0]
@@ -182,7 +182,7 @@ btnLogin.addEventListener('click', function (e) {
 
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
-  const amount = Number(inputTransferAmount.value);
+  const amount = +inputTransferAmount.value;
   const receiverAcc = accounts.find(
     acc => acc.username === inputTransferTo.value
   );
@@ -206,7 +206,7 @@ btnTransfer.addEventListener('click', function (e) {
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = Number(inputLoanAmount.value);
+  const amount = +inputLoanAmount.value;
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
@@ -223,7 +223,7 @@ btnClose.addEventListener('click', function (e) {
 
   if (
     inputCloseUsername.value === currentAccount.username &&
-    Number(inputClosePin.value) === currentAccount.pin
+    +inputClosePin.value === currentAccount.pin
   ) {
     const index = accounts.findIndex(
       acc => acc.username === currentAccount.username
@@ -249,5 +249,56 @@ btnSort.addEventListener('click', function (e) {
 });
 
 /////////////////////////////////////////////////
-/////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // LECTURES
+
+// CONVERTING AND CHECKING NUMBERS
+
+console.log(23 === 23.0);
+
+// Base 10 is 0 - 9
+// Binary base 2 is 0 or 1
+
+console.log(0.1 + 0.2);
+
+console.log(0.1 + 0.2 === 0.3); // false
+
+// convert string to number
+console.log(Number('23'));
+
+// the + sign is the same as Number, type coercion
+console.log(+'23');
+
+// Parsing
+// Here we are using base 10 number.
+// JS will parse the number from a String, in order for this to work the string must start with a number.
+// base 10 number
+console.log(Number.parseInt('30px', 10));
+
+// example - the string here does not start with a number so we get NaN
+// base 10 number
+console.log(Number.parseInt('px30', 10)); // NaN
+
+// parseFloat will include decimal
+console.log(Number.parseFloat('2.5rem')); // 2.5
+
+// parseInt does not include decimal
+console.log(Number.parseInt('2.5rem')); // 2
+
+// ** isNaN checks if a value is NOT a number **
+console.log(Number.isNaN(20)); // false since 20 is a number
+
+console.log(Number.isNaN('20')); // false because this isnt also not a number
+
+console.log(Number.isNaN(+'20')); // true
+
+console.log(Number.isNaN(23 / 0)); // false - infinity
+
+// ** isFinite ** - better method to check if value is number
+// checks if value is a number
+console.log(Number.isFinite(20)); // true
+console.log(Number.isFinite('20')); // false - since its string
+
+console.log(Number.isFinite(+'20X')); // false
+
+console.log(Number.isFinite(23 / 0)); // false - infinity
