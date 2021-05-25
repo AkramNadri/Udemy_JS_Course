@@ -381,33 +381,84 @@ btnSort.addEventListener('click', function (e) {
 // THE REMAINDER OPERATOR
 // simply return the remainder of a division
 
-console.log(5 % 2); // 1
-console.log(5 / 2); // 2.5 or 5 = 2 * 2 + 1
+// console.log(5 % 2); // 1
+// console.log(5 / 2); // 2.5 or 5 = 2 * 2 + 1
 
-console.log(8 % 3); // 2
-console.log(8 / 3); // 8 = 2 * 3 + 2
+// console.log(8 % 3); // 2
+// console.log(8 / 3); // 8 = 2 * 3 + 2
 
-console.log(6 % 2); // 0 there is no remainder
-console.log(6 / 2); // 3
+// console.log(6 % 2); // 0 there is no remainder
+// console.log(6 / 2); // 3
 
-console.log(7 % 2); // 1
-console.log(7 / 2); // 3.5
+// console.log(7 % 2); // 1
+// console.log(7 / 2); // 3.5
 
-// function check if number is odd or even
-// an even number is any number divisible by 2
-const isEven = n => n % 2 === 0;
-console.log(isEven(8)); // true even
-console.log(isEven(23)); // false odd
-console.log(isEven(514)); // true even
+// // function check if number is odd or even
+// // an even number is any number divisible by 2
+// const isEven = n => n % 2 === 0;
+// console.log(isEven(8)); // true even
+// console.log(isEven(23)); // false odd
+// console.log(isEven(514)); // true even
 
-labelBalance.addEventListener('click', function () {
-  console.log('clicked');
-  // ... spread operator
-  [...document.querySelectorAll('.movements_row')].forEach(function (row, i) {
-    // 0 , 2, 4, 6, 8
-    if (i % 2 === 0) row.style.backgroundColor = 'red';
+// labelBalance.addEventListener('click', function () {
+//   console.log('clicked');
+//   // ... spread operator
+//   [...document.querySelectorAll('.movements_row')].forEach(function (row, i) {
+//     // 0 , 2, 4, 6, 8
+//     if (i % 2 === 0) row.style.backgroundColor = 'red';
 
-    // 0, 3, 5,
-    if (i % 3 === 0) row.style.backgroundColor = 'blue';
-  });
-});
+//     // 0, 3, 5,
+//     if (i % 3 === 0) row.style.backgroundColor = 'blue';
+//   });
+// });
+
+///////////////////////////////////////////////// ******
+///////////////////////////////////////////////// ******
+
+// WORKING WITH BIGINT
+// 64 bits - 64 1's or 0's
+
+console.log(2 ** 53 - 1); // largest number JS can handle/produce
+
+// produces larger number
+// any integer larger then this is not safe
+console.log(Number.MAX_SAFE_INTEGER);
+
+// unsafe numbers
+console.log(2 ** 53 + 3);
+
+// ES 2020 a new primitive was added "BIGINT" = Big integer can store much larger numbers, as large as we want
+
+// n transforms regular number to BIGINT
+console.log(234234234234234234234234234234234234234n);
+
+console.log(BigInt(234234234234092834098234098234092834));
+
+// Operations with BIGINT
+
+console.log(10000n + 10000n);
+
+console.log(2230984209384029384029384029384902384n * 289374923874n);
+
+const huge = 234234929347293874928374n;
+const num = 23;
+
+// Cannot mix Bigint and other types
+console.log(huge * BigInt(num));
+
+console.log(20n > 15); // true
+// === does not do type coercion. 20n is a bigint and 20 is regular int
+console.log(20n === 20); // false
+
+console.log(typeof 20n); // bigint
+
+// type coercion happens with ==
+console.log(20n == 20); // true
+
+// coercion occurs here, huge is transformed to string
+console.log(huge + 'is really big!!!');
+
+// Division
+// cuts off decimal part
+console.log(10n / 3n); // 3n - returns closest bigint
+console.log(10 / 3); // 3.333333
