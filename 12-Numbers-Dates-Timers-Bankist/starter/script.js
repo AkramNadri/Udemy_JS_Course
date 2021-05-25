@@ -310,67 +310,104 @@ btnSort.addEventListener('click', function (e) {
 // MATH AND ROUNDING
 
 // square root
-console.log(Math.sqrt(25));
+// console.log(Math.sqrt(25));
 
-// same as square root
-console.log(25 ** (1 / 2));
+// // same as square root
+// console.log(25 ** (1 / 2));
 
-// cube root
-console.log(8 ** (1 / 3));
+// // cube root
+// console.log(8 ** (1 / 3));
 
-// find MAX number
-console.log(Math.max(5, 18, 23, 11, 2));
-console.log(Math.max(5, 18, '23', 11, 2));
-console.log(Math.max(5, 18, '23px', 11, 2)); // NaN
+// // find MAX number
+// console.log(Math.max(5, 18, 23, 11, 2));
+// console.log(Math.max(5, 18, '23', 11, 2));
+// console.log(Math.max(5, 18, '23px', 11, 2)); // NaN
 
-// find MIN number
-console.log(Math.min(5, 18, 23, 11, 2));
+// // find MIN number
+// console.log(Math.min(5, 18, 23, 11, 2));
 
-// Math.PI - calculate radius of circle with 10 pixels
-// calculate are of circle
-console.log(Math.PI * Number.parseFloat('10px') ** 2);
+// // Math.PI - calculate radius of circle with 10 pixels
+// // calculate are of circle
+// console.log(Math.PI * Number.parseFloat('10px') ** 2);
 
-// random value between 1 and 6
-console.log(Math.trunc(Math.random() * 6 + 1));
+// // random value between 1 and 6
+// console.log(Math.trunc(Math.random() * 6 + 1));
 
-// Math.random will output number between 0 and 1
-// using Math.floor to handle all situations including negative number inputs
-const randomInt = (min, max) =>
-  Math.floor(Math.random() * (max - min) + 1) + min;
+// // Math.random will output number between 0 and 1
+// // using Math.floor to handle all situations including negative number inputs
+// const randomInt = (min, max) =>
+//   Math.floor(Math.random() * (max - min) + 1) + min;
 
-console.log(randomInt(5, 10));
+// console.log(randomInt(5, 10));
 
-// Rounding integer
+// // Rounding integer
 
-// trunc removes and decimal parts
-console.log(Math.trunc(23.3));
+// // trunc removes and decimal parts
+// console.log(Math.trunc(23.3));
 
-// will round to the nearest integer
-console.log(Math.round(23.9));
+// // will round to the nearest integer
+// console.log(Math.round(23.9));
 
-// round up
-console.log(Math.ceil(23.3)); // 24
-console.log(Math.ceil(23.9)); // 24
+// // round up
+// console.log(Math.ceil(23.3)); // 24
+// console.log(Math.ceil(23.9)); // 24
 
-// round down
-console.log(Math.floor(23.3)); // 23
-console.log(Math.floor(23.3)); // 23
+// // round down
+// console.log(Math.floor(23.3)); // 23
+// console.log(Math.floor(23.3)); // 23
 
-// negative numbers
-console.log(Math.trunc(-23.3));
+// // negative numbers
+// console.log(Math.trunc(-23.3));
 
-// floor works in all situations - wether positive or negative numbers
-console.log(Math.floor(-23.3));
+// // floor works in all situations - wether positive or negative numbers
+// console.log(Math.floor(-23.3));
 
-// Rounding decimals
+// // Rounding decimals
 
-// toFixed will return a String rounded
-console.log((2.7).toFixed(0)); // String 3
+// // toFixed will return a String rounded
+// console.log((2.7).toFixed(0)); // String 3
 
-console.log((2.7).toFixed(3)); // String 2.700
+// console.log((2.7).toFixed(3)); // String 2.700
 
-console.log((2.345).toFixed(2)); // String 2.35
+// console.log((2.345).toFixed(2)); // String 2.35
 
-// the + here converts the String back to Number
-// + same as Number method
-console.log(+(2.7).toFixed(2));
+// // the + here converts the String back to Number
+// // + same as Number method
+// console.log(+(2.7).toFixed(2));
+
+///////////////////////////////////////////////// ******
+///////////////////////////////////////////////// ******
+
+// THE REMAINDER OPERATOR
+// simply return the remainder of a division
+
+console.log(5 % 2); // 1
+console.log(5 / 2); // 2.5 or 5 = 2 * 2 + 1
+
+console.log(8 % 3); // 2
+console.log(8 / 3); // 8 = 2 * 3 + 2
+
+console.log(6 % 2); // 0 there is no remainder
+console.log(6 / 2); // 3
+
+console.log(7 % 2); // 1
+console.log(7 / 2); // 3.5
+
+// function check if number is odd or even
+// an even number is any number divisible by 2
+const isEven = n => n % 2 === 0;
+console.log(isEven(8)); // true even
+console.log(isEven(23)); // false odd
+console.log(isEven(514)); // true even
+
+labelBalance.addEventListener('click', function () {
+  console.log('clicked');
+  // ... spread operator
+  [...document.querySelectorAll('.movements_row')].forEach(function (row, i) {
+    // 0 , 2, 4, 6, 8
+    if (i % 2 === 0) row.style.backgroundColor = 'red';
+
+    // 0, 3, 5,
+    if (i % 3 === 0) row.style.backgroundColor = 'blue';
+  });
+});
