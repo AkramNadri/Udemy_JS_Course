@@ -418,47 +418,105 @@ btnSort.addEventListener('click', function (e) {
 // WORKING WITH BIGINT
 // 64 bits - 64 1's or 0's
 
-console.log(2 ** 53 - 1); // largest number JS can handle/produce
+// console.log(2 ** 53 - 1); // largest number JS can handle/produce
 
-// produces larger number
-// any integer larger then this is not safe
-console.log(Number.MAX_SAFE_INTEGER);
+// // produces larger number
+// // any integer larger then this is not safe
+// console.log(Number.MAX_SAFE_INTEGER);
 
-// unsafe numbers
-console.log(2 ** 53 + 3);
+// // unsafe numbers
+// console.log(2 ** 53 + 3);
 
-// ES 2020 a new primitive was added "BIGINT" = Big integer can store much larger numbers, as large as we want
+// // ES 2020 a new primitive was added "BIGINT" = Big integer can store much larger numbers, as large as we want
 
-// n transforms regular number to BIGINT
-console.log(234234234234234234234234234234234234234n);
+// // n transforms regular number to BIGINT
+// console.log(234234234234234234234234234234234234234n);
 
-console.log(BigInt(234234234234092834098234098234092834));
+// console.log(BigInt(234234234234092834098234098234092834));
 
-// Operations with BIGINT
+// // Operations with BIGINT
 
-console.log(10000n + 10000n);
+// console.log(10000n + 10000n);
 
-console.log(2230984209384029384029384029384902384n * 289374923874n);
+// console.log(2230984209384029384029384029384902384n * 289374923874n);
 
-const huge = 234234929347293874928374n;
-const num = 23;
+// const huge = 234234929347293874928374n;
+// const num = 23;
 
-// Cannot mix Bigint and other types
-console.log(huge * BigInt(num));
+// // Cannot mix Bigint and other types
+// console.log(huge * BigInt(num));
 
-console.log(20n > 15); // true
-// === does not do type coercion. 20n is a bigint and 20 is regular int
-console.log(20n === 20); // false
+// console.log(20n > 15); // true
+// // === does not do type coercion. 20n is a bigint and 20 is regular int
+// console.log(20n === 20); // false
 
-console.log(typeof 20n); // bigint
+// console.log(typeof 20n); // bigint
 
-// type coercion happens with ==
-console.log(20n == 20); // true
+// // type coercion happens with ==
+// console.log(20n == 20); // true
 
-// coercion occurs here, huge is transformed to string
-console.log(huge + 'is really big!!!');
+// // coercion occurs here, huge is transformed to string
+// console.log(huge + 'is really big!!!');
 
-// Division
-// cuts off decimal part
-console.log(10n / 3n); // 3n - returns closest bigint
-console.log(10 / 3); // 3.333333
+// // Division
+// // cuts off decimal part
+// console.log(10n / 3n); // 3n - returns closest bigint
+// console.log(10 / 3); // 3.333333
+
+///////////////////////////////////////////////// ******
+///////////////////////////////////////////////// ******
+
+// CREATING DATES
+// dates and times
+
+// Create a date - 4 ways of creating a date. They all use new Date constructor
+
+// const now = new Date();
+// console.log(now);
+
+// // Parsing date
+// console.log(new Date('Tue May 25 2021 15:21:28'));
+
+// console.log(new Date('December 24, 2015'));
+
+// console.log(new Date(account1.movementsDates[0]));
+
+// // the month date in JS is 0 based
+// console.log(new Date(2037, 10, 19, 15, 23, 5));
+
+// console.log(new Date(2037, 10, 33));
+
+// console.log(new Date(0));
+
+// // day 3 which has 24 hours, 60 min each hour, 60 sec each minute and 1000 to convert to milliseconds
+// console.log(new Date(3 * 24 * 60 * 60 * 1000));
+
+// Dates are special type of object, therefore they have their own methods.
+
+// working with dates
+
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future);
+console.log(future.getFullYear());
+console.log(future.getMonth());
+console.log(future.getDate()); // day of the month
+console.log(future.getDay()); // day of the week
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+
+// ISO string follows internation standards
+console.log(future.toISOString());
+
+console.log(future.getTime()); // how much time has passed since that date
+
+// 2142274980000 we can take the value from .getTime to get the date format.
+// based on the Milliseconds that have passed.
+console.log(new Date(2142274980000));
+
+// get current date
+console.log(Date.now());
+
+// change the year with .setFullYear function
+future.setFullYear(2040);
+console.log(future);
