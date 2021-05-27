@@ -82,7 +82,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 // Functions
 
 // Function takes in date and formats it
-const formatMovementDate = function (date) {
+const formatMovementDate = function (date, locale) {
   // Takes in 2 dates as argument and returns the difference
   // Math.round to round up the dates and remove decimals
   const calcDaysPassed = (date1, date2) =>
@@ -94,14 +94,17 @@ const formatMovementDate = function (date) {
   if (daysPassed === 0) return `Today`;
   if (daysPassed === 1) return `Yesterday`;
   if (daysPassed <= 7) return `${daysPassed} days ago`;
-  else {
-    const day = `${date.getDate()}`.padStart(2, 0);
-    // month is 0 based so we add the 1
-    const month = `${date.getMonth() + 1}`.padStart(2, 0);
-    const year = date.getFullYear();
+  // else {
+  //   const day = `${date.getDate()}`.padStart(2, 0);
+  //   // month is 0 based so we add the 1
+  //   const month = `${date.getMonth() + 1}`.padStart(2, 0);
+  //   const year = date.getFullYear();
 
-    return `${day}/${month}/${year}`;
-  }
+  //   return `${day}/${month}/${year}`;
+  // }
+
+  // in DateTimeFormat we either manually specify the language (ex. en-US) or point it to a property in object which has the language set already.
+  return new Intl.DateTimeFormat(locale).format(date);
 };
 
 // updated function to take in entire account instead of just movements property
@@ -117,7 +120,7 @@ const displayMovements = function (acc, sort = false) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const date = new Date(acc.movementsDates[i]);
-    const displayDate = formatMovementDate(date);
+    const displayDate = formatMovementDate(date, acc.locale);
 
     const html = `
       <div class="movements__row">
@@ -202,6 +205,14 @@ containerApp.style.opacity = 100;
 // day/month/year
 // ******************** // ** // ** //
 
+// Arabic for Syria
+// labelDate.textContent = new Intl.DateTimeFormat('ar-SY').format(now);
+
+// English for Great Britain/UK
+// labelDate.textContent = new Intl.DateTimeFormat('en-GB').format(now);
+
+//
+
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
   e.preventDefault();
@@ -220,15 +231,44 @@ btnLogin.addEventListener('click', function (e) {
     containerApp.style.opacity = 100;
 
     // Create current date and time
-    const now = new Date();
-    const day = `${now.getDate()}`.padStart(2, 0);
-    // month is 0 based so we add the 1
-    const month = `${now.getMonth() + 1}`.padStart(2, 0);
-    const year = now.getFullYear();
-    const hour = `${now.getHours()}`.padStart(2, 0);
-    const min = `${now.getMinutes()}`.padStart(2, 0);
 
-    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
+    // Experimenting API (INTL)
+
+    const now = new Date();
+
+    // options is a configuration for Intl.DateTimeFormat, we can assign properties and set types
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric',
+    };
+
+    // will display what current language is set to
+    // const locale = navigator.language;
+    // console.log(locale);
+
+    // pass into Intl is a locale string - this will create a formatter for English - US.
+    // Then pass in the date to be formatted
+    // en-US for english US
+
+    // currentAccount.locale will use the locale property in the currentAccount object, which for Jonas is PT for portugal and Jessica object its en-US.
+    // Date and time will be formatted based on user login and object property for locale
+    labelDate.textContent = new Intl.DateTimeFormat(
+      currentAccount.locale,
+      options
+    ).format(now);
+
+    // const now = new Date();
+    // const day = `${now.getDate()}`.padStart(2, 0);
+    // // month is 0 based so we add the 1
+    // const month = `${now.getMonth() + 1}`.padStart(2, 0);
+    // const year = now.getFullYear();
+    // const hour = `${now.getHours()}`.padStart(2, 0);
+    // const min = `${now.getMinutes()}`.padStart(2, 0);
+
+    // labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
 
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
@@ -595,12 +635,17 @@ btnSort.addEventListener('click', function (e) {
 
 // OPERATIONS WITH DATES
 
-const future = new Date(2037, 10, 19, 15, 23);
-console.log(+future);
+// const future = new Date(2037, 10, 19, 15, 23);
+// console.log(+future);
 
-// function to calculate how many days passed
-const calcDaysPassed = (date1, date2) =>
-  Math.abs(date2 - date1) / (1000 * 60 * 60 * 24); // 1000 milliseconds, 60 sec, 60 min, 24 hours
+// // function to calculate how many days passed
+// const calcDaysPassed = (date1, date2) =>
+//   Math.abs(date2 - date1) / (1000 * 60 * 60 * 24); // 1000 milliseconds, 60 sec, 60 min, 24 hours
 
-const days1 = calcDaysPassed(new Date(2037, 3, 14), new Date(2037, 4, 24));
-console.log(days1);
+// const days1 = calcDaysPassed(new Date(2037, 3, 14), new Date(2037, 4, 24));
+// console.log(days1);
+
+///////////////////////////////////////////////// ******
+
+// INTERNATIONALIZING DATES(INTL)
+// JS has new INTL API - allow us to format numbers and strings according to different languages
