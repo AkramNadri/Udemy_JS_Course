@@ -107,6 +107,16 @@ const formatMovementDate = function (date, locale) {
   return new Intl.DateTimeFormat(locale).format(date);
 };
 
+const formatCurrency = function (value, locale, currency) {
+  // Intl.NumberFormat to change movement numbers to specified currency style, and we apply this format to mov argument
+  // currency style will change based on which account logged in, each account has a currency property which Intl.NumberFormat points to as a style.
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    // set currency style to point to currency property in account object
+    currency: currency,
+  }).format(value);
+};
+
 // updated function to take in entire account instead of just movements property
 const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
@@ -122,13 +132,17 @@ const displayMovements = function (acc, sort = false) {
     const date = new Date(acc.movementsDates[i]);
     const displayDate = formatMovementDate(date, acc.locale);
 
+    // Intl.NumberFormat to change movement numbers to specified currency style, and we apply this format to mov argument
+    // currency style will change based on which account logged in, each account has a currency property which Intl.NumberFormat points to as a style.
+    const formattedMovement = formatCurrency(mov, acc.locale, acc.currency);
+
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
         <div class="movements__date">${displayDate}</div>
-        <div class="movements__value">${mov.toFixed(2)}€</div>
+        <div class="movements__value">${formattedMovement}</div>
       </div>
     `;
 
@@ -138,19 +152,33 @@ const displayMovements = function (acc, sort = false) {
 
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
+  const formattedMovement = formatCurrency(
+    acc.balance,
+    acc.locale,
+    acc.currency
+  );
+
+  labelBalance.textContent = `${formattedMovement}`;
 };
 
 const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
+  labelSumIn.textContent = `${formatCurrency(
+    incomes,
+    acc.locale,
+    acc.currency
+  )}`;
 
   const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(out.toFixed(2))}€`;
+  labelSumOut.textContent = `${formatCurrency(
+    Math.abs(out),
+    acc.locale,
+    acc.currency
+  )}`;
 
   const interest = acc.movements
     .filter(mov => mov > 0)
@@ -160,7 +188,11 @@ const calcDisplaySummary = function (acc) {
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
+  labelSumInterest.textContent = `${formatCurrency(
+    interest,
+    acc.locale,
+    acc.currency
+  )}€`;
 };
 
 const createUsernames = function (accs) {
@@ -649,3 +681,30 @@ btnSort.addEventListener('click', function (e) {
 
 // INTERNATIONALIZING DATES(INTL)
 // JS has new INTL API - allow us to format numbers and strings according to different languages
+
+///////////////////////////////////////////////// ******
+
+// INTERNATIONALIZING NUMBERS
+// FORMAT REGULAR NUMBERS
+
+const num = 234234235.34;
+
+const options = {
+  style: 'currency',
+  unit: 'celsius',
+  currency: 'EUR',
+  // useGrouping: false,
+};
+
+// Intl.NumberFormat for the type of format we would like the number to be and .format for what we want to format.
+console.log('US    ', new Intl.NumberFormat('en-US', options).format(num));
+
+console.log('Germany    ', new Intl.NumberFormat('de-DE', options).format(num));
+
+console.log('Syria    ', new Intl.NumberFormat('ar-SY', options).format(num));
+
+// navigator.language is local language
+console.log(
+  navigator.language,
+  new Intl.NumberFormat(navigator.language, options).format(num)
+);
