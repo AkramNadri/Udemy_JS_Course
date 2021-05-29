@@ -89,7 +89,7 @@ const formatMovementDate = function (date, locale) {
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
 
   const daysPassed = calcDaysPassed(new Date(), date);
-  console.log(daysPassed);
+  // console.log(daysPassed);
 
   if (daysPassed === 0) return `Today`;
   if (daysPassed === 1) return `Yesterday`;
@@ -345,14 +345,18 @@ btnLoan.addEventListener('click', function (e) {
   const amount = Math.floor(+inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-    // Add movement
-    currentAccount.movements.push(amount);
+    // Assigned setTimeOut to loan button
+    setTimeout(function () {
+      // Add movement
+      currentAccount.movements.push(amount);
 
-    // Add loan date
-    currentAccount.movementsDates.push(new Date().toISOString());
+      // Add loan date
+      currentAccount.movementsDates.push(new Date().toISOString());
 
-    // Update UI
-    updateUI(currentAccount);
+      // Update UI
+      updateUI(currentAccount);
+      // setTimeOut to 2.5 seconds
+    }, 2500);
   }
   inputLoanAmount.value = '';
 });
@@ -687,24 +691,66 @@ btnSort.addEventListener('click', function (e) {
 // INTERNATIONALIZING NUMBERS
 // FORMAT REGULAR NUMBERS
 
-const num = 234234235.34;
+// const num = 234234235.34;
 
-const options = {
-  style: 'currency',
-  unit: 'celsius',
-  currency: 'EUR',
-  // useGrouping: false,
-};
+// const options = {
+//   style: 'currency',
+//   unit: 'celsius',
+//   currency: 'EUR',
+//   // useGrouping: false,
+// };
 
-// Intl.NumberFormat for the type of format we would like the number to be and .format for what we want to format.
-console.log('US    ', new Intl.NumberFormat('en-US', options).format(num));
+// // Intl.NumberFormat for the type of format we would like the number to be and .format for what we want to format.
+// console.log('US    ', new Intl.NumberFormat('en-US', options).format(num));
 
-console.log('Germany    ', new Intl.NumberFormat('de-DE', options).format(num));
+// console.log('Germany    ', new Intl.NumberFormat('de-DE', options).format(num));
 
-console.log('Syria    ', new Intl.NumberFormat('ar-SY', options).format(num));
+// console.log('Syria    ', new Intl.NumberFormat('ar-SY', options).format(num));
 
-// navigator.language is local language
-console.log(
-  navigator.language,
-  new Intl.NumberFormat(navigator.language, options).format(num)
-);
+// // navigator.language is local language
+// console.log(
+//   navigator.language,
+//   new Intl.NumberFormat(navigator.language, options).format(num)
+// );
+
+///////////////////////////////////////////////// ******
+
+// TIMERS: SETTIMEOUT AND SETINTERVAL
+
+// const ingredients = ['olives', 'spinach'];
+
+// Set time on function call, here we set the call timer to 3 sec.
+// simply schedules a function to run after a certain amount of time and is only called once.
+// const pizzaTimer = setTimeout(
+//   (ing1, ing2) => console.log(`'Here is your pizza with ${ing1} and ${ing2}'`),
+//   3000,
+//   ...ingredients
+// );
+
+// console.log('Waiting ...');
+
+// // if ingredient includes spinach, we call the clearTimeOut function on pizzaTimer to clear/stop the timer
+// if (ingredients.includes('spinach')) clearTimeout(pizzaTimer);
+
+// setInterval
+// This callback is being called every second
+// setInterval(function () {
+//   const now = new Date();
+//   now.getHours();
+//   now.getMinutes();
+//   now.getSeconds();
+
+//   console.log(now);
+// }, 5000);
+
+// console.log(new Date(3 * 24 * 60 * 60 * 1000));
+
+// Challenge build a clock
+
+// setInterval(function () {
+//   const date = new Date();
+//   const clock =
+//     date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+
+//   console.log(clock);
+// }, 1000);
