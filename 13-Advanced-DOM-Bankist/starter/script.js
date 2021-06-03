@@ -102,3 +102,62 @@ document
     // previous way of removing a node
     // message.parentElement.removeChild(message);
   });
+
+//////////////****///////////////////// *******************
+
+// Styles
+// to set a style on element, we get element . style then . the property name
+message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
+
+console.log(message.style.height); // nothing/hidden
+console.log(message.style.backgroundColor);
+
+// this contains all of the properties with all of the values assigned to message element
+// console.log(getComputedStyle(message));
+// getComputedStyle will retrieve info from element
+console.log(getComputedStyle(message).color);
+console.log(getComputedStyle(message).height);
+
+// increase height on element
+// result of this is a string, here were trying to add number to a string which will not work. Must use Number.parseFloat function to convert string to number.
+// How to parse number out of a string
+message.style.height =
+  Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
+
+// CSS custom properties
+document.documentElement.style.setProperty('--color-primary', 'orangered');
+
+// Attributes
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.src);
+console.log(logo.className); // nav__logo
+
+// adding alt to logo class
+logo.alt = 'Beautiful minimalist logo';
+
+// Non standard
+// Here we add designer class to logo
+console.log(logo.designer); // undefined
+console.log(logo.getAttribute('designer')); // Akram
+
+// new attribute created
+logo.setAttribute('company', 'Bankist');
+
+console.log(logo.getAttribute('src')); // Relative version
+console.log(logo.src); // Absolute version
+
+// get absolute path
+const link = document.querySelector('.twitter-link');
+console.log(link.href); // absolute
+console.log(link.getAttribute('href')); // absolute
+
+// Data attributes
+console.log(logo.dataset.versionNumber);
+
+// Classes
+logo.classList.add('c');
+logo.classList.remove('c');
+logo.classList.toggle('c');
+logo.classList.contains('c');
