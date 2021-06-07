@@ -195,22 +195,29 @@ buttonScrollTo.addEventListener('click', function (e) {
   );
 
   // Scrolling
-  window.scrollTo(
-    // current position + current scroll
-    s1coords.left + window.pageXOffset,
-    // current position + current scroll
-    s1coords.top + window.pageYOffset
-  );
+  // window.scrollTo(
+  //   // current position + current scroll
+  //   s1coords.left + window.pageXOffset,
+  //   // current position + current scroll
+  //   s1coords.top + window.pageYOffset
+  // );
 
   // oldschool way
   // passing an object
-  window.scrollTo({
-    left: s1coords.left + window.pageXOffset,
-    top: s1coords.top + window.pageYOffset,
-    behavior: 'smooth',
-  });
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
 
   // Modern way
   // Only works with modern browsers
-  // section1.scrollIntoView({ behavior: 'smooth' });
+  section1.scrollIntoView({ behavior: 'smooth' });
+
+  // section1.scrollBy({
+  //   behavior: 'smooth',
+  // });
+  // section1.scrollTo({
+  //   behavior: 'smooth',
+  // });
 });
