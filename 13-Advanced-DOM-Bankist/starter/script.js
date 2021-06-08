@@ -221,3 +221,37 @@ buttonScrollTo.addEventListener('click', function (e) {
   //   behavior: 'smooth',
   // });
 });
+
+//////////////****///////////////////// *******************
+
+// TYPES OF EVENT AND EVENT HANDLERS
+// Anything that happens in our webpage generates an event
+// Happens when user clicks
+
+const h1 = document.querySelector('h1');
+
+// New way of listening for mouse events
+// h1.addEventListener('mouseenter', function (e) {
+//   alert('addEventListener: Great you are reading the header');
+// });
+
+// Old way of listening for mouse events
+// h1.onmouseenter = function (e) {
+//   alert('addEventListener: Great you are reading the header');
+// };
+
+// We can remove an eventHandler we dont need anymore
+
+const alertH1 = function (e) {
+  alert('addEventListener: Great you are reading the header');
+  // removes the eventListener after listening to it once.
+  // h1.removeEventListener('mouseenter', alertH1);
+};
+
+// we pass the function above to event listener
+h1.addEventListener('mouseenter', alertH1);
+
+// timeOut will execute the removeEventListener after 3 seconds
+setTimeout(() => {
+  h1.removeEventListener('mouseenter', alertH1);
+}, 3000);
