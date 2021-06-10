@@ -228,7 +228,7 @@ buttonScrollTo.addEventListener('click', function (e) {
 // Anything that happens in our webpage generates an event
 // Happens when user clicks
 
-const h1 = document.querySelector('h1');
+// const h1 = document.querySelector('h1');
 
 // New way of listening for mouse events
 // h1.addEventListener('mouseenter', function (e) {
@@ -242,16 +242,73 @@ const h1 = document.querySelector('h1');
 
 // We can remove an eventHandler we dont need anymore
 
-const alertH1 = function (e) {
-  alert('addEventListener: Great you are reading the header');
-  // removes the eventListener after listening to it once.
-  // h1.removeEventListener('mouseenter', alertH1);
-};
+// const alertH1 = function (e) {
+//   alert('addEventListener: Great you are reading the header');
+//   // removes the eventListener after listening to it once.
+//   // h1.removeEventListener('mouseenter', alertH1);
+// };
 
 // we pass the function above to event listener
-h1.addEventListener('mouseenter', alertH1);
+// h1.addEventListener('mouseenter', alertH1);
 
 // timeOut will execute the removeEventListener after 3 seconds
-setTimeout(() => {
-  h1.removeEventListener('mouseenter', alertH1);
-}, 3000);
+// setTimeout(() => {
+//   h1.removeEventListener('mouseenter', alertH1);
+// }, 3000);
+
+//////////////****///////////////////// *******************
+
+// EVENT PROPAGATION: BUBBLING AND CAPTURING
+// 187.
+
+//////////////****///////////////////// *******************
+
+// EVENT PROPAGATION IN PRACTICE
+// Attaching event handlers to navigation link and also all of its parent elements. When clicked will assign color to all the elements when bubbling.
+
+// rgb(255, 255, 255)
+// Formula to generate a random integer
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+
+// console.log(randomInt(2, 7));
+
+// calls randomInt function, and generate numbers between 0-255 as argument passed through to randomInt
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+
+console.log(randomColor());
+
+// nav__link is the child element
+// example of event propagation, bubbling up when this event is clicked, it will bubble up to the parent elements that contains the event as well.
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  e.preventDefault();
+  // In an event handler the 'this' keyword points always to the element on which the eventListener is attached.
+
+  this.style.backgroundColor = randomColor();
+
+  // E.TARGET = where the event originated(where the click happened). E.CURRENTTARGET is where the event handler is attached
+  console.log('LINK', e.target, e.currentTarget);
+
+  // currentTarget is exactly the same as the this keyword, this keyword is also pointing to the element on which the event listener is attached to
+  console.log(e.currentTarget === this);
+
+  // Stop propagation - stops the event from bubbling upwards to parents.
+  // Stops the event from traveling upwards to parent elements
+  // e.stopPropagation();
+});
+
+// nav__links is the parent of nav__link
+// bubbling only occurs upwards, does not go downwards(doesnt effect child elements, only parents)
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('CONTAINER', e.target, e.currentTarget);
+});
+
+// nav is the parent of nav__links
+document.querySelector('.nav').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('NAV', e.target, e.currentTarget);
+
+  // use capture parameter.
+});
