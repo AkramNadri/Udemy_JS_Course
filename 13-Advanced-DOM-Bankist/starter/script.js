@@ -1,12 +1,18 @@
 'use strict';
 
-///////////////////////////////////////
-// Modal window
-
+// . is used for 'CLASS': class="btn--text btn--scroll-to
+const buttonScrollTo = document.querySelector('.btn--scroll-to');
+// # is used for 'ID': id="section--1
+const section1 = document.querySelector('#section--1');
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+
+// Modal window
 
 const openModal = function (e) {
   e.preventDefault();
@@ -35,6 +41,112 @@ document.addEventListener('keydown', function (e) {
 });
 
 //////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+
+// Button scroll
+
+buttonScrollTo.addEventListener('click', function (e) {
+  // get coords of the section we want to scroll to
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+
+  // relative to the viewpoint
+  console.log(e.target.getBoundingClientRect());
+
+  // current scroll position
+  // current position relative to the top of the page
+  // X = horizontal scroll
+  // Y = vertical scroll
+  console.log('Current scroll (X/Y)', window.pageXOffset, pageYOffset);
+
+  // Read the height and the width of the viewport
+  // will change depending on size of current window
+  // We use coords to tell JS where to scroll to
+  console.log(
+    'Height/Width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  // Scrolling
+  // window.scrollTo(
+  //   // current position + current scroll
+  //   s1coords.left + window.pageXOffset,
+  //   // current position + current scroll
+  //   s1coords.top + window.pageYOffset
+  // );
+
+  // oldschool way
+  // passing an object
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+
+  // Modern way
+  // Only works with modern browsers
+  section1.scrollIntoView({ behavior: 'smooth' });
+
+  // section1.scrollBy({
+  //   behavior: 'smooth',
+  // });
+  // section1.scrollTo({
+  //   behavior: 'smooth',
+  // });
+});
+
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+
+// PAGE NAVIGATION
+
+// This method is inneficient if we had for example 10 000 elements because we are adding the callback function to each of the elements, we are essentially creating a callback function for each element, and if we had more then 10k elements that would hinder performance. This is where event propagation comes in handy by creating 1 event which bubbles up to all parent elements instead of creating an event for each element.
+
+// ** /
+// Solution is to place the event on nav__links element, then when the user clicks one of the links the event is generated then bubbles up, then we catch the event in the common parent element. We can tell where the event originates from by using event.target
+// ** /
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+
+//     // all elements with the attribue of href will be selected
+//     const id = this.getAttribute('href');
+//     console.log(id);
+
+//     // we use the id variable that has all the href and apply scrollIntoView to them
+//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+//   });
+// });
+
+// Event delegation
+// 1. add event listener to common parent element
+// 2. determine what element originated the event(so that we can work with that element which the event was created)
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+
+  // matching strategy
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    console.log(id);
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
+// document.querySelector('.nav__link').addEventListener('click', function (e) {
+
+// }
+
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+
+// LECTURES
 
 // SELECTING, CREATING AND DELETING ELEMENTS
 
@@ -163,65 +275,67 @@ document.addEventListener('keydown', function (e) {
 // logo.classList.contains('c');
 
 //////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
 
 // IMPLEMENTING SMOOTH SCROLLING
 
-const buttonScrollTo = document.querySelector('.btn--scroll-to');
+// const buttonScrollTo = document.querySelector('.btn--scroll-to');
 
-// # is used for ID: id="section--1
-const section1 = document.querySelector('#section--1');
+// // # is used for ID: id="section--1
+// const section1 = document.querySelector('#section--1');
 
-buttonScrollTo.addEventListener('click', function (e) {
-  // get coords of the section we want to scroll to
-  const s1coords = section1.getBoundingClientRect();
-  console.log(s1coords);
+// buttonScrollTo.addEventListener('click', function (e) {
+//   // get coords of the section we want to scroll to
+//   const s1coords = section1.getBoundingClientRect();
+//   console.log(s1coords);
 
-  // relative to the viewpoint
-  console.log(e.target.getBoundingClientRect());
+//   // relative to the viewpoint
+//   console.log(e.target.getBoundingClientRect());
 
-  // current scroll position
-  // current position relative to the top of the page
-  // X = horizontal scroll
-  // Y = vertical scroll
-  console.log('Current scroll (X/Y)', window.pageXOffset, pageYOffset);
+//   // current scroll position
+//   // current position relative to the top of the page
+//   // X = horizontal scroll
+//   // Y = vertical scroll
+//   console.log('Current scroll (X/Y)', window.pageXOffset, pageYOffset);
 
-  // Read the height and the width of the viewport
-  // will change depending on size of current window
-  // We use coords to tell JS where to scroll to
-  console.log(
-    'Height/Width viewport',
-    document.documentElement.clientHeight,
-    document.documentElement.clientWidth
-  );
+//   // Read the height and the width of the viewport
+//   // will change depending on size of current window
+//   // We use coords to tell JS where to scroll to
+//   console.log(
+//     'Height/Width viewport',
+//     document.documentElement.clientHeight,
+//     document.documentElement.clientWidth
+//   );
 
-  // Scrolling
-  // window.scrollTo(
-  //   // current position + current scroll
-  //   s1coords.left + window.pageXOffset,
-  //   // current position + current scroll
-  //   s1coords.top + window.pageYOffset
-  // );
+//   // Scrolling
+//   // window.scrollTo(
+//   //   // current position + current scroll
+//   //   s1coords.left + window.pageXOffset,
+//   //   // current position + current scroll
+//   //   s1coords.top + window.pageYOffset
+//   // );
 
-  // oldschool way
-  // passing an object
-  // window.scrollTo({
-  //   left: s1coords.left + window.pageXOffset,
-  //   top: s1coords.top + window.pageYOffset,
-  //   behavior: 'smooth',
-  // });
+//   // oldschool way
+//   // passing an object
+//   // window.scrollTo({
+//   //   left: s1coords.left + window.pageXOffset,
+//   //   top: s1coords.top + window.pageYOffset,
+//   //   behavior: 'smooth',
+//   // });
 
-  // Modern way
-  // Only works with modern browsers
-  section1.scrollIntoView({ behavior: 'smooth' });
+//   // Modern way
+//   // Only works with modern browsers
+//   section1.scrollIntoView({ behavior: 'smooth' });
 
-  // section1.scrollBy({
-  //   behavior: 'smooth',
-  // });
-  // section1.scrollTo({
-  //   behavior: 'smooth',
-  // });
-});
+//   // section1.scrollBy({
+//   //   behavior: 'smooth',
+//   // });
+//   // section1.scrollTo({
+//   //   behavior: 'smooth',
+//   // });
+// });
 
+//////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
 
 // TYPES OF EVENT AND EVENT HANDLERS
@@ -268,47 +382,53 @@ buttonScrollTo.addEventListener('click', function (e) {
 
 // rgb(255, 255, 255)
 // Formula to generate a random integer
-const randomInt = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1) + min);
+// const randomInt = (min, max) =>
+//   Math.floor(Math.random() * (max - min + 1) + min);
 
-// console.log(randomInt(2, 7));
+// // console.log(randomInt(2, 7));
 
-// calls randomInt function, and generate numbers between 0-255 as argument passed through to randomInt
-const randomColor = () =>
-  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+// // calls randomInt function, and generate numbers between 0-255 as argument passed through to randomInt
+// const randomColor = () =>
+//   `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
 
-console.log(randomColor());
+// console.log(randomColor());
 
-// nav__link is the child element
-// example of event propagation, bubbling up when this event is clicked, it will bubble up to the parent elements that contains the event as well.
-document.querySelector('.nav__link').addEventListener('click', function (e) {
-  e.preventDefault();
-  // In an event handler the 'this' keyword points always to the element on which the eventListener is attached.
+// // nav__link is the child element
+// // example of event propagation, bubbling up when this event is clicked, it will bubble up to the parent elements that contains the event as well.
+// document.querySelector('.nav__link').addEventListener('click', function (e) {
+//   e.preventDefault();
+//   // In an event handler the 'this' keyword points always to the element on which the eventListener is attached.
 
-  this.style.backgroundColor = randomColor();
+//   this.style.backgroundColor = randomColor();
 
-  // E.TARGET = where the event originated(where the click happened). E.CURRENTTARGET is where the event handler is attached
-  console.log('LINK', e.target, e.currentTarget);
+//   // E.TARGET = where the event originated(where the click happened). E.CURRENTTARGET is where the event handler is attached
+//   console.log('LINK', e.target, e.currentTarget);
 
-  // currentTarget is exactly the same as the this keyword, this keyword is also pointing to the element on which the event listener is attached to
-  console.log(e.currentTarget === this);
+//   // currentTarget is exactly the same as the this keyword, this keyword is also pointing to the element on which the event listener is attached to
+//   console.log(e.currentTarget === this);
 
-  // Stop propagation - stops the event from bubbling upwards to parents.
-  // Stops the event from traveling upwards to parent elements
-  // e.stopPropagation();
-});
+//   // Stop propagation - stops the event from bubbling upwards to parents.
+//   // Stops the event from traveling upwards to parent elements
+//   // e.stopPropagation();
+// });
 
-// nav__links is the parent of nav__link
-// bubbling only occurs upwards, does not go downwards(doesnt effect child elements, only parents)
-document.querySelector('.nav__links').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log('CONTAINER', e.target, e.currentTarget);
-});
+// // nav__links is the parent of nav__link
+// // bubbling only occurs upwards, does not go downwards(doesnt effect child elements, only parents)
+// document.querySelector('.nav__links').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+//   console.log('CONTAINER', e.target, e.currentTarget);
+// });
 
-// nav is the parent of nav__links
-document.querySelector('.nav').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log('NAV', e.target, e.currentTarget);
+// // nav is the parent of nav__links
+// document.querySelector('.nav').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+//   console.log('NAV', e.target, e.currentTarget);
 
-  // use capture parameter.
-});
+//   // use capture parameter.
+// });
+
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+
+// EVENT DELEGATION: IMPLEMENTING PAGE NAVIGATION
+// implement smooth scolling to nav links
