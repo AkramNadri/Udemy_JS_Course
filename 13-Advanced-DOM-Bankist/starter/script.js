@@ -432,3 +432,51 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 
 // EVENT DELEGATION: IMPLEMENTING PAGE NAVIGATION
 // implement smooth scolling to nav links
+
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+
+// DOM TRAVERSING
+
+const h1 = document.querySelector('h1');
+
+// going downwards: child
+// this will go down the DOM tree and select the .highlight class elements which are child elements of h1.
+console.log(h1.querySelectorAll('.highlight'));
+
+console.log(h1.childNodes);
+
+// html collection children inside h1
+console.log(h1.children);
+
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'orangered';
+
+// Going upwards - selecting parents
+// selects direct parent
+console.log(h1.parentNode);
+
+console.log(h1.parentElement);
+
+// selects closest parent - opposite of querySelector -
+// finds parents no matter how far up the DOM tree
+h1.closest('.header').style.background = 'pearl';
+
+h1.closest('.header').style.background = 'maroon';
+
+// Going sideways: Siblings
+// Select previous or the next one
+
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
+
+// we go up to the parent first, then find all the children of that parent
+console.log(h1.parentElement.children);
+
+// we use spread operator to first select parent of h1 then all the children from that parent.
+[...h1.parentElement.children].forEach(function (e) {
+  if (e !== h1) e.style.transform = 'scale(0.5)';
+});
