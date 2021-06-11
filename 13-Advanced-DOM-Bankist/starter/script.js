@@ -140,6 +140,60 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 
 //////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
+
+// TABBED COMPONENT
+
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+
+// All because we have 3
+const tabsContent = document.querySelectorAll('.operations__content');
+
+// This method will attach an event listener too all the tabs
+// Not efficient because what if we had 200+ tabs
+// tabs.forEach(t => t.addEventListener('click', () => console.log('TAB')));
+
+// Use event delegation instead
+
+// 1. attach event handler on the common parent handler on all the elements we want
+// The common parent for operation tab buttons is operations__tab--container(tabsContainer)
+
+tabsContainer.addEventListener('click', function (e) {
+  // matching strategy
+  // We use 'closest()' here to select the button even if we click on the span in the button. Closest will find the parent with the specified class name as passed in argument(); Since the span is child element of btn, btn will be found using this closest method.
+  const clicked = e.target.closest('.operations__tab');
+
+  // Gaurd clause
+  // if statement will return early if some condition is matched
+  // if clicked does not exist, if statement will return, else if clicked does exist will execute code below
+  if (!clicked) return;
+
+  // Remove active classes
+  // We are clearing the class 'operations__tab--active' on all buttons and only adding this class to the buttons that are clicked
+  // Removing and adding classes to manipulate the page
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+
+  // Clear tabs content
+  // Clearing the content element
+  // Removing and adding classes to manipulate the page
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+
+  // will add the css class 'operations__tab--active' to the clicked button class. Multiple classes can be assigned on element(and element can have many classes)
+  clicked.classList.add('operations__tab--active');
+
+  // Active content area
+
+  // will display the dataset for clicked
+  // console.log(clicked.dataset.tab);
+
+  // add 'operations__content--active' to the current button that is clicked, template literal to find which button was clicked then apply add method to that button
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+});
+
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
@@ -438,45 +492,48 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 
 // DOM TRAVERSING
 
-const h1 = document.querySelector('h1');
+// const h1 = document.querySelector('h1');
 
-// going downwards: child
-// this will go down the DOM tree and select the .highlight class elements which are child elements of h1.
-console.log(h1.querySelectorAll('.highlight'));
+// // going downwards: child
+// // this will go down the DOM tree and select the .highlight class elements which are child elements of h1.
+// console.log(h1.querySelectorAll('.highlight'));
 
-console.log(h1.childNodes);
+// console.log(h1.childNodes);
 
-// html collection children inside h1
-console.log(h1.children);
+// // html collection children inside h1
+// console.log(h1.children);
 
-h1.firstElementChild.style.color = 'white';
-h1.lastElementChild.style.color = 'orangered';
+// h1.firstElementChild.style.color = 'white';
+// h1.lastElementChild.style.color = 'orangered';
 
-// Going upwards - selecting parents
-// selects direct parent
-console.log(h1.parentNode);
+// // Going upwards - selecting parents
+// // selects direct parent
+// console.log(h1.parentNode);
 
-console.log(h1.parentElement);
+// console.log(h1.parentElement);
 
-// selects closest parent - opposite of querySelector -
-// finds parents no matter how far up the DOM tree
-h1.closest('.header').style.background = 'pearl';
+// // selects closest parent - opposite of querySelector -
+// // finds parents no matter how far up the DOM tree
+// h1.closest('.header').style.background = 'pearl';
 
-h1.closest('.header').style.background = 'maroon';
+// h1.closest('.header').style.background = 'maroon';
 
-// Going sideways: Siblings
-// Select previous or the next one
+// // Going sideways: Siblings
+// // Select previous or the next one
 
-console.log(h1.previousElementSibling);
-console.log(h1.nextElementSibling);
+// console.log(h1.previousElementSibling);
+// console.log(h1.nextElementSibling);
 
-console.log(h1.previousSibling);
-console.log(h1.nextSibling);
+// console.log(h1.previousSibling);
+// console.log(h1.nextSibling);
 
-// we go up to the parent first, then find all the children of that parent
-console.log(h1.parentElement.children);
+// // we go up to the parent first, then find all the children of that parent
+// console.log(h1.parentElement.children);
 
-// we use spread operator to first select parent of h1 then all the children from that parent.
-[...h1.parentElement.children].forEach(function (e) {
-  if (e !== h1) e.style.transform = 'scale(0.5)';
-});
+// // we use spread operator to first select parent of h1 then all the children from that parent.
+// [...h1.parentElement.children].forEach(function (e) {
+//   if (e !== h1) e.style.transform = 'scale(0.5)';
+// });
+
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
