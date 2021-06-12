@@ -9,6 +9,16 @@ const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 
+// nav
+const nav = document.querySelector('.nav');
+
+// tabbed components
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+
+// All because we have 3
+const tabsContent = document.querySelectorAll('.operations__content');
+
 //////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
 
@@ -143,12 +153,6 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 
 // TABBED COMPONENT
 
-const tabs = document.querySelectorAll('.operations__tab');
-const tabsContainer = document.querySelector('.operations__tab-container');
-
-// All because we have 3
-const tabsContent = document.querySelectorAll('.operations__content');
-
 // This method will attach an event listener too all the tabs
 // Not efficient because what if we had 200+ tabs
 // tabs.forEach(t => t.addEventListener('click', () => console.log('TAB')));
@@ -191,6 +195,81 @@ tabsContainer.addEventListener('click', function (e) {
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add('operations__content--active');
 });
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+
+// Menu fade animation
+
+// event propagation here - we select the common parent element which is .nav
+// const nav = document.querySelector('.nav');
+
+// Create a function to handle the mouseover and mouseout
+// since we use the bind method to call this function we can only pass 1 argument, We dont need opacity argument anymore
+const handleOver = function (e, __opacity) {
+  // this keyword is equal to currentTarget
+  console.log(this, e.currentTarget);
+
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(el => {
+      // Since we used the bind method to call this function, we use the this keyword
+      if (el !== link) el.style.opacity = this;
+    });
+    logo.style.opacity = this;
+  }
+};
+
+// Solution 1
+// we can use the bind method
+// Bind method will point the this keyword to the specified function, in this case the eventListener will be bind to handleOver function
+// Passing "argument" into handler
+nav.addEventListener('mouseover', handleOver.bind(0.5));
+nav.addEventListener('mouseout', handleOver.bind(1));
+
+// Solution 2
+// Call handleOver funntion
+// e is the event that will get passed to handleOver function and 0.5 is the opacity argument
+// nav.addEventListener('mouseover', function (e) {
+//   handleOver(e, 0.5);
+// });
+// nav.addEventListener('mouseout', function (e) {
+//   handleOver(e, 1);
+// });
+
+// Code below has been refactored into function above using DRY technique
+
+// nav.addEventListener('mouseover', function (e) {
+// match element
+// check if the button clicked contains 'nav__link' class
+// if (e.target.classList.contains('nav__link')) {
+//   const link = e.target;
+//   // to find siblings we go up to parent(.nav) by using closest then we use querySelector to specify the class shared by all the siblings which is .nav__link
+//   const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+//   // img is for any image that has the img tag
+//   const logo = link.closest('.nav').querySelector('img');
+//   siblings.forEach(el => {
+//     if (el !== link) el.style.opacity = 0.5;
+//   });
+//   logo.style.opacity = 0.5;
+// }
+// });
+
+// nav.addEventListener('mouseout', function (e) {
+// if (e.target.classList.contains('nav__link')) {
+//   const link = e.target;
+//   const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+//   const logo = link.closest('.nav').querySelector('img');
+//   siblings.forEach(el => {
+//     if (el !== link) el.style.opacity = 1;
+//   });
+//   logo.style.opacity = 1;
+// }
+// });
 
 //////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
