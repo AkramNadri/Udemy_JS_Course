@@ -273,6 +273,19 @@ nav.addEventListener('mouseout', handleOver.bind(1));
 
 //////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
+
+// Sticky navigation
+const initialCoords = section1.getBoundingClientRect();
+console.log(initialCoords);
+
+// using scroll event listener is bad for performance because the event will be triggered everytime scroll occurs.
+window.addEventListener('scroll', function () {
+  if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+});
+
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
