@@ -284,7 +284,15 @@ window.addEventListener('scroll', function () {
   else nav.classList.remove('sticky');
 });
 
+// Better solution to sticky nav code below
+
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+
 // Solution 2 for sticky navigation
+
+// A BETTER WAY: THE INTERSECTION OBSERVER API
+// What is the intersection oberver API ? - allows our code to observe changes to the way a certain target element intersects another element or the way it intersects the viewport.
 
 //////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
