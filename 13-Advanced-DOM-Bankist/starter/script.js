@@ -326,11 +326,11 @@ const header = document.querySelector('.header');
 // The Element.getBoundingClientRect() method returns a DOMRect object providing information about the size of an element and its position relative to the viewport.
 // nav is 384 width x 90 height, we use
 const navHeight = nav.getBoundingClientRect().height;
-console.log(navHeight);
+// console.log(navHeight);
 
 const stickyNav = function (entries) {
   const [entry] = entries;
-  console.log(entry);
+  // console.log(entry);
 
   // isIntersecting is a property of IntersectionObserver which returns a boolean true or false if the element is intersecting
   if (entry.isIntersecting === true) {
@@ -354,6 +354,37 @@ const headerObserver = new IntersectionObserver(stickyNav, {
 headerObserver.observe(header);
 
 //////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+
+// REVEALING ELEMENTS ON SCROLL
+
+// Reveal sections
+
+const allSections = document.querySelectorAll('.section');
+
+const revealSection = function (entries, observer) {
+  const [entry] = entries;
+  console.log(entry);
+
+  // Gaurd Claus - if its not intersecting then return right away, but if it is intersecting then execute code below
+  if (!entry.isIntersecting) return;
+  // Find which target is currently in viewpoint and apply class to it
+  entry.target.classList.remove('section--hidden');
+
+  // once we are done observing the target we no longer need to observe them so we apply unobserve function to the targets that are being observed.
+  observer.unobserve(entry.target);
+};
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.1,
+});
+
+allSections.forEach(function (section) {
+  sectionObserver.observe(section);
+  console.log(section);
+});
+
 //////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
