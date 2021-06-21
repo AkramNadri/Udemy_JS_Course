@@ -364,7 +364,7 @@ const allSections = document.querySelectorAll('.section');
 
 const revealSection = function (entries, observer) {
   const [entry] = entries;
-  console.log(entry);
+  // console.log(entry);
 
   // Gaurd Claus - if its not intersecting then return right away, but if it is intersecting then execute code below
   if (!entry.isIntersecting) return;
@@ -382,10 +382,41 @@ const sectionObserver = new IntersectionObserver(revealSection, {
 
 allSections.forEach(function (section) {
   sectionObserver.observe(section);
-  console.log(section);
+  // console.log(section);
 });
 
 //////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+
+// LAZY LOADING IMAGES
+
+// this query will only select img elements with data-src property in the HTML
+const imgTargets = document.querySelectorAll('img[data-src]');
+const loading = function (entries, observer) {
+  const [entry] = entries;
+
+  console.log(entry);
+
+  if (!entry.isIntersecting) return;
+
+  // replace the lazy image with the real image
+  entry.target.src = entry.target.dataset.src;
+
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+  });
+
+  observer.unobserve(entry.target);
+};
+
+const imgObserver = new IntersectionObserver(loading, {
+  root: null,
+  threshold: 0,
+  rootMargin: '-100px',
+});
+
+imgTargets.forEach(img => imgObserver.observe(img));
+
 //////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
