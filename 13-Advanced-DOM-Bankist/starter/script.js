@@ -207,7 +207,7 @@ tabsContainer.addEventListener('click', function (e) {
 // since we use the bind method to call this function we can only pass 1 argument, We dont need opacity argument anymore
 const handleOver = function (e, __opacity) {
   // this keyword is equal to currentTarget
-  console.log(this, e.currentTarget);
+  // console.log(this, e.currentTarget);
 
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
@@ -275,14 +275,14 @@ nav.addEventListener('mouseout', handleOver.bind(1));
 //////////////****///////////////////// *******************
 
 // Sticky navigation
-const initialCoords = section1.getBoundingClientRect();
-console.log(initialCoords);
+// const initialCoords = section1.getBoundingClientRect();
+// console.log(initialCoords);
 
-// using scroll event listener is bad for performance because the event will be triggered everytime scroll occurs.
-window.addEventListener('scroll', function () {
-  if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
-  else nav.classList.remove('sticky');
-});
+// // using scroll event listener is bad for performance because the event will be triggered everytime scroll occurs.
+// window.addEventListener('scroll', function () {
+//   if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
+//   else nav.classList.remove('sticky');
+// });
 
 // Better solution to sticky nav code below
 
@@ -293,6 +293,65 @@ window.addEventListener('scroll', function () {
 
 // A BETTER WAY: THE INTERSECTION OBSERVER API
 // What is the intersection oberver API ? - allows our code to observe changes to the way a certain target element intersects another element or the way it intersects the viewport.
+
+// entries is an array of the threshold entries
+// const obsCallback = function (entries, observer) {
+//   entries.forEach(entry => {
+//     console.log(entry);
+//   });
+// };
+
+// const obsOptions = {
+//   // if section1 target intersects the viewport at 0.10% then obsCallback function will be called
+
+//   // root is the viewport - viewport is your entire screen, so once the target reaches approx. the threshold that has been set, at the point the viewport has intersected with the observed target
+//   root: null,
+
+//   // the event will trigger when this threshold is reached
+//   // threshold set to %10, so once the target element is atleast %10 visible on our viewport, event will trigger.
+//   // 0 means the trigger will immediately happen when target comes into view or leaves view.
+//   // 1 means the threshold is met once %100 of the target is visible on the viewport
+//   threshold: [0, 0.2],
+// };
+
+// // we pass 2 arguments obsCallback is the function that will be called when the options/configurations in obsOptions are met.
+// const observer = new IntersectionObserver(obsCallback, obsOptions);
+
+// // section1 is our target
+// observer.observe(section1);
+
+// We will observe the header element
+const header = document.querySelector('.header');
+
+// The Element.getBoundingClientRect() method returns a DOMRect object providing information about the size of an element and its position relative to the viewport.
+// nav is 384 width x 90 height, we use
+const navHeight = nav.getBoundingClientRect().height;
+console.log(navHeight);
+
+const stickyNav = function (entries) {
+  const [entry] = entries;
+  console.log(entry);
+
+  // isIntersecting is a property of IntersectionObserver which returns a boolean true or false if the element is intersecting
+  if (entry.isIntersecting === true) {
+    nav.classList.remove('sticky');
+  } else {
+    nav.classList.add('sticky');
+  }
+};
+
+// we can create the options inside this callback function
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  // when %0 of the header is visible or when the target is completely out of view, then we want something to happen
+  threshold: 0,
+
+  // rootMargin will trigger the event when the target is 90px away
+  // hardcoding this 90px is not a good idea because the screens are dynamic and always changing, so we need to set this as a dynamic number which will change depending on user or device or viewport.
+  rootMargin: `-${navHeight}px`,
+});
+
+headerObserver.observe(header);
 
 //////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
