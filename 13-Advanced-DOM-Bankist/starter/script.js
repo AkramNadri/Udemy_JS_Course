@@ -410,13 +410,101 @@ const loading = function (entries, observer) {
 };
 
 const imgObserver = new IntersectionObserver(loading, {
-  root: null,
+  root: null, //  = viewport
   threshold: 0,
   rootMargin: '-100px',
 });
 
 imgTargets.forEach(img => imgObserver.observe(img));
 
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+
+// BUILDING SLIDER COMPONENT
+
+const slides = document.querySelectorAll('.slide')
+const btnLeft = document.querySelector('.slider__btn--left')
+const btnRight = document.querySelector('.slider__btn--right')
+
+let currentSlide = 0;
+const maxSlide = slides.length
+
+//
+const slider = document.querySelector('.slider')
+slider.style.transform = 'scale(0.6) translateX(-100px)'
+slider.style.overflow = 'visible'
+//
+
+
+// first slide should be at 0%, 2nd %100, %200, %300
+// the width of each of these images is %100.
+// slides.forEach((s, i) => s.style.transform = `translateX(${100 * i}%)`)
+
+const goToSlide = function(slide){
+
+  slides.forEach(
+    (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`))
+}
+
+// Calling function with 0 argument passed, 0 starting position of first slide
+goToSlide(0);
+
+// Go to next slide
+const nextSlide = function(){
+if(currentSlide === maxSlide - 1){
+    currentSlide = 0;
+  } else {
+    currentSlide++;
+  }
+  goToSlide(currentSlide)
+}
+
+// Go to previous slide
+const previousSlide = function(){
+if(currentSlide === 0){
+  currentSlide = maxSlide - 1;
+} else {
+  currentSlide--;
+}
+ goToSlide(currentSlide)
+}
+
+
+// next slide to the right, simply change the percentage on translateX
+btnRight.addEventListener('click', nextSlide)
+
+
+
+  // DRY - new function since this if statement is present in both left and right buttons
+  // if(currentSlide === maxSlide - 1){
+  //   currentSlide =0;
+  // } else {
+  //   currentSlide++;
+  // }
+
+  // DRY - replaced by function goToSlide
+//   // take the current and subtract current slide, 
+// slides.forEach(
+//   (s, i) => (s.style.transform = `translateX(${100 * (i - currentSlide)}%)`))
+//// -------------------------------------
+
+// currentSlide = 1
+
+btnLeft.addEventListener('click', previousSlide);
+
+//   if(currentSlide === maxSlide - 1){
+//     currentSlide =0;
+//   } else {
+//     currentSlide++;
+//   }
+
+//   // take the current and subtract current slide, 
+// // slides.forEach(
+// //   (s, i) => (s.style.transform = `translateX(${100 * (i + currentSlide)}%)`))
+
+// })
+
+//////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
