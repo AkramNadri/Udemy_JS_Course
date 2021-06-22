@@ -422,24 +422,47 @@ imgTargets.forEach(img => imgObserver.observe(img));
 
 // BUILDING SLIDER COMPONENT
 
+// PLACE ALL SLIDER CODE INTO 1 FUNCTION
+
+const slider = function(){
 const slides = document.querySelectorAll('.slide')
 const btnLeft = document.querySelector('.slider__btn--left')
 const btnRight = document.querySelector('.slider__btn--right')
-
-let currentSlide = 0;
+const dotContainer = document.querySelector('.dots')
 const maxSlide = slides.length
+let currentSlide = 0;
 
-//
-// const slider = document.querySelector('.slider')
-// slider.style.transform = 'scale(0.6) translateX(-100px)'
-// slider.style.overflow = 'visible'
-// //
+// FUNCTIONS --
+const createDots = function(){
 
+  // forEach iterates over slides and creates a button for each slide. i is the index per slide.
+slides.forEach(function(__, i){
+  
+dotContainer.insertAdjacentHTML('beforeend', `<button class="dots__dot" data-slide="${i}"></button>`)
+
+})
+};
+
+createDots();
+
+// which slide is the currently the active one and active dot
+// were passing the number index of slide through this slide argument
+const activeDot = function(slide){
+
+  // removing the class dots__dot--active from all dots
+document.querySelectorAll('.dots__dot').forEach(dot => dot.classList.remove('dots__dot--active'))
+
+  // how do we know the one dot thats activated ? 
+// we use data attribute
+// were selecting the active dot by passing the class and dataset to equal slide value which in this case is 1, 2 or 3. since there are only 3 slides. Then we add the class dots__dot--active to the currently selected dot.
+document.querySelector(`.dots__dot[data-slide="${slide}"]`).classList.add('.dots__dot--active')
+
+};
+
+activeDot(0);
 
 // first slide should be at 0%, 2nd %100, %200, %300
 // the width of each of these images is %100.
-// slides.forEach((s, i) => s.style.transform = `translateX(${100 * i}%)`)
-
 const goToSlide = function(slide){
 
   slides.forEach(
@@ -457,6 +480,7 @@ if(currentSlide === maxSlide - 1){
     currentSlide++;
   }
   goToSlide(currentSlide)
+  activeDot(currentSlide)
 }
 
 // Go to previous slide
@@ -467,14 +491,20 @@ if(currentSlide === 0){
   currentSlide--;
 }
  goToSlide(currentSlide)
+ activeDot(currentSlide)
 }
 
+const init = function(){
+ goToSlide(0);
+ createDots();
 
+ activeDot(0);
+}
+
+init();
+// EVENT HANDLERS
 // next slide to the right, simply change the percentage on translateX
 btnRight.addEventListener('click', nextSlide)
-
-
-
   // DRY - new function since this if statement is present in both left and right buttons
   // if(currentSlide === maxSlide - 1){
   //   currentSlide =0;
@@ -504,6 +534,43 @@ btnLeft.addEventListener('click', previousSlide);
 
 // })
 
+document.addEventListener('keydown', function(e){
+// same as below
+if(e.key === 'ArrowLeft') previousSlide();
+// short circuit
+e.key === 'ArrowRight' && nextSlide();
+})
+
+// Event delegation
+dotContainer.addEventListener('click', function(e){
+if(e.target.classList.contains('dots__dot')){
+
+  // this target has a dataset with slide
+  const slide = e.target.dataset.slide;
+
+  // same as above, curly braces here means the element is in the dataset. Html data-slide.
+  // const {slide} = e.target.dataset;
+  goToSlide(slide)
+  activeDot(slide)
+}
+})
+}
+slider();
+
+
+
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+
+// 
+
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
+//////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
