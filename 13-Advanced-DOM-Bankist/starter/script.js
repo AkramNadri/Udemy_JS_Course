@@ -430,10 +430,10 @@ let currentSlide = 0;
 const maxSlide = slides.length
 
 //
-const slider = document.querySelector('.slider')
-slider.style.transform = 'scale(0.6) translateX(-100px)'
-slider.style.overflow = 'visible'
-//
+// const slider = document.querySelector('.slider')
+// slider.style.transform = 'scale(0.6) translateX(-100px)'
+// slider.style.overflow = 'visible'
+// //
 
 
 // first slide should be at 0%, 2nd %100, %200, %300
