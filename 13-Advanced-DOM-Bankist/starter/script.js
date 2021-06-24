@@ -436,7 +436,7 @@ let currentSlide = 0;
 const createDots = function(){
 
   // forEach iterates over slides and creates a button for each slide. i is the index per slide.
-slides.forEach(function(__, i){
+slides.forEach(function(_, i){
   
 dotContainer.insertAdjacentHTML('beforeend', `<button class="dots__dot" data-slide="${i}"></button>`)
 
@@ -455,11 +455,11 @@ document.querySelectorAll('.dots__dot').forEach(dot => dot.classList.remove('dot
   // how do we know the one dot thats activated ? 
 // we use data attribute
 // were selecting the active dot by passing the class and dataset to equal slide value which in this case is 1, 2 or 3. since there are only 3 slides. Then we add the class dots__dot--active to the currently selected dot.
-document.querySelector(`.dots__dot[data-slide="${slide}"]`).classList.add('.dots__dot--active')
+document.querySelector(`.dots__dot[data-slide="${slide}"]`).classList.add('dots__dot--active')
 
 };
 
-activeDot(0);
+// activeDot(0);
 
 // first slide should be at 0%, 2nd %100, %200, %300
 // the width of each of these images is %100.
@@ -494,14 +494,8 @@ if(currentSlide === 0){
  activeDot(currentSlide)
 }
 
-const init = function(){
- goToSlide(0);
- createDots();
 
- activeDot(0);
-}
 
-init();
 // EVENT HANDLERS
 // next slide to the right, simply change the percentage on translateX
 btnRight.addEventListener('click', nextSlide)
@@ -558,6 +552,14 @@ if(e.target.classList.contains('dots__dot')){
 slider();
 
 
+// const init = function(){
+//   goToSlide();
+//   createDots();
+
+//   activeDot(0);
+// }
+
+// init();
 
 //////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
@@ -915,3 +917,14 @@ slider();
 
 //////////////****///////////////////// *******************
 //////////////****///////////////////// *******************
+
+// LIFECYCLE DOM EVENTS
+// DOM content loaded - once the html has been completely parsed and converted to DOM tree. All scripts must be downloaded and executed before DOM content loaded event can happen.
+
+// We can listen to that event of DOM content loaded
+document.addEventListener('DOMContentLoaded', function(e){
+
+  console.log('HTML parsed and DOM tree built!');
+
+
+})
