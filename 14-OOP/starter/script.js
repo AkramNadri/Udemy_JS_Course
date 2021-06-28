@@ -93,3 +93,9 @@ console.log(jonas.hasOwnProperty('firstName')); // true
 
 // false since species is not directly in the object, it simply has access to it becuase of its prototype
 console.log(jonas.hasOwnProperty('species')); // false
+
+// --------------------------------------------------------
+// --------------------------------------------------------
+// --------------------------------------------------------
+
+// PROTOTYPAL INHERITANCE AND THE PROTOTYPE CHAIN
