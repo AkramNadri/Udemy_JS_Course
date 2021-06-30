@@ -22,7 +22,7 @@ const Person = function (firstName, birthYear) {
 // Only difference between regular function and constructor function is that we call the constructor function with 'new' keyword.
 
 const jonas = new Person('jonas', 1991);
-console.log(jonas);
+// console.log(jonas);
 // The process of 'new' keyword - 4 steps -----------------
 // 1. New 'empty object is created {}
 
@@ -36,9 +36,9 @@ console.log(jonas);
 
 const matilda = new Person('Matilda', 2044);
 const bill = new Person('Bill', 2022);
-console.log(matilda, bill);
+// console.log(matilda, bill);
 
-console.log(jonas instanceof Person);
+// console.log(jonas instanceof Person);
 
 // --------------------------------------------------------
 // --------------------------------------------------------
@@ -49,7 +49,7 @@ console.log(jonas instanceof Person);
 // Each and every function in JS automatically has a property called prototype, and that includes constructor function. Every object thats created by a certain constructor function will get access to all the methods and properties that we define on the constructor prototype property.
 
 //
-console.log(Person.prototype);
+// console.log(Person.prototype);
 
 // instead of creating a new function within each object creation, we can instead re-use this function calcAge within the object itself. Reusability.
 
@@ -60,20 +60,20 @@ Person.prototype.calcAge = function () {
 
 // since 'jonas' is an instance of Person, jonas has access to methods on Person. jonas has access to calcAge.
 // We have access to it since prototypal inheritance
-jonas.calcAge();
+// jonas.calcAge();
 
 // This is the prototype of jonas
 // The prototype of jonas object is essentially the prototype property of the constructor function
-console.log(jonas.__proto__);
+// console.log(jonas.__proto__);
 
-console.log(jonas.__proto__ === Person.prototype); // true
+// console.log(jonas.__proto__ === Person.prototype); // true
 
-// Check if one prototype is the same as another
-console.log(Person.prototype.isPrototypeOf(jonas)); // true
-console.log(Person.prototype.isPrototypeOf(matilda)); // true
+// // Check if one prototype is the same as another
+// console.log(Person.prototype.isPrototypeOf(jonas)); // true
+// console.log(Person.prototype.isPrototypeOf(matilda)); // true
 
-// This is not the prototype of Person
-console.log(Person.prototype.isPrototypeOf(Person)); // false
+// // This is not the prototype of Person
+// console.log(Person.prototype.isPrototypeOf(Person)); // false
 
 // How is jonas object connected to Person constructor ???
 // During step 3 of creating an object with Person constructor, a link is created between the object and constructor, we can see that link in 'console.log(Person.prototype.isPrototypeOf(jonas));' // true
@@ -86,16 +86,54 @@ console.log(Person.prototype.isPrototypeOf(Person)); // false
 Person.prototype.species = 'Homosapiens';
 
 // these objects now have a property called species in __proto__
-console.log(jonas, matilda);
+// console.log(jonas, matilda);
 
 // Check if a property exists in an object
-console.log(jonas.hasOwnProperty('firstName')); // true
+// console.log(jonas.hasOwnProperty('firstName')); // true
 
 // false since species is not directly in the object, it simply has access to it becuase of its prototype
-console.log(jonas.hasOwnProperty('species')); // false
+// console.log(jonas.hasOwnProperty('species')); // false
 
 // --------------------------------------------------------
 // --------------------------------------------------------
 // --------------------------------------------------------
 
 // PROTOTYPAL INHERITANCE AND THE PROTOTYPE CHAIN
+
+// --------------------------------------------------------
+// --------------------------------------------------------
+// --------------------------------------------------------
+
+// PROTOTYPAL INHERITANCE ON BUILT-IN OBJECTS
+
+// Going up the chain of prototypes
+console.log(jonas.__proto__);
+
+// higher up the chain
+// object.prototype
+console.log(jonas.__proto__.__proto__);
+
+// highest point in the chain now points to object.prototype
+// null because its the highest point in the scope chain
+console.log(jonas.__proto__.__proto__.__proto__); // null
+
+// points back to the constructor function
+console.dir(Person.prototype.constructor);
+
+const arr = [2, 4, 5, 5, 7, 7, 8, 9];
+console.log(arr.__proto__);
+
+// Arrays are created by an Array constructor function
+console.log(jonas.__proto__ === Array.prototype); // true
+
+// We can also add a method to the Array.prototype
+// Set object lets you store unique values of any type
+Array.prototype.unique = function () {
+  return [...new Set(this)];
+};
+
+// will return only unique values from the array
+// Generally not a good idea to create your own method inside a prototype because JS can eventually release a method with the same name as your that will work or do something different. Also multiple developers working on the same project and each implementing their own methods can cause bugs
+console.log(arr.unique());
+
+// const h1 = document.querySelector('h1');
