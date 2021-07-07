@@ -167,31 +167,88 @@ GOOD LUCK 😀
 
 // 1. Car constructor function
 
-const Car = function (make, speed) {
-  this.make = make;
-  this.speed = speed;
-  //
+// const Car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+//   //
+// };
+
+// // 2. Accelerate method - increase cars speed by 10 and log it
+// Car.prototype.accelerate = function () {
+//   console.log((this.speed += 10));
+// };
+
+// // 3. Brake method - decrease cars speed by 5 and log it.
+// Car.prototype.brake = function () {
+//   console.log((this.speed -= 5));
+// };
+
+// // 4. Create 2 Car objects and call Accelerate and Brake.
+
+// const car1 = new Car('Honda', 200);
+// const car2 = new Car('McLarenP1', 400);
+
+// console.log(car1, car2);
+
+// // calling accelerate method on car1 and car2 objects
+// car1.accelerate();
+// car2.brake();
+
+// car1.brake();
+
+// --------------------------------------------------------
+// --------------------------------------------------------
+
+// ES6 CLASSES
+
+// Classes in JS are just sugar syntax for constructor functions. They still implement prototypal syntax.
+// Classes are still functions.
+
+// Implement Person using class
+
+// Class expression
+// const PersonCl = class {
+
+//   //
+// }
+
+// ** Recommended ** //
+// Class Decleration
+class PersonCl {
+  // constructor is a method of this class
+  // we pass in arguements
+  constructor(firstName, birthYear) {
+    // set properties of the object
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  // methods - all of the methods that we write in the class will be on the prototype of the objects, not on the objects themselves - prototype inheritance. This method will not be found in the objects, instead it will be in the objects __proto__
+  // methods will be added to .prototype property
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+}
+
+const pardis = new PersonCl('Pardis', 1988);
+const akram = new PersonCl('Akram', 1984);
+console.log(pardis);
+pardis.calcAge();
+akram.calcAge();
+
+console.log(pardis.__proto__ === PersonCl.prototype); // true
+
+// adding method manually to the prototype
+PersonCl.prototype.greet = function () {
+  console.log(`Hey ${this.firstName}`);
 };
 
-// 2. Accelerate method - increase cars speed by 10 and log it
-Car.prototype.accelerate = function () {
-  console.log((this.speed += 10));
-};
+pardis.greet();
 
-// 3. Brake method - decrease cars speed by 5 and log it.
-Car.prototype.brake = function () {
-  console.log((this.speed -= 5));
-};
+// 1. Classes are NOT hoisted. BUT function declerations ARE hoisted, which means we can use them before they are declared in the code.
 
-// 4. Create 2 Car objects and call Accelerate and Brake.
+// 2. Classes are also first-class citizens - we can pass them into functions and also return them from functions. That is because classes are really just a special kind of function behind the scenes.
 
-const car1 = new Car('Honda', 200);
-const car2 = new Car('McLarenP1', 400);
+// 3. Classes are executed in 'Strict Mode'.
 
-console.log(car1, car2);
-
-// calling accelerate method on car1 and car2 objects
-car1.accelerate();
-car2.brake();
-
-car1.brake();
+// USE 'CLASSES' OR 'CONSTRUCTOR FUNCTION' ? based on personal preference.
