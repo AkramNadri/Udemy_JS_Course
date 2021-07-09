@@ -217,9 +217,9 @@ GOOD LUCK 😀
 class PersonCl {
   // constructor is a method of this class
   // we pass in arguements
-  constructor(firstName, birthYear) {
+  constructor(fullName, birthYear) {
     // set properties of the object
-    this.firstName = firstName;
+    this.fullName = fullName;
     this.birthYear = birthYear;
   }
 
@@ -228,13 +228,36 @@ class PersonCl {
   calcAge() {
     console.log(2037 - this.birthYear);
   }
+
+  // manually created this method on line 265
+  // greet() {
+  //   console.log(`Hey ${this.firstName}`);
+  // }
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+
+  // "Data validation" to check if name contains spaces/if name is full name or not
+  // Since fullname already exists, we add _fullName which becomes a new property.
+  set fullName(name) {
+    // when creating a new object with class PersonCl, this checks wether the name includes a space which indicates its a full name, if no space is found '' will print alert.
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
 }
 
-const pardis = new PersonCl('Pardis', 1988);
-const akram = new PersonCl('Akram', 1984);
+const pardis = new PersonCl('Pardis Honarvar', 1988);
+const akram = new PersonCl('Akram Nadri', 1984);
 console.log(pardis);
 pardis.calcAge();
 akram.calcAge();
+console.log(akram.age);
+console.log(akram.__proto__);
 
 console.log(pardis.__proto__ === PersonCl.prototype); // true
 
@@ -247,8 +270,41 @@ pardis.greet();
 
 // 1. Classes are NOT hoisted. BUT function declerations ARE hoisted, which means we can use them before they are declared in the code.
 
-// 2. Classes are also first-class citizens - we can pass them into functions and also return them from functions. That is because classes are really just a special kind of function behind the scenes.
+// 2. Classes are also first-class citizens - we can pass them into fuu89]nctions and also return them from functions. That is because classes are really just a special kind of function behind the scenes.
 
 // 3. Classes are executed in 'Strict Mode'.
 
 // USE 'CLASSES' OR 'CONSTRUCTOR FUNCTION' ? based on personal preference.
+
+// --------------------------------------------------------
+// --------------------------------------------------------
+// SETTERS AND GETTERS
+// Every object in JS can have Setter and getter property, we call these special properties assessor properties and the normal properties are called data properties.
+// getter and setter are functions that get and set a value.
+
+// creating a new object using PersonCl class, must include a full name with space for fullName property to be created on new object. Alert if name does not contain spaces
+// example below is only first name
+// const walter = new PersonCl('Walter', 1995); // Alert
+const walter = new PersonCl('Walter White', 1995);
+
+const account = {
+  owner: 'Akram',
+  movements: [200, 300, 500, 700],
+
+  // this will return an array with the last position
+  get latest() {
+    return this.movements.slice(-1).pop();
+  },
+  // Any setter method needs to have atleast 1 parameter
+  // Can add a new movement to the array
+  set latest(mov) {
+    this.movements.push(mov);
+  },
+};
+
+// we write it as if its just a property.
+console.log(account.latest);
+
+// how we pass a value into the setter
+account.latest = 50;
+console.log(account.movements);
