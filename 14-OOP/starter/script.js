@@ -7,21 +7,21 @@
 // Constructor functions always start with a capital letter.
 
 // => Arrow function will not work as a constructor function because it doesnt have its own 'this' keyword and we need that in a constructor function.
-// const Person = function (firstName, birthYear) {
-//   // instance properties
-//   this.firstName = firstName;
-//   this.birthYear = birthYear;
+const Person = function (firstName, birthYear) {
+  // instance properties
+  this.firstName = firstName;
+  this.birthYear = birthYear;
 
-// Never create a method inside a constructor functions !!
-// imagine we need to create 100 or thousands of Person object using this constructor function, what would happen is each of these objects would carry around this function, we would create thousands of copies of this function which is bad for performance.
-//   this.calcAge = function () {
-//     console.log(2037 - this.birthYear);
-//   };
-// };
+  // Never create a method inside a constructor functions !!
+  // imagine we need to create 100 or thousands of Person object using this constructor function, what would happen is each of these objects would carry around this function, we would create thousands of copies of this function which is bad for performance.
+  //   this.calcAge = function () {
+  //     console.log(2037 - this.birthYear);
+  //   };
+};
 
 // Only difference between regular function and constructor function is that we call the constructor function with 'new' keyword.
 
-// const jonas = new Person('jonas', 1991);
+const jonas = new Person('jonas', 1991);
 // console.log(jonas);
 
 //
@@ -48,6 +48,19 @@
 // console.log(matilda, bill);
 
 // console.log(jonas instanceof Person);
+
+// Static method
+Person.hey = function () {
+  console.log('Hey there ');
+  // this is pointing to entire Person constructor
+  console.log(this);
+};
+
+// the object calling the method, this will work.
+// whatever object is calling the method will have the this keyword
+Person.hey();
+// This static method is not inherited, it is not in prototype, so there is no wau jonas can inherit it.
+// jonas.hey(); // TypeError
 
 // --------------------------------------------------------
 // --------------------------------------------------------
@@ -225,6 +238,7 @@ class PersonCl {
 
   // methods - all of the methods that we write in the class will be on the prototype of the objects, not on the objects themselves - prototype inheritance. This method will not be found in the objects, instead it will be in the objects __proto__
   // methods will be added to .prototype property
+  // ***!!! Instance method - these are methods that will be added to the prototype property so that all instance will have acces to them, hence the name instance method
   calcAge() {
     console.log(2037 - this.birthYear);
   }
@@ -241,13 +255,19 @@ class PersonCl {
   // "Data validation" to check if name contains spaces/if name is full name or not
   // Since fullname already exists, we add _fullName which becomes a new property.
   set fullName(name) {
-    // when creating a new object with class PersonCl, this checks wether the name includes a space which indicates its a full name, if no space is found '' will print alert.
+    // when creating a new object with class PersonCl, this checks wether the name includes a space which indicates its a fu ll name, if no space is found '' will print alert.
     if (name.includes(' ')) this._fullName = name;
     else alert(`${name} is not a full name`);
   }
 
   get fullName() {
     return this._fullName;
+  }
+
+  // Static method
+  static hey() {
+    console.log('Hey there');
+    console.log(this);
   }
 }
 
@@ -267,6 +287,8 @@ PersonCl.prototype.greet = function () {
 };
 
 pardis.greet();
+
+PersonCl.hey();
 
 // 1. Classes are NOT hoisted. BUT function declerations ARE hoisted, which means we can use them before they are declared in the code.
 
@@ -308,3 +330,9 @@ console.log(account.latest);
 // how we pass a value into the setter
 account.latest = 50;
 console.log(account.movements);
+
+// --------------------------------------------------------
+// --------------------------------------------------------
+// --------------------------------------------------------
+
+// STATIC METHODS
