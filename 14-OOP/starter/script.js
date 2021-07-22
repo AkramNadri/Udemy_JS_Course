@@ -2,7 +2,7 @@
 
 // CONSTRUCTOR FUNCTION AND THE NEW OPERATOR ----
 
-// A constructor is a completely normal function, the only difference between a regular function and a constructor function is the we call a constructor function with the 'new' operator.
+// A constructor is a completely normal function, the only difference between a regular function and a constructor function is we call a constructor function with the 'new' operator.
 
 // Constructor functions always start with a capital letter.
 
@@ -50,15 +50,15 @@ const jonas = new Person('jonas', 1991);
 // console.log(jonas instanceof Person);
 
 // Static method
-Person.hey = function () {
-  console.log('Hey there ');
-  // this is pointing to entire Person constructor
-  console.log(this);
-};
+// Person.hey = function () {
+//   console.log('Hey there ');
+//   // this is pointing to entire Person constructor
+//   console.log(this);
+// };
 
-// the object calling the method, this will work.
-// whatever object is calling the method will have the this keyword
-Person.hey();
+// // the object calling the method, this will work.
+// // whatever object is calling the method will have the this keyword
+// Person.hey();
 // This static method is not inherited, it is not in prototype, so there is no wau jonas can inherit it.
 // jonas.hey(); // TypeError
 
@@ -227,68 +227,68 @@ GOOD LUCK 😀
 
 // ** Recommended ** //
 // Class Decleration
-class PersonCl {
-  // constructor is a method of this class
-  // we pass in arguements
-  constructor(fullName, birthYear) {
-    // set properties of the object
-    this.fullName = fullName;
-    this.birthYear = birthYear;
-  }
+// class PersonCl {
+//   // constructor is a method of this class
+//   // we pass in arguements
+//   constructor(fullName, birthYear) {
+//     // set properties of the object
+//     this.fullName = fullName;
+//     this.birthYear = birthYear;
+//   }
 
-  // methods - all of the methods that we write in the class will be on the prototype of the objects, not on the objects themselves - prototype inheritance. This method will not be found in the objects, instead it will be in the objects __proto__
-  // methods will be added to .prototype property
-  // ***!!! Instance method - these are methods that will be added to the prototype property so that all instance will have acces to them, hence the name instance method
-  calcAge() {
-    console.log(2037 - this.birthYear);
-  }
+//   // methods - all of the methods that we write in the class will be on the prototype of the objects, not on the objects themselves - prototype inheritance. This method will not be found in the objects, instead it will be in the objects __proto__
+//   // methods will be added to .prototype property
+//   // ***!!! Instance method - these are methods that will be added to the prototype property so that all instance will have acces to them, hence the name instance method
+//   calcAge() {
+//     console.log(2037 - this.birthYear);
+//   }
 
-  // manually created this method on line 265
-  // greet() {
-  //   console.log(`Hey ${this.firstName}`);
-  // }
+//   // manually created this method on line 265
+//   // greet() {
+//   //   console.log(`Hey ${this.firstName}`);
+//   // }
 
-  get age() {
-    return 2037 - this.birthYear;
-  }
+//   get age() {
+//     return 2037 - this.birthYear;
+//   }
 
-  // "Data validation" to check if name contains spaces/if name is full name or not
-  // Since fullname already exists, we add _fullName which becomes a new property.
-  set fullName(name) {
-    // when creating a new object with class PersonCl, this checks wether the name includes a space which indicates its a fu ll name, if no space is found '' will print alert.
-    if (name.includes(' ')) this._fullName = name;
-    else alert(`${name} is not a full name`);
-  }
+//   // "Data validation" to check if name contains spaces/if name is full name or not
+//   // Since fullname already exists, we add _fullName which becomes a new property.
+//   set fullName(name) {
+//     // when creating a new object with class PersonCl, this checks wether the name includes a space which indicates its a fu ll name, if no space is found '' will print alert.
+//     if (name.includes(' ')) this._fullName = name;
+//     else alert(`${name} is not a full name`);
+//   }
 
-  get fullName() {
-    return this._fullName;
-  }
+//   get fullName() {
+//     return this._fullName;
+//   }
 
-  // Static method
-  static hey() {
-    console.log('Hey there');
-    console.log(this);
-  }
-}
+//   // Static method
+//   static hey() {
+//     console.log('Hey there');
+//     console.log(this);
+//   }
+// }
 
-const pardis = new PersonCl('Pardis Honarvar', 1988);
-const akram = new PersonCl('Akram Nadri', 1984);
-console.log(pardis);
-pardis.calcAge();
-akram.calcAge();
-console.log(akram.age);
-console.log(akram.__proto__);
+// const pardis = new PersonCl('Pardis Honarvar', 1988);
+// const akram = new PersonCl('Akram Nadri', 1984);
+// console.log(pardis);
+// pardis.calcAge();
+// akram.calcAge();
+// console.log(akram.age);
+// console.log(akram.__proto__);
 
-console.log(pardis.__proto__ === PersonCl.prototype); // true
+// console.log(pardis.__proto__ === PersonCl.prototype); // true
 
-// adding method manually to the prototype
-PersonCl.prototype.greet = function () {
-  console.log(`Hey ${this.firstName}`);
-};
+// // adding method manually to the prototype
+// PersonCl.prototype.greet = function () {
+//   console.log(`Hey ${this.firstName}`);
+// };
 
-pardis.greet();
+// pardis.greet();
 
-PersonCl.hey();
+// PersonCl.hey();
 
 // 1. Classes are NOT hoisted. BUT function declerations ARE hoisted, which means we can use them before they are declared in the code.
 
@@ -307,32 +307,83 @@ PersonCl.hey();
 // creating a new object using PersonCl class, must include a full name with space for fullName property to be created on new object. Alert if name does not contain spaces
 // example below is only first name
 // const walter = new PersonCl('Walter', 1995); // Alert
-const walter = new PersonCl('Walter White', 1995);
+// const walter = new PersonCl('Walter White', 1995);
 
-const account = {
-  owner: 'Akram',
-  movements: [200, 300, 500, 700],
+// const account = {
+//   owner: 'Akram',
+//   movements: [200, 300, 500, 700],
 
-  // this will return an array with the last position
-  get latest() {
-    return this.movements.slice(-1).pop();
-  },
-  // Any setter method needs to have atleast 1 parameter
-  // Can add a new movement to the array
-  set latest(mov) {
-    this.movements.push(mov);
-  },
-};
+//   // this will return an array with the last position
+//   get latest() {
+//     return this.movements.slice(-1).pop();
+//   },
+//   // Any setter method needs to have atleast 1 parameter
+//   // Can add a new movement to the array
+//   set latest(mov) {
+//     this.movements.push(mov);
+//   },
+// };
 
-// we write it as if its just a property.
-console.log(account.latest);
+// // we write it as if its just a property.
+// console.log(account.latest);
 
-// how we pass a value into the setter
-account.latest = 50;
-console.log(account.movements);
+// // how we pass a value into the setter
+// account.latest = 50;
+// console.log(account.movements);
 
 // --------------------------------------------------------
 // --------------------------------------------------------
 // --------------------------------------------------------
 
 // STATIC METHODS
+
+// --------------------------------------------------------
+// --------------------------------------------------------
+
+// OBJECT.CREATE
+// Learned about constructor functions and ES6 Classes, there is a 3rd way of implementing prototypal inheritance or delegation. Function called Object.create.
+
+// Object.create
+// no prototype properties, no constructor functions and no "new" operator
+
+// ~~~ manually set the prototype of an object to any other object that we want. ~~~~
+
+// Create an object is going to be the prototype of all the Person objects.
+
+// Implementing prototypal inheritance in a completely different way below ! ~~
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+
+  // This is not a constructor function !!!
+  // We are not using the "new" keyword to call this.
+  // Manually initializing an object
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+// Create an object and inherit prototype from PersonProto
+const steven = Object.create(PersonProto);
+
+console.log(steven);
+
+// Manually create properties
+steven.name = 'Steven';
+steven.birthYear = 2002;
+
+// steven has access to calcAge - delegation - since it has the __proto__ from PersonProto object
+steven.calcAge();
+
+console.log(steven.__proto__ === PersonProto);
+
+// Create another object
+const sarah = Object.create(PersonProto);
+sarah.init('sarah', 1979);
+sarah.calcAge();
+console.log(sarah);
+// --------------------------------------------------------
+// --------------------------------------------------------
+// --------------------------------------------------------
