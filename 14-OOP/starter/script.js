@@ -7,21 +7,21 @@
 // Constructor functions always start with a capital letter.
 
 // => Arrow function will not work as a constructor function because it doesnt have its own 'this' keyword and we need that in a constructor function.
-const Person = function (firstName, birthYear) {
-  // instance properties
-  this.firstName = firstName;
-  this.birthYear = birthYear;
+// const Person = function (firstName, birthYear) {
+//   // instance properties
+//   this.firstName = firstName;
+//   this.birthYear = birthYear;
 
-  // Never create a method inside a constructor functions !!
-  // imagine we need to create 100 or thousands of Person object using this constructor function, what would happen is each of these objects would carry around this function, we would create thousands of copies of this function which is bad for performance.
-  //   this.calcAge = function () {
-  //     console.log(2037 - this.birthYear);
-  //   };
-};
+// Never create a method inside a constructor functions !!
+// imagine we need to create 100 or thousands of Person object using this constructor function, what would happen is each of these objects would carry around this function, we would create thousands of copies of this function which is bad for performance.
+//   this.calcAge = function () {
+//     console.log(2037 - this.birthYear);
+//   };
+// };
 
 // Only difference between regular function and constructor function is that we call the constructor function with 'new' keyword.
 
-const jonas = new Person('jonas', 1991);
+// const jonas = new Person('jonas', 1991);
 // console.log(jonas);
 
 //
@@ -412,44 +412,122 @@ GOOD LUCK 😀
 // };
 
 // 1.
-class Car {
-  //
-  constructor(make, speed) {
-    this.make = make;
-    this.speed = speed;
-  }
+// class Car {
+//   //
+//   constructor(make, speed) {
+//     this.make = make;
+//     this.speed = speed;
+//   }
 
-  // since this method is in a class we dont need to write it out as 'Car.prototype.accelerate'
-  accelerate() {
-    this.speed += 10;
-    console.log(`${this.make} is going at ${this.speed} km/h`);
-  }
+//   // since this method is in a class we dont need to write it out as 'Car.prototype.accelerate'
+//   accelerate() {
+//     this.speed += 10;
+//     console.log(`${this.make} is going at ${this.speed} km/h`);
+//   }
 
-  brake() {
-    this.speed -= 5;
-    console.log(`${this.make} is going ${this.speed} km/h`);
-  }
+//   brake() {
+//     this.speed -= 5;
+//     console.log(`${this.make} is going ${this.speed} km/h`);
+//   }
 
-  // 2.
-  get speedUS() {
-    return this.speed / 1.6;
-  }
+//   // 2.
+//   get speedUS() {
+//     return this.speed / 1.6;
+//   }
 
-  // 3.
-  set speedUS(speed) {
-    this.speed = speed * 1.6;
-  }
-}
+//   // 3.
+//   set speedUS(speed) {
+//     this.speed = speed * 1.6;
+//   }
+// }
 
-// 4.
-const ford = new Car('ford', 120);
+// // 4.
+// const ford = new Car('ford', 120);
 
-console.log(ford);
+// console.log(ford);
 
-console.log(ford.speedUS); // calling getter divide 1.6=75
+// console.log(ford.speedUS); // calling getter divide 1.6=75
 
-ford.speedUS = 40; // convert miles to km=64
-console.log(ford);
+// ford.speedUS = 40; // convert miles to km=64
+// console.log(ford);
 
-ford.accelerate(); // increase speed by 10
-ford.brake(); // decrease speed by 5
+// ford.accelerate(); // increase speed by 10
+// ford.brake(); // decrease speed by 5
+
+// --------------------------------------------------------
+// --------------------------------------------------------
+// --------------------------------------------------------
+
+// INHERITANCE BETWEEN 'CLASSES': CONSTRUCTOR FUNCTIONS
+
+// ~~~~ //
+// 1. CONSTRUCTOR FUNCTIONS
+// 2. ES6 CLASSES
+// 3. OBJECT.CREATE()
+// ~~~~ //
+
+// PROTOTYPAL INHERITANCE - CONSTRUCTOR FUNCTIONS, ES6 CLASSES AND OBJECT.CREATE - ALLOW OBJECTS TO INHERIT METHODS FROM ITS PROTOTYPE - DELEGATE THEIR BEHAVIOUR TO THE PROTOTYPES.
+
+// @ Inheritance -- Child classes can share behaviour from their parent classes
+
+// Parent Class !!!
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
+
+// Child Class !!!
+// Student constructor
+const Student = function (firstName, birthYear, course) {
+  // we use the call method here and set the this keyword to the new object
+  Person.call(this, firstName, birthYear);
+
+  // DRY - solution above
+  // this.firstName = firstName;
+  // this.birthYear = birthYear;
+  this.course = course;
+};
+
+// student.proto is now an object that inherits from Person.proto
+Student.prototype = Object.create(Person.prototype);
+
+// method
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this.firstName} and i study ${this.course}`);
+};
+
+const akram = new Student('akram', 2020, 'Computer science');
+console.log(akram);
+
+akram.introduce();
+
+akram.calcAge();
+
+// Person because on line 496 we set the proto of Student to Person.
+console.log(akram.__proto__); // Person
+console.log(akram.__proto__.__proto__);
+
+// Change proto of akram object to Student
+Student.prototype.constructor = Student;
+console.dir(Student.prototype.constructor);
+console.log(akram);
+
+console.log(akram instanceof Student); // true
+console.log(akram instanceof Person); // true - because we linked the prototypes together
+console.log(akram instanceof Object); // true
+
+///////////////////////////////////////
+// Coding Challenge #3
+
+/* 
+1. Use a constructor function to implement an Electric Car (called EV) as a CHILD "class" of Car. Besides a make and current speed, the EV also has the current battery charge in % ('charge' property);
+2. Implement a 'chargeBattery' method which takes an argument 'chargeTo' and sets the battery charge to 'chargeTo';
+3. Implement an 'accelerate' method that will increase the car's speed by 20, and decrease the charge by 1%. Then log a message like this: 'Tesla going at 140 km/h, with a charge of 22%';
+4. Create an electric car object and experiment with calling 'accelerate', 'brake' and 'chargeBattery' (charge to 90%). Notice what happens when you 'accelerate'! HINT: Review the definiton of polymorphism 😉
+DATA CAR 1: 'Tesla' going at 120 km/h, with a charge of 23%
+GOOD LUCK 😀
+*/
