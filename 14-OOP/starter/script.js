@@ -214,7 +214,7 @@ GOOD LUCK 😀
 
 // ES6 CLASSES
 
-// Classes in JS are just sugar syntax for constructor functions. They still implement prototypal syntax.
+// Classes in JS are just syntactic sugar for constructor functions. They still implement prototypal syntax.
 // Classes are still functions.
 
 // Implement Person using class
@@ -255,7 +255,7 @@ GOOD LUCK 😀
 //   // "Data validation" to check if name contains spaces/if name is full name or not
 //   // Since fullname already exists, we add _fullName which becomes a new property.
 //   set fullName(name) {
-//     // when creating a new object with class PersonCl, this checks wether the name includes a space which indicates its a fu ll name, if no space is found '' will print alert.
+//     // when creating a new object with class PersonCl, this checks wether the name includes a space which indicates its a full name, if no space is found '' will print alert.
 //     if (name.includes(' ')) this._fullName = name;
 //     else alert(`${name} is not a full name`);
 //   }
@@ -292,7 +292,7 @@ GOOD LUCK 😀
 
 // 1. Classes are NOT hoisted. BUT function declerations ARE hoisted, which means we can use them before they are declared in the code.
 
-// 2. Classes are also first-class citizens - we can pass them into fuu89]nctions and also return them from functions. That is because classes are really just a special kind of function behind the scenes.
+// 2. Classes are also first-class citizens - we can pass them into functions and also return them from functions. That is because classes are really just a special kind of function behind the scenes.
 
 // 3. Classes are executed in 'Strict Mode'.
 
@@ -351,39 +351,105 @@ GOOD LUCK 😀
 // Create an object is going to be the prototype of all the Person objects.
 
 // Implementing prototypal inheritance in a completely different way below ! ~~
-const PersonProto = {
-  calcAge() {
-    console.log(2037 - this.birthYear);
-  },
+// const PersonProto = {
+//   calcAge() {
+//     console.log(2037 - this.birthYear);
+//   },
 
-  // This is not a constructor function !!!
-  // We are not using the "new" keyword to call this.
-  // Manually initializing an object
-  init(firstName, birthYear) {
-    this.firstName = firstName;
-    this.birthYear = birthYear;
-  },
-};
+//   // This is not a constructor function !!!
+//   // We are not using the "new" keyword to call this.
+//   // Manually initializing an object
+//   init(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   },
+// };
 
-// Create an object and inherit prototype from PersonProto
-const steven = Object.create(PersonProto);
+// // Create an object and inherit prototype from PersonProto
+// const steven = Object.create(PersonProto);
 
-console.log(steven);
+// console.log(steven);
 
-// Manually create properties
-steven.name = 'Steven';
-steven.birthYear = 2002;
+// // Manually create properties
+// steven.name = 'Steven';
+// steven.birthYear = 2002;
 
-// steven has access to calcAge - delegation - since it has the __proto__ from PersonProto object
-steven.calcAge();
+// // steven has access to calcAge - delegation - since it has the __proto__ from PersonProto object
+// steven.calcAge();
 
-console.log(steven.__proto__ === PersonProto);
+// console.log(steven.__proto__ === PersonProto);
 
-// Create another object
-const sarah = Object.create(PersonProto);
-sarah.init('sarah', 1979);
-sarah.calcAge();
-console.log(sarah);
+// // Create another object
+// const sarah = Object.create(PersonProto);
+// sarah.init('sarah', 1979);
+// sarah.calcAge();
+// console.log(sarah);
 // --------------------------------------------------------
 // --------------------------------------------------------
 // --------------------------------------------------------
+
+///////////////////////////////////////
+// Coding Challenge #2
+
+/* 
+1. Re-create challenge 1, but this time using an ES6 class;
+
+2. Add a getter called 'speedUS' which returns the current speed in mi/h (divide by 1.6);
+
+3. Add a setter called 'speedUS' which sets the current speed in mi/h (but converts it to km/h before storing the value, by multiplying the input by 1.6);
+
+4. Create a new car and experiment with the accelerate and brake methods, and with the getter and setter.
+
+
+DATA CAR 1: 'Ford' going at 120 km/h
+GOOD LUCK 😀
+*/
+
+// const Car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+//   //
+// };
+
+// 1.
+class Car {
+  //
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  // since this method is in a class we dont need to write it out as 'Car.prototype.accelerate'
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.make} is going at ${this.speed} km/h`);
+  }
+
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.make} is going ${this.speed} km/h`);
+  }
+
+  // 2.
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+
+  // 3.
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
+  }
+}
+
+// 4.
+const ford = new Car('ford', 120);
+
+console.log(ford);
+
+console.log(ford.speedUS); // calling getter divide 1.6=75
+
+ford.speedUS = 40; // convert miles to km=64
+console.log(ford);
+
+ford.accelerate(); // increase speed by 10
+ford.brake(); // decrease speed by 5
