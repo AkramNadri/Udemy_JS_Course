@@ -471,54 +471,58 @@ GOOD LUCK 😀
 // @ Inheritance -- Child classes can share behaviour from their parent classes
 
 // Parent Class !!!
-const Person = function (firstName, birthYear) {
-  this.firstName = firstName;
-  this.birthYear = birthYear;
-};
+// const Person = function (firstName, birthYear) {
+//   this.firstName = firstName;
+//   this.birthYear = birthYear;
+// };
 
-Person.prototype.calcAge = function () {
-  console.log(2037 - this.birthYear);
-};
+// Person.prototype.calcAge = function () {
+//   console.log(2037 - this.birthYear);
+// };
 
-// Child Class !!!
-// Student constructor
-const Student = function (firstName, birthYear, course) {
-  // we use the call method here and set the this keyword to the new object
-  Person.call(this, firstName, birthYear);
+// // Child Class !!!
+// // Student constructor
+// const Student = function (firstName, birthYear, course) {
+//   // we use the call method here and set the this keyword to the new object
+//   Person.call(this, firstName, birthYear);
 
-  // DRY - solution above
-  // this.firstName = firstName;
-  // this.birthYear = birthYear;
-  this.course = course;
-};
+//   // DRY - solution above
+//   // this.firstName = firstName;
+//   // this.birthYear = birthYear;
+//   this.course = course;
+// };
 
-// student.proto is now an object that inherits from Person.proto
-Student.prototype = Object.create(Person.prototype);
+// // student.proto is now an object that inherits from Person.proto
+// Student.prototype = Object.create(Person.prototype);
 
-// method
-Student.prototype.introduce = function () {
-  console.log(`My name is ${this.firstName} and i study ${this.course}`);
-};
+// // method
+// Student.prototype.introduce = function () {
+//   console.log(`My name is ${this.firstName} and i study ${this.course}`);
+// };
 
-const akram = new Student('akram', 2020, 'Computer science');
-console.log(akram);
+// const akram = new Student('akram', 2020, 'Computer science');
+// console.log(akram);
 
-akram.introduce();
+// akram.introduce();
 
-akram.calcAge();
+// akram.calcAge();
 
-// Person because on line 496 we set the proto of Student to Person.
-console.log(akram.__proto__); // Person
-console.log(akram.__proto__.__proto__);
+// // Person because on line 496 we set the proto of Student to Person.
+// console.log(akram.__proto__); // Person
+// console.log(akram.__proto__.__proto__);
 
-// Change proto of akram object to Student
-Student.prototype.constructor = Student;
-console.dir(Student.prototype.constructor);
-console.log(akram);
+// // Change proto of akram object to Student
+// Student.prototype.constructor = Student;
+// console.dir(Student.prototype.constructor);
+// console.log(akram);
 
-console.log(akram instanceof Student); // true
-console.log(akram instanceof Person); // true - because we linked the prototypes together
-console.log(akram instanceof Object); // true
+// console.log(akram instanceof Student); // true
+// console.log(akram instanceof Person); // true - because we linked the prototypes together
+// console.log(akram instanceof Object); // true
+
+// --------------------------------------------------------
+// --------------------------------------------------------
+// --------------------------------------------------------
 
 ///////////////////////////////////////
 // Coding Challenge #3
@@ -536,55 +540,123 @@ GOOD LUCK 😀
 */
 
 // 1.
-const Car = function (make, speed) {
-  this.make = make;
-  this.speed = speed;
-};
+// const Car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+// };
 
-const Ev = function (make, speed, charge) {
-  // this will point to Car object
-  Car.call(this, make, speed);
+// const Ev = function (make, speed, charge) {
+//   // this will point to Car object
+//   Car.call(this, make, speed);
 
-  this.charge = charge;
-};
+//   this.charge = charge;
+// };
 
-// Set prototype of Ev to Car, Car is parent class and Ev is child class
-Ev.prototype = Object.create(Car.prototype);
-Car.prototype.brake = function () {
-  this.speed -= 5;
-  console.log(`${this.make} is going at ${this.speed} km/h`);
-};
+// // Set prototype of Ev to Car, Car is parent class and Ev is child class
+// Ev.prototype = Object.create(Car.prototype);
+// Car.prototype.brake = function () {
+//   this.speed -= 5;
+//   console.log(`${this.make} is going at ${this.speed} km/h`);
+// };
 
-// 2.
-Ev.prototype.chargeBattery = function (chargeTo) {
-  //
-  this.charge = chargeTo;
-};
+// // 2.
+// Ev.prototype.chargeBattery = function (chargeTo) {
+//   //
+//   this.charge = chargeTo;
+// };
 
-// 3.
-Ev.prototype.accelerate = function () {
-  this.speed += 20;
-  this.charge--;
-  console.log(
-    `${this.make} going at ${this.speed}, with a charge of %${this.charge}`
-  );
-};
+// // 3.
+// Ev.prototype.accelerate = function () {
+//   this.speed += 20;
+//   this.charge--;
+//   console.log(
+//     `${this.make} going at ${this.speed}, with a charge of %${this.charge}`
+//   );
+// };
 
-// 4. Create new Ev object
-const tesla = new Ev('Tesla', 120, 23);
+// // 4. Create new Ev object
+// const tesla = new Ev('Tesla', 120, 23);
 
-//
-Ev.prototype.constructor = Ev;
+// //
+// Ev.prototype.constructor = Ev;
 
-console.log(tesla);
-tesla.chargeBattery(90);
-console.log(tesla);
+// console.log(tesla);
+// tesla.chargeBattery(90);
+// console.log(tesla);
 
-tesla.accelerate();
-tesla.accelerate();
-tesla.brake();
-tesla.accelerate();
-tesla.accelerate();
-tesla.accelerate();
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.brake();
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.accelerate();
 
-console.log(tesla);
+// console.log(tesla);
+
+// --------------------------------------------------------
+// --------------------------------------------------------
+// --------------------------------------------------------
+
+// INHERITANCE BETWEEN "CLASSES: ES6 CLASSES"
+class PersonCl {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+
+  set fullName(name) {
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+
+  static hey() {
+    console.log('Hey there');
+    console.log(this);
+  }
+}
+
+// Classes are really just a layer of abstraction over constructor functions.
+// To implement inheritance between ES6 Classes we only need 2 ingredients, we need the EXTEND keyword and the SUPER function.
+
+// extends - implements inheritance between StudentCl and PersonCl - will link the prototypes.
+// PersonCl is parent class and StudentCl is the child class.
+class StudentCl extends PersonCl {
+  // we still need a constructor
+  constructor(fullName, birthYear, course) {
+    // super is the constructor function of the parent class
+    // similar to Person.call(this, fullName, birthYear)
+    // Always needs to happen first because this call to the super function is responsible for creating the "this" keyword in this subclass.
+    super(fullName, birthYear);
+    this.course = course;
+  }
+
+  introduce() {
+    console.log(`My name is ${this.fullName} and i study ${this.course}`);
+  }
+
+  // Override calcAge method
+  // this new method overrode the one that was already there in the prototype chain, this new calcAge method appears first in the prototype chain, therefore it is essentially overriding the calcAge coming from the parent class.
+  calcAge() {
+    `Im ${2037 - this.birthYear} years old, but as a student i feel more like ${
+      2037 - this.birthYear + 10
+    }`;
+  }
+}
+
+const martha = new StudentCl('martha stewart', 2012, 'computer science');
+// const martha = new StudentCl('martha', 2012, 'computer science');
+
+martha.introduce();
+martha.calcAge();
