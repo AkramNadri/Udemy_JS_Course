@@ -598,65 +598,103 @@ GOOD LUCK 😀
 // --------------------------------------------------------
 
 // INHERITANCE BETWEEN "CLASSES: ES6 CLASSES"
-class PersonCl {
-  constructor(fullName, birthYear) {
-    this.fullName = fullName;
-    this.birthYear = birthYear;
-  }
+// class PersonCl {
+//   constructor(fullName, birthYear) {
+//     this.fullName = fullName;
+//     this.birthYear = birthYear;
+//   }
 
+//   calcAge() {
+//     console.log(2037 - this.birthYear);
+//   }
+
+//   get age() {
+//     return 2037 - this.birthYear;
+//   }
+
+//   set fullName(name) {
+//     if (name.includes(' ')) this._fullName = name;
+//     else alert(`${name} is not a full name`);
+//   }
+
+//   get fullName() {
+//     return this._fullName;
+//   }
+
+//   static hey() {
+//     console.log('Hey there');
+//     console.log(this);
+//   }
+// }
+
+// // Classes are really just a layer of abstraction over constructor functions.
+// // To implement inheritance between ES6 Classes we only need 2 ingredients, we need the EXTEND keyword and the SUPER function.
+
+// // extends - implements inheritance between StudentCl and PersonCl - will link the prototypes.
+// // PersonCl is parent class and StudentCl is the child class.
+// class StudentCl extends PersonCl {
+//   // we still need a constructor
+//   constructor(fullName, birthYear, course) {
+//     // super is the constructor function of the parent class
+//     // similar to Person.call(this, fullName, birthYear)
+//     // Always needs to happen first because this call to the super function is responsible for creating the "this" keyword in this subclass.
+//     super(fullName, birthYear);
+//     this.course = course;
+//   }
+
+//   introduce() {
+//     console.log(`My name is ${this.fullName} and i study ${this.course}`);
+//   }
+
+//   // Override calcAge method
+//   // this new method overrode the one that was already there in the prototype chain, this new calcAge method appears first in the prototype chain, therefore it is essentially overriding the calcAge coming from the parent class.
+//   calcAge() {
+//     `Im ${2037 - this.birthYear} years old, but as a student i feel more like ${
+//       2037 - this.birthYear + 10
+//     }`;
+//   }
+// }
+
+// const martha = new StudentCl('martha stewart', 2012, 'computer science');
+// // const martha = new StudentCl('martha', 2012, 'computer science');
+
+// martha.introduce();
+// martha.calcAge();
+
+// --------------------------------------------------------
+// --------------------------------------------------------
+// --------------------------------------------------------
+
+// INHERITANCE BETWEEN "CLASSES": OBJECT.CREATE
+
+const PersonProto = {
   calcAge() {
     console.log(2037 - this.birthYear);
-  }
+  },
 
-  get age() {
-    return 2037 - this.birthYear;
-  }
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
 
-  set fullName(name) {
-    if (name.includes(' ')) this._fullName = name;
-    else alert(`${name} is not a full name`);
-  }
+const steven = Object.create(PersonProto);
 
-  get fullName() {
-    return this._fullName;
-  }
+const StudentProto = Object.create(PersonProto);
 
-  static hey() {
-    console.log('Hey there');
-    console.log(this);
-  }
-}
+// Child prototype can reuse the init method from the PersonProto prototype which is the parent prototype.
+StudentProto.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
 
-// Classes are really just a layer of abstraction over constructor functions.
-// To implement inheritance between ES6 Classes we only need 2 ingredients, we need the EXTEND keyword and the SUPER function.
+StudentProto.introduce = function () {
+  console.log(`My name is ${this.firstName} and i study ${this.course}`);
+};
 
-// extends - implements inheritance between StudentCl and PersonCl - will link the prototypes.
-// PersonCl is parent class and StudentCl is the child class.
-class StudentCl extends PersonCl {
-  // we still need a constructor
-  constructor(fullName, birthYear, course) {
-    // super is the constructor function of the parent class
-    // similar to Person.call(this, fullName, birthYear)
-    // Always needs to happen first because this call to the super function is responsible for creating the "this" keyword in this subclass.
-    super(fullName, birthYear);
-    this.course = course;
-  }
+const jay = Object.create(StudentProto);
+jay.init('Jay', 2010, 'Computer Science');
+console.log(jay);
 
-  introduce() {
-    console.log(`My name is ${this.fullName} and i study ${this.course}`);
-  }
-
-  // Override calcAge method
-  // this new method overrode the one that was already there in the prototype chain, this new calcAge method appears first in the prototype chain, therefore it is essentially overriding the calcAge coming from the parent class.
-  calcAge() {
-    `Im ${2037 - this.birthYear} years old, but as a student i feel more like ${
-      2037 - this.birthYear + 10
-    }`;
-  }
-}
-
-const martha = new StudentCl('martha stewart', 2012, 'computer science');
-// const martha = new StudentCl('martha', 2012, 'computer science');
-
-martha.introduce();
-martha.calcAge();
+jay.introduce();
+jay.calcAge();
