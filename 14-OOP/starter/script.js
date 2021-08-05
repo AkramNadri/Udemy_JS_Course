@@ -87,7 +87,7 @@
 // This is the prototype of jonas
 // The prototype of jonas object is essentially the prototype property of the constructor function
 // console.log(jonas.__proto__);
-
+//
 // console.log(jonas.__proto__ === Person.prototype); // true
 
 // // Check if one prototype is the same as another
@@ -667,34 +667,92 @@ GOOD LUCK 😀
 
 // INHERITANCE BETWEEN "CLASSES": OBJECT.CREATE
 
-const PersonProto = {
-  calcAge() {
-    console.log(2037 - this.birthYear);
-  },
+// const PersonProto = {
+//   calcAge() {
+//     console.log(2037 - this.birthYear);
+//   },
 
-  init(firstName, birthYear) {
-    this.firstName = firstName;
-    this.birthYear = birthYear;
-  },
-};
+//   init(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   },
+// };
 
-const steven = Object.create(PersonProto);
+// const steven = Object.create(PersonProto);
 
-const StudentProto = Object.create(PersonProto);
+// const StudentProto = Object.create(PersonProto);
 
-// Child prototype can reuse the init method from the PersonProto prototype which is the parent prototype.
-StudentProto.init = function (firstName, birthYear, course) {
-  PersonProto.init.call(this, firstName, birthYear);
-  this.course = course;
-};
+// // Child prototype can reuse the init method from the PersonProto prototype which is the parent prototype.
+// StudentProto.init = function (firstName, birthYear, course) {
+//   PersonProto.init.call(this, firstName, birthYear);
+//   this.course = course;
+// };
 
-StudentProto.introduce = function () {
-  console.log(`My name is ${this.firstName} and i study ${this.course}`);
-};
+// StudentProto.introduce = function () {
+//   console.log(`My name is ${this.firstName} and i study ${this.course}`);
+// };
 
-const jay = Object.create(StudentProto);
-jay.init('Jay', 2010, 'Computer Science');
-console.log(jay);
+// const jay = Object.create(StudentProto);
+// jay.init('Jay', 2010, 'Computer Science');
+// console.log(jay);
 
-jay.introduce();
-jay.calcAge();
+// jay.introduce();
+// jay.calcAge();
+
+// --------------------------------------------------------
+// --------------------------------------------------------
+// --------------------------------------------------------
+
+// ANOTHER CLASS EXAMPLE
+
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+
+    // assign an empty array to movement
+    this.movement = [];
+
+    // locale data is retrieved by navigator.language
+    this.locale = navigator.language;
+
+    console.log(`Thanks for opening an account ${owner}`);
+  }
+
+  // public interface
+  deposit(value) {
+    this.movement.push(value);
+  }
+
+  // we can use the method above by using the 'this' keyword
+  withdraw(value) {
+    this.deposit(-value);
+  }
+
+  approvedLoan(value) {
+    return true;
+  }
+
+  requestLoan(value) {
+    if (this.approvedLoan(value)) {
+      this.deposit(value);
+      console.log('Loan approved');
+    }
+  }
+}
+
+const acc1 = new Account('Akram', 'CAD', 1111, []);
+// console.log(acc1);
+
+// Instead of creating individual movements, its better to create a method to handle these
+// deposit
+// acc1.movement.push(250);
+// withdraw
+// acc1.movement.push(-50);
+
+acc1.deposit(250);
+acc1.withdraw(140);
+acc1.requestLoan(1000);
+acc1.approvedLoan(1000);
+console.log(acc1);
