@@ -705,14 +705,78 @@ GOOD LUCK 😀
 
 // ANOTHER CLASS EXAMPLE
 
+// class Account {
+//   constructor(owner, currency, pin) {
+//     this.owner = owner;
+//     this.currency = currency;
+//     this.pin = pin;
+
+//     // assign an empty array to movement
+//     this.movement = [];
+
+//     // locale data is retrieved by navigator.language
+//     this.locale = navigator.language;
+
+//     console.log(`Thanks for opening an account ${owner}`);
+//   }
+
+//   // public interface
+//   deposit(value) {
+//     this.movement.push(value);
+//   }
+
+//   // we can use the method above by using the 'this' keyword
+//   withdraw(value) {
+//     this.deposit(-value);
+//   }
+
+//   approvedLoan(value) {
+//     return true;
+//   }
+
+//   requestLoan(value) {
+//     if (this.approvedLoan(value)) {
+//       this.deposit(value);
+//       console.log('Loan approved');
+//     }
+//   }
+// }
+
+// const acc1 = new Account('Akram', 'CAD', 1111, []);
+// // console.log(acc1);
+
+// // Instead of creating individual movements, its better to create a method to handle these
+// // deposit
+// // acc1.movement.push(250);
+// // withdraw
+// // acc1.movement.push(-50);
+
+// acc1.deposit(250);
+// acc1.withdraw(140);
+// acc1.requestLoan(1000);
+// acc1.approvedLoan(1000);
+// console.log(acc1);
+
+// --------------------------------------------------------
+// --------------------------------------------------------
+// --------------------------------------------------------
+
+// ENCAPSULATION: PROTECTED PROPERTIES AND METHODS
+// Encapsulation means to keep some properties and methods private inside the class so that they are not accessible outside of the class.
+// The rest of the methods are exposed as public interface which we can also called API.
+// 2 BIG reasons why we need encapsulation and data privacy, prevent code outside of a class to accidentally manipulate data inside the class.
+
 class Account {
   constructor(owner, currency, pin) {
     this.owner = owner;
     this.currency = currency;
-    this.pin = pin;
+
+    // Protected property
+    this._pin = pin;
 
     // assign an empty array to movement
-    this.movement = [];
+    // Protected property - underscore _
+    this._movement = [];
 
     // locale data is retrieved by navigator.language
     this.locale = navigator.language;
@@ -720,9 +784,14 @@ class Account {
     console.log(`Thanks for opening an account ${owner}`);
   }
 
+  // Public interface to access movement array
+  getMovements() {
+    return this._movement;
+  }
+
   // public interface
   deposit(value) {
-    this.movement.push(value);
+    this._movement.push(value);
   }
 
   // we can use the method above by using the 'this' keyword
@@ -730,7 +799,8 @@ class Account {
     this.deposit(-value);
   }
 
-  approvedLoan(value) {
+  // Protected method - This method should not be exposed,
+  _approvedLoan(value) {
     return true;
   }
 
@@ -756,3 +826,6 @@ acc1.withdraw(140);
 acc1.requestLoan(1000);
 acc1.approvedLoan(1000);
 console.log(acc1);
+
+// We use the public interface method to get access to movements.
+console.log(acc1.getMovements());
