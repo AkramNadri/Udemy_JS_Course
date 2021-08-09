@@ -766,37 +766,140 @@ GOOD LUCK 😀
 // The rest of the methods are exposed as public interface which we can also called API.
 // 2 BIG reasons why we need encapsulation and data privacy, prevent code outside of a class to accidentally manipulate data inside the class.
 
+// class Account {
+//   constructor(owner, currency, pin) {
+//     this.owner = owner;
+//     this.currency = currency;
+
+//     // Protected property
+//     this._pin = pin;
+
+//     // assign an empty array to movement
+//     // Protected property - underscore _
+//     this._movement = [];
+
+//     // locale data is retrieved by navigator.language
+//     this.locale = navigator.language;
+
+//     console.log(`Thanks for opening an account ${owner}`);
+//   }
+
+//   // Public interface to access movement array
+//   getMovements() {
+//     return this._movement;
+//   }
+
+//   // public interface
+//   deposit(value) {
+//     this._movement.push(value);
+//   }
+
+//   // we can use the method above by using the 'this' keyword
+//   withdraw(value) {
+//     this.deposit(-value);
+//   }
+
+//   // Protected method - This method should not be exposed,
+//   _approvedLoan(value) {
+//     return true;
+//   }
+
+//   requestLoan(value) {
+//     if (this.approvedLoan(value)) {
+//       this.deposit(value);
+//       console.log('Loan approved');
+//     }
+//   }
+// }
+
+// const acc1 = new Account('Akram', 'CAD', 1111, []);
+// // console.log(acc1);
+
+// // Instead of creating individual movements, its better to create a method to handle these
+// // deposit
+// // acc1.movement.push(250);
+// // withdraw
+// // acc1.movement.push(-50);
+
+// acc1.deposit(250);
+// acc1.withdraw(140);
+// acc1.requestLoan(1000);
+// acc1.approvedLoan(1000);
+// console.log(acc1);
+
+// // We use the public interface method to get access to movements.
+// console.log(acc1.getMovements());
+
+// --------------------------------------------------------
+// --------------------------------------------------------
+// --------------------------------------------------------
+
+// ENCAPSULATION: PRIVATE CLASS FIELDS AND METHODS
+//
+// 1. Public fields
+// 2. Private fields
+
+// -- We can think of a field as a property that will be on all instances.
+
+// ~~~~
+
+// 3. Public methods
+// 4. Private methods
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// (there is also the static version)
+// adding static keyword in front of it
+
 class Account {
+  // 1. PUBLIC FIELDS ~~~~~~
+  // this is not a variable!
+  // these public fields will be on all instances created through this class.
+  // fields will not be in prototype, will be instances
+  locale = navigator.language;
+
+  // 2. PRIVATE FIELDS ~~~~~~~~~~~~
+  // private fields are not accesible from the outside
+  // The # hash symbol is the syntax that makes the field private
+  #movement = [];
+
+  // setting pin as private field, below we use this keyword on #pin to set its value.
+  #pin;
+
   constructor(owner, currency, pin) {
     this.owner = owner;
     this.currency = currency;
 
-    // Protected property
-    this._pin = pin;
+    // Private field, first we set the private #pin outside the constructor, then we call the #pin using this keyword
+    this.#pin = pin;
 
     // assign an empty array to movement
     // Protected property - underscore _
-    this._movement = [];
+    // _movement and locale are fields, because these are 2 properties that will be on all objects that we create with this class.
+    // this._movement = [];
 
     // locale data is retrieved by navigator.language
-    this.locale = navigator.language;
+    // this.locale = navigator.language;
 
     console.log(`Thanks for opening an account ${owner}`);
   }
 
+  // 3. PUBLIC METHODS ~~~~~~~~~~~~~~~~~~~~
   // Public interface to access movement array
   getMovements() {
-    return this._movement;
+    return this.#movement;
   }
 
   // public interface
   deposit(value) {
-    this._movement.push(value);
+    this.#movement.push(value);
+    return this;
   }
 
   // we can use the method above by using the 'this' keyword
   withdraw(value) {
     this.deposit(-value);
+    return this;
   }
 
   // Protected method - This method should not be exposed,
@@ -805,11 +908,24 @@ class Account {
   }
 
   requestLoan(value) {
-    if (this.approvedLoan(value)) {
+    if (this._approvedLoan(value)) {
       this.deposit(value);
       console.log('Loan approved');
+      return this;
     }
   }
+
+  // Static method will not be available on all the instances, only on the class itself.
+  static helper() {
+    console.log('Helper');
+  }
+
+  // 4. PRIVATE METHODS
+  // Hide implementation details from the outside
+  // Similar to private fields, we use the # hash
+  // #approvedLoan(value) {
+  //   return true;
+  // }
 }
 
 const acc1 = new Account('Akram', 'CAD', 1111, []);
@@ -823,9 +939,30 @@ const acc1 = new Account('Akram', 'CAD', 1111, []);
 
 acc1.deposit(250);
 acc1.withdraw(140);
-acc1.requestLoan(1000);
-acc1.approvedLoan(1000);
+// acc1.requestLoan(1000);
+// acc1.approvedLoan(1000);
 console.log(acc1);
 
 // We use the public interface method to get access to movements.
 console.log(acc1.getMovements());
+
+// console.log(acc1.#movements); // SyntaxError, private field
+
+// try to access private field pin
+// console.log(acc1.#pin); //Syntax error
+
+// Test to access private method
+// console.log(acc1.#approvedLoan(100)); // SyntaxError
+
+// How you call a static method
+// Call the class then the static method
+Account.helper();
+
+// --------------------------------------------------------
+// --------------------------------------------------------
+// --------------------------------------------------------
+
+// CHAINING METHODS
+// the first deposit will return undefined, so all the other methods will be passed an undefined value also
+// Will now work because we are returning "this" value from each method.
+acc1.deposit(300).deposit(100).withdraw(35).requestLoan(40).withdraw(123);
