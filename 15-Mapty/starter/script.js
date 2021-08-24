@@ -29,8 +29,18 @@ if (navigator.geolocation)
 
       const coords = [latitude, longitude];
 
+      // map object is created by L.map which is from the leaflet library. map object will have access to methods and properties from leaflet library.
       // 13 indicates zoom amount during page load
       const map = L.map('map').setView(coords, 13);
+
+      const mapMarker = L.marker(coords)
+        .addTo(map)
+        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+        .openPopup();
+      // See the internal of map object
+      console.log(map);
+
+      // DISPLAYING A MAP USING LEAFLET LIBRARY
 
       // map is created from small tiles, these tiles come from this URL. openstreetmap.
       L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
@@ -42,6 +52,31 @@ if (navigator.geolocation)
         .addTo(map)
         .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
         .openPopup();
+
+      // DISPLAYING A MAP MARKER
+
+      // map object created with leaflet library, has special methods and properties.
+      map.on('click', function (mapEvent) {
+        console.log(mapEvent);
+
+        const { lat, lng } = mapEvent.latlng;
+
+        // marker creates the marker, and addTo adds the marker to the map.
+        // bindPopup creates a popup and binds it to marker.
+        L.marker([lat, lng])
+          .addTo(map)
+          .bindPopup(
+            L.popup({
+              maxWidth: 250,
+              minWidth: 100,
+              autoClose: false,
+              closeOnClick: false,
+              className: 'running-popup',
+            })
+          )
+          .setPopupContent('Hi')
+          .openPopup();
+      });
     },
 
     // error function
@@ -49,5 +84,3 @@ if (navigator.geolocation)
       alert('Could not get your position');
     }
   );
-
-// DISPLAYING A MAP USING LEAFLET LIBRARY
