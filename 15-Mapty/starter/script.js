@@ -26,6 +26,22 @@ if (navigator.geolocation)
       const { latitude } = position.coords;
       const { longitude } = position.coords;
       console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
+
+      const coords = [latitude, longitude];
+
+      // 13 indicates zoom amount during page load
+      const map = L.map('map').setView(coords, 13);
+
+      // map is created from small tiles, these tiles come from this URL. openstreetmap.
+      L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+
+      L.marker(coords)
+        .addTo(map)
+        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+        .openPopup();
     },
 
     // error function
@@ -33,3 +49,5 @@ if (navigator.geolocation)
       alert('Could not get your position');
     }
   );
+
+// DISPLAYING A MAP USING LEAFLET LIBRARY
