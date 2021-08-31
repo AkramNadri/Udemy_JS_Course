@@ -16,6 +16,64 @@ const inputElevation = document.querySelector('.form__input--elevation');
 // --------------------------------------------------------
 // --------------------------------------------------------
 // --------------------------------------------------------
+// MANAGING WORKOUT DATA: CREATING CLASSES
+
+// Parent class ~~~~~
+class Workout {
+  date = new Date();
+  // create an id using some library
+  // id is a unique identifier we attach to an object
+  id = (Date.now() + '').slice(-14);
+
+  constructor(coordinates, distance, duration) {
+    this.coordinates = coordinates; // array of [lat, lng]
+    this.distance = distance; // km
+    this.duration = duration; // in min
+  }
+}
+
+// Child classes
+class Running extends Workout {
+  constructor(coordinates, distance, duration, cadence) {
+    // super points to the parent class constructor
+    super(coordinates, distance, duration);
+    this.cadence = cadence;
+    // Calling a method inside a constructor
+    // we use the constructor here to immediately calculate the pace;
+    this.calcPace();
+  }
+
+  // Create a method for calculating pace
+  calcPace() {
+    // pace is defined min over km
+    this.pace = this.duration / this.distance;
+    return this.pace;
+  }
+}
+class Cycling extends Workout {
+  constructor(coordinates, distance, duration, elevationGain) {
+    // super points to the parent class constructor
+    super(coordinates, distance, duration);
+    this.elevation = elevationGain;
+    // Calling calcSpeed in constructor because as the page loads constructors are first to be run
+    this.calcSpeed();
+  }
+
+  calcSpeed() {
+    // km / h
+    // duration is in hours, we divide by 60 to get minutes
+    this.speed = this.distance / (this.duration / 60);
+    return this.speed;
+  }
+}
+
+// const running1 = new Running([39, -12], 5.2, 24, 178);
+// const cycling1 = new Cycling([39, -12], 27, 95, 523);
+
+// console.log(running1, cycling1);
+// --------------------------------------------------------
+// --------------------------------------------------------
+
 // PROJECT ARCHITECTURE
 
 class App {
@@ -83,6 +141,7 @@ class App {
     // here the this keyword will then be set onto which the eventhandler it is attached which is the 'on' method. Solution is to bind _showForm this to the app object.
     // .bind(this) points to the app object.
     this.#map.on('click', this._showForm.bind(this));
+    console.log(this._showForm.bind(this));
   }
 
   _showForm(mapE) {
