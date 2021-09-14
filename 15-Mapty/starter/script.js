@@ -20,6 +20,7 @@ const inputElevation = document.querySelector('.form__input--elevation');
 
 // Parent class ~~~~~
 class Workout {
+  // Fields ~~~~
   date = new Date();
   // create an id using some library
   // id is a unique identifier we attach to an object
@@ -34,6 +35,9 @@ class Workout {
 
 // Child classes
 class Running extends Workout {
+  // fields
+  type = 'running';
+
   constructor(coordinates, distance, duration, cadence) {
     // super points to the parent class constructor
     super(coordinates, distance, duration);
@@ -51,10 +55,13 @@ class Running extends Workout {
   }
 }
 class Cycling extends Workout {
+  // fields
+  type = 'cycling';
+
   constructor(coordinates, distance, duration, elevationGain) {
     // super points to the parent class constructor
     super(coordinates, distance, duration);
-    this.elevation = elevationGain;
+    this.elevationGain = elevationGain;
     // Calling calcSpeed in constructor because as the page loads constructors are first to be run
     this.calcSpeed();
   }
@@ -82,6 +89,7 @@ class App {
   // properties that are gonna be present in all instances created through this class.
   #map;
   #mapEvent;
+  #workouts = [];
 
   constructor() {
     // Since we are creating an object using this class, the constructor will be immediately called as the page loads, so we can simply get the position in the constructor. Load page will trigger the constructor, which will then trigger _getPosition() as soon as we recieve the position the _loadMap method is called.
@@ -156,20 +164,92 @@ class App {
   }
 
   _newWorkout(e) {
+    // Helper function
+    // Arrow function which can take an arbitrary number of inputs
+    // Loop over the array and check if the number is finite or not, the every method will only return true if all values in the array are true. If one of the values is false then the every method will return false.
+    const validInputs = (...inputs) =>
+      inputs.every(inp => Number.isFinite(inp));
+
+    // Helper function - loops through array and checks if all values are > then zero.
+    const allPositive = (...inputs) => inputs.every(inp => inp > 0);
+
     e.preventDefault();
 
-    // Clear fields
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    // Get data from form
+    const type = inputType.value;
+
+    // inputDistance comes as a string, to convert the value to a number we place a + in front
+    const distance = +inputDistance.value;
+    const duration = +inputDuration.value;
+
+    // get lat and long from mapEvent.
+    const { lat, lng } = this.#mapEvent.latlng;
+
+    let workout;
+
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    // If workout running, create running object
+    if (type === 'running') {
+      const cadence = +inputCadence.value;
+      // Check if data is valid
+      // Gaurd clause - check for the opposite of what we are interested in, if that opposite is true we return the function immediately.
+      // we are checking if distance is not a number
+      if (
+        // !Number.isFinite(distance) ||
+        // !Number.isFinite(duration) ||
+        // !Number.isFinite(cadence)
+        // here we are calling validInputs method but inverting it with !validInputs to check if these values are numbers.
+        // whenever this method is not true, then we go down to return an alert.
+        !validInputs(distance, duration, cadence) ||
+        !allPositive(distance, duration, cadence)
+      )
+        return alert('Inputs have to be positive numbers');
+
+      workout = new Running([lat, lng], distance, duration, cadence);
+    }
+
+    // If workout cycling, create cycling object
+    if (type === 'cycling') {
+      const elevation = +inputElevation.value;
+      // Check if data is valid
+      if (
+        // !Number.isFinite(distance) ||
+        // !Number.isFinite(duration) ||
+        // !Number.isFinite(cadence)
+        // here we are calling validInputs method but inverting it with !validInputs to check if these values are numbers.
+        // whenever this method is not true, then we go down to return an alert.
+        !validInputs(distance, duration, elevation) ||
+        !allPositive(distance, duration)
+      )
+        return alert('Inputs have to be positive numbers');
+
+      workout = new Cycling([lat, lng], distance, duration, elevation);
+    }
+
+    // pushing workout into private #workouts array.
+    this.#workouts.push(workout);
+    console.log(workout);
+
+    // Add new object to workout array
+
+    // Render workout on map as marker
+    this.renderWorkoutMarker(workout);
+
+    // Render workout on list
+
+    // Hide from + clear fields
     inputDistance.value =
       inputDuration.value =
       inputCadence.value =
       inputElevation.value =
         '';
-    // Display marker
+  }
 
-    const { lat, lng } = this.#mapEvent.latlng;
-    // marker creates the marker, and addTo adds the marker to the map.
-    // bindPopup creates a popup and binds it to marker.
-    L.marker([lat, lng])
+  renderWorkoutMarker(workout) {
+    L.marker(workout.coordinates)
       .addTo(this.#map)
       .bindPopup(
         L.popup({
@@ -177,10 +257,10 @@ class App {
           minWidth: 100,
           autoClose: false,
           closeOnClick: false,
-          className: 'running-popup',
+          className: `${workout.type}-popup`,
         })
       )
-      .setPopupContent('Hi')
+      .setPopupContent('workout')
       .openPopup();
   }
 }
