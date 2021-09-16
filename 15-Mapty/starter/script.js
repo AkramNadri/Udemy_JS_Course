@@ -1,7 +1,7 @@
 'use strict';
 
-// prettier-ignore
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+// // prettier-ignore
+// const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 const form = document.querySelector('.form');
 const containerWorkouts = document.querySelector('.workouts');
@@ -31,6 +31,16 @@ class Workout {
     this.distance = distance; // km
     this.duration = duration; // in min
   }
+
+  _setDescription() {
+    // prettier-ignore
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    this.description = `${this.type[0].toUppercase}
+    ${this.type.slice(1)} on ${
+      months[this.date.getMonth()]
+    }${this.date.getDate()}`;
+  }
 }
 
 // Child classes
@@ -45,6 +55,9 @@ class Running extends Workout {
     // Calling a method inside a constructor
     // we use the constructor here to immediately calculate the pace;
     this.calcPace();
+
+    // _setDesciption must be placed here because each class contains its own type: example class Running contains type "running"
+    this._setDescription();
   }
 
   // Create a method for calculating pace
@@ -64,6 +77,9 @@ class Cycling extends Workout {
     this.elevationGain = elevationGain;
     // Calling calcSpeed in constructor because as the page loads constructors are first to be run
     this.calcSpeed();
+
+    // _setDesciption must be placed here because each class contains its own type: example class Cycling contains type "cycling"
+    this._setDescription();
   }
 
   calcSpeed() {
@@ -236,9 +252,10 @@ class App {
     // Add new object to workout array
 
     // Render workout on map as marker
-    this.renderWorkoutMarker(workout);
+    this._renderWorkoutMarker(workout);
 
     // Render workout on list
+    this._renderWorkout(workout);
 
     // Hide from + clear fields
     inputDistance.value =
@@ -248,7 +265,7 @@ class App {
         '';
   }
 
-  renderWorkoutMarker(workout) {
+  _renderWorkoutMarker(workout) {
     L.marker(workout.coordinates)
       .addTo(this.#map)
       .bindPopup(
@@ -262,6 +279,24 @@ class App {
       )
       .setPopupContent('workout')
       .openPopup();
+  }
+
+  _renderWorkout(workout) {
+    const html = `
+    <li class="workout workout--${workout.type}" data-id="${workout.id}">
+    <h2 class="workout__title">Running on April 14</h2>
+    <div class="workout__details">
+      <span class="workout__icon">${
+        workout.type === 'running' ? '🏃‍♂️' : 'cycling'
+      }</span>
+      <span class="workout__value">${workout.distance}</span>
+      <span class="workout__unit">km</span>
+</div>
+<div class="workout__details">
+  <span class="workout__icon">⏱</span>
+  <span class="workout__value">${workout.duration}</span>
+  <span class="workout__unit">min</span>
+</div>`;
   }
 }
 
