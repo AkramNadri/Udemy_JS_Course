@@ -281,6 +281,7 @@ class App {
       .openPopup();
   }
 
+  // this html will be injected to page
   _renderWorkout(workout) {
     const html = `
     <li class="workout workout--${workout.type}" data-id="${workout.id}">
