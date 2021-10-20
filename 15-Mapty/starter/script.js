@@ -104,6 +104,7 @@ class App {
   // private instance properties.
   // properties that are gonna be present in all instances created through this class.
   #map;
+  #mapZoomLevel = 13;
   #mapEvent;
   #workouts = [];
 
@@ -118,6 +119,9 @@ class App {
 
     // Calling _toggleElevationField
     inputType.addEventListener('change', this._toggleElevationField);
+
+    // we use bind here to bind the method to this
+    containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
   }
 
   // getCurrentPosition will retrieve the current position from navigator, we use the this._loadMap to send the current location to _loadMap argument.
@@ -145,7 +149,7 @@ class App {
     // map object is created by L.map which is from the leaflet library. map object will have access to methods and properties from leaflet library.
     // 13 indicates zoom amount during page load
     console.log(this);
-    this.#map = L.map('map').setView(coords, 13);
+    this.#map = L.map('map').setView(coords, this.#mapZoomLevel);
 
     // DISPLAYING A MAP USING LEAFLET LIBRARY
 
@@ -348,6 +352,29 @@ class App {
     // injecting above html to form using insertAdjacentHTML which will insert the html as a sibling element.
     // afterend - add the new element as a sibling element at the end of the form.
     form.insertAdjacentHTML('afterend', html);
+  }
+
+  _moveToPopup(e) {
+    // The closest() method traverses the Element and its parents (heading toward the document root) until it finds a node that matches the provided selector string.
+    const workoutEl = e.target.closest('.workout');
+    console.log(workoutEl);
+
+    // gaurd clause
+    if (!workoutEl) return;
+
+    const workout = this.#workouts.find(
+      work => work.id === workoutEl.dataset.id
+    );
+
+    console.log(workout);
+
+    // leaflet method setView takes 2 arguments, coordinate and zoom level, lastly pass an object
+    this.#map.setView(workout.coordinates, this.#mapZoomLevel, {
+      animate: true,
+      pan: {
+        duration: 1,
+      },
+    });
   }
 }
 
