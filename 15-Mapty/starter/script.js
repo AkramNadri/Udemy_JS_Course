@@ -109,9 +109,14 @@ class App {
   #workouts = [];
 
   constructor() {
+    // get users position
     // Since we are creating an object using this class, the constructor will be immediately called as the page loads, so we can simply get the position in the constructor. Load page will trigger the constructor, which will then trigger _getPosition() as soon as we recieve the position the _loadMap method is called.
     this._getPosition();
 
+    // Get data from local storage
+    this._getLocalStorage();
+
+    // Attach event handlers
     // Calling _newWorkout method
     // this keyword inside the _newWorkout will point to form, unless we manually bind _newWorkout
     // in this case we want _newWorkout to point to the app object, which is what the this keyword is pointing to so we bind the this keyword which is pointing to the app object to _newWorkout
@@ -142,13 +147,11 @@ class App {
     // get current position function
     const { latitude } = position.coords;
     const { longitude } = position.coords;
-    console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
-
     const coords = [latitude, longitude];
 
     // map object is created by L.map which is from the leaflet library. map object will have access to methods and properties from leaflet library.
     // 13 indicates zoom amount during page load
-    console.log(this);
+
     this.#map = L.map('map').setView(coords, this.#mapZoomLevel);
 
     // DISPLAYING A MAP USING LEAFLET LIBRARY
@@ -169,7 +172,9 @@ class App {
     // here the this keyword will then be set onto which the eventhandler it is attached which is the 'on' method. Solution is to bind _showForm this to the app object.
     // .bind(this) points to the app object.
     this.#map.on('click', this._showForm.bind(this));
-    console.log(this._showForm.bind(this));
+
+    // here we render workouts that are saved in localStorage to map. This must be placed here because it is executed after the map has been loaded. Cannot load markers and map at the same time
+    this.#workouts.forEach(work => this._renderWorkoutMarker(work));
   }
 
   _showForm(mapE) {
@@ -268,11 +273,10 @@ class App {
       workout = new Cycling([lat, lng], distance, duration, elevation);
     }
 
+    // Add new object to workout array
     // pushing workout into private #workouts array.
     this.#workouts.push(workout);
     console.log(workout);
-
-    // Add new object to workout array
 
     // Render workout on map as marker
     this._renderWorkoutMarker(workout);
@@ -282,6 +286,9 @@ class App {
 
     // Hide form + clear fields
     this._hideForm();
+
+    // Set local storage to all workouts
+    this._setLocalStorage();
   }
 
   _renderWorkoutMarker(workout) {
@@ -375,6 +382,37 @@ class App {
         duration: 1,
       },
     });
+  }
+
+  _setLocalStorage() {
+    // localStorage is an API that the browser provides
+    // localStorage is a key/value storage
+    // first argument is key and second is value
+    // JSON.stringify can convert any object to a string
+    // localStorage is blocking. Also should not use for large amount of data will slow down application
+    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+  }
+
+  // _getLocalStorage is being called in App constructor so this method will be called when application start up
+  // IMPORTANT: objects coming from localStorage will not inherit the prototype. Since we converted the object to string and back to object we lose its prototype chain.
+  _getLocalStorage() {
+    // retrieving localStorage into const data, the data is currently a string so we will use JSON.parse to convert the string data into an object.
+    const data = JSON.parse(localStorage.getItem('workouts'));
+
+    // gaurd clause, if there is no data simply return.
+    if (!data) return;
+
+    // we are storing data into #workout list.
+    this.#workouts = data;
+
+    // forEach does not create a new array,
+    this.#workouts.forEach(work => this._renderWorkout(work));
+  }
+
+  reset() {
+    // will remove all items from localStorage
+    localStorage.removeItem('workouts');
+    location.reload();
   }
 }
 
