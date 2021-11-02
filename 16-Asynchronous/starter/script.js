@@ -46,3 +46,5 @@ const getCountryData = function (country) {
 getCountryData('portugal');
 getCountryData('canada');
 getCountryData('america');
+
+// How the web works
