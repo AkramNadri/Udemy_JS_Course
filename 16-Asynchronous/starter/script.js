@@ -1,7 +1,7 @@
 'use strict';
 
-// const btn = document.querySelector('.btn-country');
-// const countriesContainer = document.querySelector('.countries');
+const btn = document.querySelector('.btn-country');
+const countriesContainer = document.querySelector('.countries');
 
 ///////////////////////////////////////
 ///////////////////////////////////////
@@ -58,26 +58,26 @@
 
 // Welcome to callback Heck
 
-// const renderCountry = function (data, className = '') {
-//   //
-//   const html = `
-//   <article class=${className}>
-//   <img class="country__img" src="${data.flags.png}" />
-//   <div class="country__data">
-//     <h3 class="country__name">${data.name.common}</h3>
-//     <h4 class="country__region">${data.region}</h4>
-//     <p class="country__row"><span>👫</span>${(
-//       +data.population / 1000000
-//     ).toFixed(1)}/million people</p>
-//     <p class="country__row"><span>🗣️</span>${data.languages.eng}</p>
-//     <p class="country__row"><span>💰</span>${data.currencies}</p>
-//   </div>
-// </article>`;
+const renderCountry = function (data, className = '') {
+  //
+  const html = `
+  <article class=${className}>
+  <img class="country__img" src="${data.flags.png}" />
+  <div class="country__data">
+    <h3 class="country__name">${data.name.common}</h3>
+    <h4 class="country__region">${data.region}</h4>
+    <p class="country__row"><span>👫</span>${(
+      +data.population / 1000000
+    ).toFixed(1)}/million people</p>
+    <p class="country__row"><span>🗣️</span>${data.languages.eng}</p>
+    <p class="country__row"><span>💰</span>${data.currencies}</p>
+  </div>
+</article>`;
 
-//   countriesContainer.insertAdjacentHTML('beforeend', html);
+  countriesContainer.insertAdjacentHTML('beforeend', html);
 
-//   countriesContainer.style.opacity = 1;
-// };
+  countriesContainer.style.opacity = 1;
+};
 
 // One callback function inside another callback function
 // below is an example of callback heck, because what if we needed data on many countries, we would have to put another callback function. This leads to many callback functions within other callback functions and we can only receive data on the other callbacks when the first callback is completed.
@@ -165,6 +165,31 @@
 // Build Promise THAN Consume Promise.
 // When we already have a promise
 
-const request = fetch('https://restcountries.com/v3.1/name/canada');
+// const request = fetch('https://restcountries.com/v3.1/name/canada');
 
-console.log(request);
+// console.log(request);
+
+///////////////////////////////////////
+///////////////////////////////////////
+///////////////////////////////////////
+
+// CONSUMING PROMISES
+
+// On all promises we can call the 'then' method
+const getCountryData = function (country) {
+  const request = fetch(`https://restcountries.com/v3.1/name/${country}`)
+    .then(function (response) {
+      console.log(response);
+      // The data received back in response is located in the body.
+      // this becomes a new promise
+      // to read the data we received from response we call the json method on it
+      return response.json();
+    }) // 2nd promise is called after we receive data from the first promise, this then will retrieve data from the previous promise.
+    .then(function (data) {
+      console.log(data);
+      // finally we render the country, 0 is the index where the data is contained
+      renderCountry(data[0]);
+    });
+};
+
+getCountryData('canada');
