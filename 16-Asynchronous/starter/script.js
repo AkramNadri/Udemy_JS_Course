@@ -176,20 +176,62 @@ const renderCountry = function (data, className = '') {
 // CONSUMING PROMISES
 
 // On all promises we can call the 'then' method
-const getCountryData = function (country) {
-  const request = fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then(function (response) {
-      console.log(response);
-      // The data received back in response is located in the body.
-      // this becomes a new promise
-      // to read the data we received from response we call the json method on it
-      return response.json();
-    }) // 2nd promise is called after we receive data from the first promise, this then will retrieve data from the previous promise.
-    .then(function (data) {
-      console.log(data);
-      // finally we render the country, 0 is the index where the data is contained
-      renderCountry(data[0]);
-    });
-};
+// const getCountryData = function (country) {
+//   const request = fetch(`https://restcountries.com/v3.1/name/${country}`)
+//     .then(function (response) {
+//       console.log(response);
+//       // The data received back in response is located in the body.
+//       // this becomes a new promise
+//       // to read the data we received from response we call the json method on it
+//       return response.json();
+//     }) // 2nd promise is called after we receive data from the first promise, this then will retrieve data from the previous promise.
+//     .then(function (data) {
+//       console.log(data);
+//       // finally we render the country, 0 is the index where the data is contained
+//       renderCountry(data[0]);
+//     });
+// };
 
+// getCountryData('canada');
+
+///////////////////////////////////////
+///////////////////////////////////////
+///////////////////////////////////////
+
+// CHAINING PROMISES
+// updated using arrow function
+// const getCountryData = function (country) {
+//   const request = fetch(`https://restcountries.com/v3.1/name/${country}`)
+//     .then(respone => respone.json())
+//     .then(data => {
+//       renderCountry(data[0]);
+//     });
+// };
+// getCountryData('canada');
+
+const getCountryData = function (country) {
+  // Country 1
+  const request = fetch(`https://restcountries.com/v3.1/name/${country}`)
+    // the subsequent 'then' retreives it data from the previous promise, this is how we can chain promises.
+    .then(respone => respone.json())
+    .then(data => {
+      renderCountry(data[0]);
+
+      const neighbour = data[0].borders[0];
+
+      if (!neighbour) return;
+
+      // Country 2 - chaining promise
+      // By returning this promise, then the fullfilled value of the next 'then' method will be the fullfilled value of the previous promise.
+      return fetch(`https://restcountries.com/v3.1/name/${neighbour}`);
+
+      // the next then takes data from the previous promise
+      // here we are dealing with the fullfilled value from of a fetch promise, so that is a response
+    })
+    // Always return the promise, then use it with the next 'then'.
+    .then(response => response.json())
+    .then(data => renderCountry(data, 'neighbour'));
+  console.log(response);
+  //
+};
 getCountryData('canada');
