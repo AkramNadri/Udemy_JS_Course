@@ -211,27 +211,32 @@ const renderCountry = function (data, className = '') {
 
 const getCountryData = function (country) {
   // Country 1
-  const request = fetch(`https://restcountries.com/v3.1/name/${country}`)
+  fetch(`https://restcountries.com/v3.1/name/${country}`)
     // the subsequent 'then' retreives it data from the previous promise, this is how we can chain promises.
-    .then(respone => respone.json())
+    .then(response => response.json())
     .then(data => {
       renderCountry(data[0]);
 
       const neighbour = data[0].borders[0];
-
+      console.log(neighbour);
       if (!neighbour) return;
 
       // Country 2 - chaining promise
       // By returning this promise, then the fullfilled value of the next 'then' method will be the fullfilled value of the previous promise.
-      return fetch(`https://restcountries.com/v3.1/name/${neighbour}`);
+      return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
 
       // the next then takes data from the previous promise
       // here we are dealing with the fullfilled value from of a fetch promise, so that is a response
     })
     // Always return the promise, then use it with the next 'then'.
-    .then(response => response.json())
-    .then(data => renderCountry(data, 'neighbour'));
-  console.log(response);
-  //
+    .then(responses => responses.json())
+    .then(data => renderCountry(data));
 };
 getCountryData('canada');
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// HANDLING REJECTED PROMISES
+// A promise in which a error happens in a rejected promise
+
+//
