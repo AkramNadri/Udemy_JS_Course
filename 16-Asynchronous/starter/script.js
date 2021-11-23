@@ -227,6 +227,8 @@ const getCountryData = function (country) {
       // By returning this promise, then the fullfilled value of the next 'then' method will be the fullfilled value of the previous promise.
       return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
 
+      // *** Bug - 2nd country fetch is being returned but states undefined when reading properties.
+
       // the next then takes data from the previous promise
       // here we are dealing with the fullfilled value from of a fetch promise, so that is a response
     })
