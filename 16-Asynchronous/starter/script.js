@@ -243,3 +243,4 @@ getCountryData('canada');
 // A promise in which a error happens in a rejected promise
 
 //
+// example rejected promise
