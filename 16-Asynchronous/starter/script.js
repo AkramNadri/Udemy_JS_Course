@@ -233,6 +233,7 @@ const getCountryData = function (country) {
       // here we are dealing with the fullfilled value from of a fetch promise, so that is a response
     })
     // Always return the promise, then use it with the next 'then'.
+    // attempted bug fix 3.2
     .then(responses => responses.json())
     .then(country2Data => console.log(country2Data[0]))
     .then(data => renderCountry(data[0]));
