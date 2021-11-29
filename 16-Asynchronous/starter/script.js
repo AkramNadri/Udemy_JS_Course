@@ -225,7 +225,7 @@ const getCountryData = function (country) {
 
       // Country 2 - chaining promise
       // By returning this promise, then the fullfilled value of the next 'then' method will be the fullfilled value of the previous promise.
-      return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
+      return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`); // returning code USA
 
       // *** Bug - 2nd country fetch is being returned but states undefined when reading properties.
 
