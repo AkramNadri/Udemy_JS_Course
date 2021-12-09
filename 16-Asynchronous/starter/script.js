@@ -62,10 +62,10 @@ const renderCountry = function (data, className = '') {
   //
   const html = `
   <article class=${className}>
-  <img class="country__img" src="${data.flags.svg}" />
+  <img class="country__img" src="${data.flags.png}" />
   <div class="country__data">
-    <h3 class="country__name">${data.name}</h3>
-    <h4 class="country__region">${data.region}</h4>
+    <h3 class="country__name">${data.name.common}</h3>
+    <h4 class="country__region">${data.postalCode.region}</h4>
     <p class="country__row"><span>👫</span>${(
       +data.population / 1000000
     ).toFixed(1)}/million people</p>
@@ -214,6 +214,7 @@ const getCountryData = function (country) {
   fetch(`https://restcountries.com/v3.1/name/${country}`)
     // the subsequent 'then' retreives it data from the previous promise, this is how we can chain promises.
     .then(response => response.json())
+    // .then(dataCan => console.log(dataCan[0])) /////** */
     // .then(country1Data => console.log(country1Data))
     .then(data => {
       renderCountry(data[0]);
@@ -236,10 +237,9 @@ const getCountryData = function (country) {
     // Always return the promise, then use it with the next 'then'.
     // attempted bug fix 3.2
     .then(responses => responses.json())
-    .then(country2Data => console.log(country2Data[0]))
-    .then(data => renderCountry(data[0]));
+    .then(data => renderCountry(data[0], 'neighbour'));
 };
-getCountryData('nairobi');
+getCountryData('canada');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
