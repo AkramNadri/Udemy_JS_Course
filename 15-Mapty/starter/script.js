@@ -309,6 +309,7 @@ class App {
       .openPopup();
   }
 
+  // update html inject
   // this html will be injected to page
   _renderWorkout(workout) {
     let html = `
